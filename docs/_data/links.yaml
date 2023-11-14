@@ -1,0 +1,23 @@
+- title: "Wikipedia entry for Sitemaps"
+  url: "https://en.wikipedia.org/wiki/Sitemaps"
+  tags: [ "sitemap" ]
+
+- title: "Sitmaps.org: the official specification for sitemap.xml"
+  url: "https://sitemaps.org/protocol.html"
+  tags: [ "sitemap" ]
+
+- title: "Yoast: Why you need a sitemap"
+  url: "https://yoast.com/what-is-an-xml-sitemap-and-why-should-you-have-one/"
+  tags: [ "sitemap" ]
+
+- title: "Google: Building and submitting a sitemap"
+  url: "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+  tags: [ "sitemap" ]
+
+- title: "Mozilla Developer Network: XSLT reference"
+  url: "https://developer.mozilla.org/en-US/docs/Web/XSLT"
+  tags: [ "xslt" ]
+
+- title: "W3C: Official XSLT 3.0 specification"
+  url: "https://www.w3.org/TR/xslt-30/"
+  tags: [ "xslt" ]

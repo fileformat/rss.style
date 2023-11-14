@@ -1,0 +1,15 @@
+---
+# Remember to set production_url in your _config.yml file!
+title: Robots.txt
+noindex: true
+layout: none
+---
+#
+# robots.txt for {{ site.title }}
+#
+#
+
+Sitemap: {{ site.production_url }}/sitemap.xml
+
+User-agent: *
+Disallow: /honeypot.txt

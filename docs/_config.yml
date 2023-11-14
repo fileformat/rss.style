@@ -1,0 +1,24 @@
+#
+# _config.yml for Sitemap Style
+#
+
+exclude: [ "CNAME" ]
+production_url: https://www.sitemap.style
+sharing_targets: [ "reddit", "pinboard" ]
+title: Sitemap Style
+markdown: kramdown
+plugins:
+  - jekyll-redirect-from
+redirect_from:
+  json: false
+theme: null
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default"
+
+google_validation: LATER
+bing_validation: LATER
+yandex_validation: LATER

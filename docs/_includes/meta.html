@@ -1,0 +1,44 @@
+{%- if page.url == '/index.html' or page.url == '/' %}
+    {%- if site.google_validation != 'LATER' %}
+    <meta name="google-site-verification" content="{{site.google_validation}}" />
+    {%- endif %}
+    {%- if site.bing_validation != 'LATER' %}
+    <meta name="msvalidate.01" content="{{site.bing_validation}}" />
+    {%- endif %}
+    {%- if site.yandex_validation != 'LATER' %}
+    <meta name="yandex-verification" content="{{site.yandex_validation}}" />
+    {%- endif %}
+{%- endif %}
+    <meta name="referrer" content="unsafe-url" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!--
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.css">
+    -->
+    <link rel="stylesheet" href="/css/pico.classless.css" />
+    <style>
+        :root {
+            --block-spacing-vertical: 0;    /* LATER: why doesn't this work??? */
+        }
+        body > main {
+            padding-top: 1em;
+        }
+        h1 {
+            margin-bottom: 0.25em;
+        }
+        h2 {
+            margin-top: 0.75em;
+            margin-bottom: 0.25em;
+        }
+        p {
+            margin-bottom: 0.75em;
+        }
+        .github-icon {
+            margin-left: 8px;
+            margin-right: 8px;
+            vertical-align: middle;
+            height: 1rem;
+        }
+        .sharelogo {
+            height: 1em;
+        }
+    </style>

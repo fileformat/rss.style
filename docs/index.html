@@ -1,0 +1,41 @@
+---
+title: Home Page
+h1: Sitemap Style
+---
+
+<h2>What is this?</h2>
+
+<p>
+    Every website that wants to be found should have a <code>sitemap.xml</code> file that 
+    Google (and everyone else) can use to help find and index all the pages.
+</p>
+    
+<p>
+    By default, these files look horrible when a human looks at them in a browser.  But there is 
+    a simple way to make them look better: <b>Sitemap Style</b>!
+</p>
+
+<h2>How do I use it?</h2>
+
+<p>Add a line to the top of your <code>sitemap.xml</code> file with one of the styles here on <b>Sitemap Style</b>:</p>
+
+<p><code>&lt;?xml-stylesheet type="text/xsl" href="https://www.sitemap.style/xslt/vanilla.xslt" ?&gt;</code></p>
+
+<!-- LATER: examples with and w/o xml dtd -->
+
+<h2>Available styles</h2>
+
+<p>Coming soon!</p><!-- LATER -->
+
+<h2>Tech details</h2>
+
+<p>Coming soon!</p><!-- LATER -->
+
+<h2>Links</h2>
+<ul>
+    {%- for link in site.data.links %}
+    <li><a href="{{link.url}}">{{link.title}}</a></li>
+    {% endfor %}
+</ul>
+
+{% include share.html %}

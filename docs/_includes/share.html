@@ -1,0 +1,9 @@
+<p>
+    <small>
+        Share: {% for target in site.sharing_targets %}
+        <a href="https://simpleshare.io/go?site={{target}}&amp;url={{ site.production_url | cgi_escape }}{{ page.url | cgi_escape }}"
+            rel="nofollow"
+        ><img alt="share on {{target}}" class="sharelogo" src="https://www.vectorlogo.zone/logos/{{target}}/{{target}}-tile.svg" /></a>
+        {% endfor %}
+    </small>
+</p>

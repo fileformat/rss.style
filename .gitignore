@@ -1,0 +1,15 @@
+*~
+.cache
+*.class
+crash.log
+.DS_Store
+.env
+.idea/
+.jekyll-metadata
+.jekyll-cache
+*.pyc
+.sass-cache/
+_site/
+tmp/
+_tmp/
+venv/

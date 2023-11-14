@@ -1,0 +1,13 @@
+---
+# Remember to set production_url in your _config.yml file!
+title: Sitemap
+noindex: true
+layout: none
+---
+<?xml-stylesheet type="text/xsl" href="/xslt/vanilla.xslt" ?>
+<urlset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{% for thePage in site.pages %}{% if thePage.noindex or thePage.draft or thePage.sitemap == false %}{% else %}	<url><loc>{{site.production_url}}{{ thePage.url }}</loc></url>
+{% endif %}{% endfor %}</urlset>
