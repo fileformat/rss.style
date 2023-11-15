@@ -16,7 +16,7 @@
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <title>Sitemap for <xsl:value-of select="$hostname"/></title>
-                <link rel="stylesheet" href="/css/pico.classless.min.css" />
+                <link rel="stylesheet" href="https://www.sitemap.style/css/pico.classless.min.css" />
             </head>
             <body>
                 <main class="container">
