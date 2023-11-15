@@ -16,6 +16,7 @@
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <title>Sitemap for <xsl:value-of select="$hostname"/></title>
+                <link rel="stylesheet" href="/css/water.min.css" />
             </head>
             <body>
                 <h1>Pages on <xsl:value-of select="$hostname"/></h1>

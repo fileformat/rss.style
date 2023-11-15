@@ -16,8 +16,10 @@
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <title>Sitemap for <xsl:value-of select="$hostname"/></title>
+                <link rel="stylesheet" href="/css/pico.classless.min.css" />
             </head>
             <body>
+                <main class="container">
                 <h1>Pages on <xsl:value-of select="$hostname"/></h1>
                 <ul>
                     <xsl:for-each select="sitemap:urlset/sitemap:url">
@@ -32,6 +34,7 @@
                     </xsl:for-each>
                 </ul>
                 <p><xsl:value-of select="count(sitemap:urlset/sitemap:url)"/> pages</p>
+                </main>
             </body>
         </html>
     </xsl:template>
