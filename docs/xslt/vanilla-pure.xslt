@@ -15,6 +15,7 @@
         <html>
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="referrer" content="unsafe-url" />
                 <title>Sitemap for <xsl:value-of select="$hostname"/></title>
                 <link rel="stylesheet" href="https://www.sitemap.style/css/pure-min.css" />
             </head>
