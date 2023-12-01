@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{{ page.title }} - {{ site.title }}</title>
+    <title>{{ page.title }}{%- unless page.h1 %} - {{ site.title }}{% endunless %}</title>
 {% include meta.html %}
 </head>
 <body>
