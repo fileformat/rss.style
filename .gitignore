@@ -13,3 +13,4 @@ _site/
 tmp/
 _tmp/
 venv/
+.vscode
