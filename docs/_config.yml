@@ -1,11 +1,11 @@
 #
-# _config.yml for Sitemap Style
+# _config.yml for Feed Style
 #
 
 exclude: [ "CNAME" ]
-production_url: https://www.sitemap.style
+production_url: https://www.feed.style
 sharing_targets: [ "reddit", "pinboard" ]
-title: Sitemap Style
+title: Feed Style
 markdown: kramdown
 plugins:
   - jekyll-redirect-from

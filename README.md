@@ -1,11 +1,11 @@
 
-# Sitemap Style [<img alt="Sitemap.Style Logo" src="https://www.sitemap.style/favicon.svg" height="96" align="right" />](https://www.sitemap.style/)
+# Feed Style [<img alt="Feed.Style Logo" src="https://www.feed.style/favicon.svg" height="96" align="right" />](https://www.feed.style/)
 
-[Sitemap Style](https://www.sitemap.style/) helps you make your [sitemap.xml](https://en.wikipedia.org/wiki/Sitemaps) look nice.
+[Feed Style](https://www.feed.style/) helps you make your [RSS and Atom feeds](https://en.wikipedia.org/wiki/Web_feed) look nice.
 
 ## Using
 
-Instructions and links for all the different resources are on the [Sitemap Style website](https://www.sitemap.style/).
+Instructions and links for all the different resources are on the [Feed Style website](https://www.feed.style/).
 
 ## Running
 

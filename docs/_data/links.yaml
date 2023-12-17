@@ -21,3 +21,11 @@
 - title: "W3C: Official XSLT 3.0 specification"
   url: "https://www.w3.org/TR/xslt-30/"
   tags: [ "xslt" ]
+
+- title: "RFC 4287: The Atom Syndication Format"
+  url: "https://datatracker.ietf.org/doc/html/rfc4287"
+  tags: [ "atom" ]
+
+- title: "RSS Advisory Board: RSS 2.0 specification"
+  url: "https://www.rssboard.org/rss-profile"
+  tags: [ "rss" ]
