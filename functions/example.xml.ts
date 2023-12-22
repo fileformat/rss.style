@@ -13,7 +13,12 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         });
     }
 
-    const feeddata = await fetch(feedurl);
+    const feeddata = await fetch(feedurl, {
+        headers: {
+            'User-Agent': 'Feed.Style/1.0 (you are one of the examples on https://www.feed.style/ !)',
+            'Referer': 'https://www.feed.style/',
+        },
+    });
 
     let feedtext = await feeddata.text();
 
