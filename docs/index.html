@@ -40,7 +40,7 @@ h1: Feed Style
     <tr>
         <td>{{example.name}}</td>
         <td><a href="{{example.url}}">before</a></td>
-        <td><a href="example.xml?feedurl={{example.url | cgi_escape}}">after</a></td>
+        <td><a rel="nofollow" href="example.xml?feedurl={{example.url | cgi_escape}}">after</a></td>
         <td>{{example.notes | markdownify}}</td>
     <tr>
     {% endfor %}

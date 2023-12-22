@@ -13,3 +13,4 @@ Sitemap: {{ site.production_url }}/sitemap.xml
 
 User-agent: *
 Disallow: /honeypot.txt
+Disallow: /example
