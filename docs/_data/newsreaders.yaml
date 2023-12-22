@@ -1,0 +1,19 @@
+#
+# LATER: for a future page of newsreaders to choose from
+#
+# add pricing, platform, logo/icon...
+#
+- name: BazQux
+  url: https://bazqux.com/
+- name: Feedbin
+- name: Feedly
+- name: Feedreader
+- name: Inoreader
+- name: Miniflux
+  url: https://miniflux.app/
+- name: NetNewsWire
+  url: https://netnewswire.com/
+- name: Newsblur
+- name: Reeder
+  url: http://reederapp.com/
+- name: Vivaldi
