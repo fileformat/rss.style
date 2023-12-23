@@ -30,7 +30,7 @@ Contributions are welcome!  Please follow the standard Github [Fork & Pull Reque
 [![Github](https://www.vectorlogo.zone/logos/github/github-ar21.svg)](https://github.com/ "Code hosting")
 [![Jekyll](https://www.vectorlogo.zone/logos/jekyllrb/jekyllrb-ar21.svg)](https://www.jekyllrb.com/ "Static website builder")
 [![Pico CSS](https://www.vectorlogo.zone/logos/picocss/picocss-ar21.svg)](https://picocss.com/ "CSS")
-[![SimpleShareIO](https://www.vectorlogo.zone/logos/simpleshareio/simpleshareio-ar21.svg)](https://simpleshare.io/ "Share links")
+[![SimpleShare](https://www.vectorlogo.zone/logos/simplesharedev/simplesharedev-ar21.svg)](https://simpleshare.dev/ "Share links")
 [![VectorLogoZone](https://www.vectorlogo.zone/logos/vectorlogozone/vectorlogozone-ar21.svg)](https://www.vectorlogo.zone/ "Icons")
 
 * [Tim Holman](https://tholman.com/github-corners/) - Github corner
