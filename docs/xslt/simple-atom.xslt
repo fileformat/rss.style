@@ -54,6 +54,7 @@
         </xsl:for-each>
         </ul>
         <p><xsl:value-of select="count(/atom:feed/atom:entry)"/> news items.</p>
+        <p><small>Powered by <a href="https://www.feed.style/"><img src="https://www.feed.style/favicon.svg" style="height:1em;padding-right:0.25em;vertical-align:middle;" />Feed.Style</a></small></p>
     </body>
 </html>
     </xsl:template>
