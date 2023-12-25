@@ -15,6 +15,8 @@ cd docs
 jekyll serve --watch
 ```
 
+The examples (not really required for the main functionality) are handled with a Cloudflare Pages function.  See the <a href="./run.sh">run.sh</a> script to run everything locally.
+
 ## Contributing
 
 Contributions are welcome!  Please follow the standard Github [Fork & Pull Request Workflow](https://gist.github.com/Chaser324/ce0505fbed06b947d962)

@@ -1,3 +1,10 @@
+- title: "Help! What is a feed? (About Feeds)"
+  url: "https://aboutfeeds.com/"
+  tags: [ "rss", "atom" ]
+
+- title: "Web feed on Wikipedia"
+  url: "https://en.wikipedia.org/wiki/Web_feed"
+  tags: [ "rss", "atom" ]
 
 - title: "RFC 4287: The Atom Syndication Format"
   url: "https://datatracker.ietf.org/doc/html/rfc4287"
@@ -14,3 +21,11 @@
 - title: "W3C: Official XSLT 3.0 specification"
   url: "https://www.w3.org/TR/xslt-30/"
   tags: [ "xslt" ]
+
+- title: "Styling an RSS Feed With XSLT (Nat Clark)"
+  url: "https://natclark.com/tutorials/xslt-style-rss-feed/"
+  tags: [ "xslt" ]
+
+- title: "Adding a CSS StyleSheet to your RSS Feed (Pete Freitag)"
+  url: "https://www.petefreitag.com/blog/css-stylesheet-rss/"
+  tags: [ "css" ]
