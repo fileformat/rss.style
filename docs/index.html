@@ -6,7 +6,7 @@ h1: Feed Style
 <h2>What is this?</h2>
 
 <p>
-    Every website that updates routinely should have an RSS or atom feed that 
+    Every website that updates routinely should have an RSS or Atom feed that 
     people (and search engines) can use to watch for changes.
 </p>
     
@@ -21,7 +21,7 @@ h1: Feed Style
 
 <p>
     <label for="rssxslt">For RSS feeds:</label>
-    <input type="text" id="rssxslt" name="rssxslt" value="&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;https://www.feed.style/xslt/simple-rss.xslt&quot; ?&gt;" readonly>
+    <input class="cbinput" type="text" id="rssxslt" name="rssxslt" value="&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;data:text/xsl;base64,{% include_relative xslt/simple-atom.base64 %}&quot; ?&gt;" readonly>
     <button class="clipboard" data-clipboard-target="#rssxslt">Copy to clipboard (RSS)</button>
 </p>
 
@@ -29,9 +29,49 @@ h1: Feed Style
 
 <p>
     <label for="atomxslt">For Atom feeds:</label>
-    <input type="text" id="atomxslt" name="atomxslt" value="&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;https://www.feed.style/xslt/simple-atom.xslt&quot; ?&gt;" readonly>
+    <input class="cbinput" type="text" id="atomxslt" name="atomxslt" value="&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;data:text/xsl;base64,{% include_relative xslt/simple-atom.base64 %}&quot; ?&gt;" readonly>
     <button class="clipboard" data-clipboard-target="#atomxslt">Copy to clipboard (Atom)</button>
 </p>
+
+<h2>Questions and Answers</h2>
+
+<h3>How does this work?</h3>
+
+<p>
+    The <code>xml-stylesheet</code> processing instruction tells the browser to use the XSLT stylesheet to transform the raw XML into HTML.  This has been supported by all major browsers for a long time.
+</p>
+
+<h3>Why is the snippet so huge?</h3>
+<p>
+    The entire XSLT stylesheet needs to be included because of a bug in Chrome that prevents cross-domain loading.
+</p>
+
+<h3>What if I don't want a huge base64-encoding blob in my feed?</h3>
+<p>
+    You can host the XSLT file yourself and point to it directly:
+    <ul>
+        <li>Download the <a href="https://github.com/fileformat/feed.style/tree/main/docs/xslt">appropriate XSLT file</a> and host it next to your feed (<code>/localcopy.xslt</code> in the example below).</li>
+        <li>Use a simpler snippet:<br/>
+            <input class="cbinput" type="text" id="localxslt" name="localxslt" value="&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/localcopy.xslt&quot; ?&gt;" readonly>
+            <button class="clipboard" data-clipboard-target="#localxslt" role="button">Copy to clipboard</button>
+        </li>
+        <li>The code is <a href="https://github.com/fileformat/feed.style/blob/main/LICENSE.txt">MIT licensed</a>: customize to your liking (though XSLT is not for the faint of heart IMHO)</li>
+    </ul>
+</p>
+
+<h3>Are there other ways to make my feeds look nice?</h3>
+
+<p>
+    Yes! You can also use a CSS stylesheet. I plan on having some examples here, but in the meantime check out
+    <a href="https://www.petefreitag.com/blog/css-stylesheet-rss/">Pete Freitag's overview</a> for making your own.
+</p>
+
+<h2>Links</h2>
+<ul>
+    {%- for link in site.data.links %}
+    <li><a href="{{link.url}}">{{link.title}}</a></li>
+    {% endfor %}
+</ul>
 
 <h2>Examples</h2>
 
@@ -43,15 +83,9 @@ h1: Feed Style
         <td><a rel="nofollow" href="example.xml?feedurl={{example.url | cgi_escape}}">after</a></td>
         <td>{{example.notes | markdownify}}</td>
     <tr>
-    {% endfor %}
+        {% endfor %}
 </table>
 
-<h2>Links</h2>
-<ul>
-    {%- for link in site.data.links %}
-    <li><a href="{{link.url}}">{{link.title}}</a></li>
-    {% endfor %}
-</ul>
 
 {% include share.html %}
 

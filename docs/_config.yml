@@ -2,7 +2,7 @@
 # _config.yml for Feed Style
 #
 
-exclude: [ "CNAME" ]
+exclude: [ "CNAME", "**/*.base64" ]
 production_url: https://www.feed.style
 sharing_targets: [ "reddit", "pinboard" ]
 title: Feed Style

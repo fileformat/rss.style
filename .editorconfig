@@ -12,3 +12,6 @@ indent_style = space
 [*.yaml]
 indent_size = 2
 
+[*.xslt]
+indent_size = 4
+indent_style = tab

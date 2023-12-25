@@ -70,7 +70,7 @@
 - name: John Graham-Cumming
   hn: jgrahamc
   url: https://blog.jgc.org/feeds/posts/default
-  notes: "Opens 'Save as' dialog"
+  notes: "Opens 'Save as' dialog, `self` link mismatch but working"
 
 - name: Dan Luu
   hn: luu
