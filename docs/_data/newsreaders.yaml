@@ -36,6 +36,10 @@
 - name: The Old Reader
   url: https://theoldreader.com/
 
+- name: "Qi Reader"
+  url: "https://www.qireader.com/"
+  pricing: "Free for up to 30 feeds, then $1.50/month"
+
 - name: Reeder
   url: http://reederapp.com/
 
