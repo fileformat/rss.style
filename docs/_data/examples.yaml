@@ -1,21 +1,36 @@
 # mostly from https://news.ycombinator.com/leaders
 
+- name: Hacker News (front page)
+  website: https://news.ycombinator.com/
+  hn: dang
+  url: https://news.ycombinator.com/rss
+  notes: "missing `self` link, HTML page discovery link is relative"
+
+- name: Hacker News (Show HN)
+  website: https://news.ycombinator.com/show
+  url: https://news.ycombinator.com/showrss
+  notes: "title doesn't have 'Show HN', missing `self` link, HTML page discovery link is relative"
+
 - name: Fly.io
+  website: https://fly.io/
   hn: tptacek
   url: https://fly.io/blog/feed.xml
   notes: "bad `self` link, HTML page is missing the discovery link"
 
 - name: Jacques Mattheij
+  website: https://jacquesmattheij.com/
   hn: jacquesm
   url: https://jacquesmattheij.com/rss.xml
   notes: "bad `self` link"
 
 - name: Dave Winer
+  website: http://scripting.com/
   hn: davewiner
   url: http://scripting.com/rss.xml
   notes: "missing the `self` link"
 
 - name: Dan Nguyen
+  website: https://danwin.com/
   hn: danso
   url: http://blog.danwin.com/feed.xml
   notes: "insecure `self` link"
@@ -26,63 +41,76 @@
   notes: "`self` link is different, though it works"
 
 - name: Colin Wright
+  website: https://www.solipsys.co.uk/
   hn: ColinWright
   url: https://www.solipsys.co.uk/rss.xml
   notes: "already has styling! [CSS](https://www.solipsys.co.uk/rss.css)"
 
 - name: Hillel Wayne
+  website: https://www.hillelwayne.com/
   url: https://buttondown.email/hillelwayne/rss
   notes: "Opens 'Save as' dialog"
 
 - name: Patrick McKenzie
+  website: https://www.kalzumeus.com/
   hn: patio11
   url: https://www.kalzumeus.com/feed/articles/
 
 - name: Allen Downey
+  website: https://www.allendowney.com/
   hn: AllenDowney
   url: https://www.allendowney.com/blog/feed/
   notes: "Opens 'Save as' dialog"
 
 - name: Julia Evans
+  website: https://jvns.ca/
   #hn: mjevans?
   url: https://jvns.ca/atom.xml
 
 - name: Thomas Park
+  website: https://thomaspark.co/
   hn: thomaspark
   url: https://thomaspark.co/feed/
   notes: "Opens 'Save as' dialog"
 
 - name: Kyle Kingsbury
   hn: aphyr
+  website: https://aphyr.com/
   url: https://aphyr.com/posts.atom
   notes: "Opens 'Save as' dialog"
 
 - name: Mark Nottingham
+  website: https://www.mnot.net/
   hn: mnot
   url: https://www.mnot.net/blog/index.atom
   notes: "Opens 'Save as' dialog"
 
 - name: Tim Bray
+  website: https://www.tbray.org/ongoing/
   hn: tbray
   url: https://www.tbray.org/ongoing/ongoing.atom
   notes: "Opens 'Save as' dialog"
 
 - name: John Graham-Cumming
+  website: https://www.jgc.org/
   hn: jgrahamc
   url: https://blog.jgc.org/feeds/posts/default
   notes: "Opens 'Save as' dialog, `self` link mismatch but working"
 
 - name: Dan Luu
+  website: https://danluu.com/
   hn: luu
   url: https://danluu.com/atom.xml
   notes: "bad `self` link"
 
 - name: Steve Klabnik
+  website: https://steveklabnik.com/
   hn: steveklabnik
   url: https://steveklabnik.com/feed.xml
   notes: "missing the `self` link"
 
 - name: Stavros Korokithakis
+  website: https://www.stavros.io/
   hn: stavros
   url: https://feeds.feedburner.com/stavrosstuff
   notes: "discovery vs `self` link mismatch but working"

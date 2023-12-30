@@ -73,12 +73,18 @@ h1: Feed Style
     {% endfor %}
 </ul>
 
-<h2>Examples</h2>
+<h2 id="examples">Examples</h2>
 
 <table>
     {% for example in site.data.examples %}
     <tr>
-        <td>{{example.name}}</td>
+        <td>
+            {%- if example.website -%}
+                <a href="{{example.website}}">{{example.name}}</a>
+            {%- else -%}
+                {{example.name}}
+            {%- endif -%}
+        </td>
         <td><a href="{{example.url}}">before</a></td>
         <td><a rel="nofollow" href="example.xml?feedurl={{example.url | cgi_escape}}">after</a></td>
         <td>{{example.notes | markdownify}}</td>
