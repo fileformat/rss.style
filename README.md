@@ -31,9 +31,10 @@ Contributions are welcome!  Please follow the standard Github [Fork & Pull Reque
 [![Git](https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg)](https://git-scm.com/ "Version control")
 [![Github](https://www.vectorlogo.zone/logos/github/github-ar21.svg)](https://github.com/ "Code hosting")
 [![Jekyll](https://www.vectorlogo.zone/logos/jekyllrb/jekyllrb-ar21.svg)](https://www.jekyllrb.com/ "Static website builder")
+[![NodePing](https://www.vectorlogo.zone/logos/nodeping/nodeping-ar21.svg)](https://nodeping.com?rid=201109281250J5K3P "Uptime monitoring")
 [![Pico CSS](https://www.vectorlogo.zone/logos/picocss/picocss-ar21.svg)](https://picocss.com/ "CSS")
-[![SimpleShare](https://www.vectorlogo.zone/logos/simplesharedev/simplesharedev-ar21.svg)](https://simpleshare.dev/ "Share links")
-[![VectorLogoZone](https://www.vectorlogo.zone/logos/vectorlogozone/vectorlogozone-ar21.svg)](https://www.vectorlogo.zone/ "Icons")
+[![SimpleShare](https://www.vectorlogo.zone/logos/simplesharedev/simplesharedev-ar21.svg)](https://simpleshare.dev/ "Privacy-friendly sharing links")
+[![VectorLogoZone](https://www.vectorlogo.zone/logos/vectorlogozone/vectorlogozone-ar21.svg)](https://www.vectorlogo.zone/ "Logos")
 
 * [Tim Holman](https://tholman.com/github-corners/) - Github corner
 * [Taco de Wolff](https://github.com/tdewolff/minify) - minify
