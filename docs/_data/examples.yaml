@@ -114,3 +114,9 @@
   hn: stavros
   url: https://feeds.feedburner.com/stavrosstuff
   notes: "discovery vs `self` link mismatch but working"
+
+- name: "Terence Eden"
+  website: ""
+  hn: "edent"
+  url: "https://shkspr.mobi/blog/feed/atom/"
+  notes: ""

@@ -11,6 +11,10 @@
   tags: [ "atom" ]
 
 - title: "RSS Advisory Board: RSS 2.0 specification"
+  url: "https://www.rssboard.org/rss-specification"
+  tags: [ "rss" ]
+
+- title: "RSS Advisory Board: RSS 2.0 Best Practices"
   url: "https://www.rssboard.org/rss-profile"
   tags: [ "rss" ]
   
@@ -22,6 +26,10 @@
   url: "https://www.w3.org/TR/xslt-30/"
   tags: [ "xslt" ]
 
+- title: "How to style RSS feed (Lepture aka Hsiaoming Yang)"
+  url: "https://lepture.com/en/2019/rss-style-with-xsl"
+  tags: [ "xslt" ]
+
 - title: "Styling an RSS Feed With XSLT (Nat Clark)"
   url: "https://natclark.com/tutorials/xslt-style-rss-feed/"
   tags: [ "xslt" ]
@@ -29,3 +37,4 @@
 - title: "Adding a CSS StyleSheet to your RSS Feed (Pete Freitag)"
   url: "https://www.petefreitag.com/blog/css-stylesheet-rss/"
   tags: [ "css" ]
+
