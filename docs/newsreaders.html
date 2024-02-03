@@ -3,16 +3,21 @@ title: News Readers
 ---
 
 <p>
-    A list of software that can be used to read news feeds.
+    Software that can be used to read news feeds.
 </p>
 
 
 <table>
     {% for newsreader in site.data.newsreaders %}
-    <tr>
-        <td>
-            <a href="{{newsreader.url}}">{{newsreader.name}}</a>
-        </td>
-    </tr>
+    <tbody>
+        <tr>
+            <td>
+                <a href="{{newsreader.url}}">{{newsreader.name}}</a>
+            </td>
+            <td>
+                {{newsreader.pricing}}
+            </td>
+        </tr>
+    </tbody>
     {% endfor %}
 </table>

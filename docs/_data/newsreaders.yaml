@@ -4,52 +4,77 @@
 # add short description, pricing, platform(s), logo/icon, mini-review, last-updated, other links
 #
 # a really old list: https://sourceforge.net/projects/quicksub/
-# https://feedbin.com/apps
-# https://bazqux.com/apps
 #
 - name: "BazQux"
   url: "https://bazqux.com/"
   platforms: [ "web" ]
   pricing: "30 day trial, then $30/year"
   notes: "Also a backend for various [installable news reader apps](https://bazqux.com/apps)"
+  apps: "https://bazqux.com/apps"
 
 - name: "Feedbin"
   url: "https://feedbin.com/"
   pricing: "30 day trial, then $5/month"
+  apps: "https://feedbin.com/apps"
 
 - name: "Feedly"
   url: "https://feedly.com/"
+  pricing: "Free, $72/year for pro"
 
 - name: "Feedreader"
   url: "https://feedreader.com/"
+  platforms: [ "linux", "web", "windows" ]
+  pricing: "Free"
 
 - name: "Inoreader"
   url: "https://www.inoreader.com/"
+  pricing: "Freemium, $90/year for premium"
+  platforms: [ "android", "ios", "web" ]
   
 - name: "Miniflux"
   url: "https://miniflux.app/"
+  platforms: [ "freebsd", "linux", "macos", "openbsd", "windows" ]
+  pricing: "Free"
 
 - name: "NetNewsWire"
   url: "https://netnewswire.com/"
+  platforms: [ "macos", "ios" ]
+  pricing: "Free"
 
 - name: "Newsboat"
   url: "https://newsboat.org/"
+  platforms: [ "linux", "macos", "freebsd" ]
+  notes: "Terminal-based, need to build from source"
+  pricing: "Free"
 
 - name: "Newsblur"
   url: "https://newsblur.com/"
+  platforms: [ "android", "ios", "web" ]
+  pricing: "Freemium, $36/year for premium"
 
 - name: "The Old Reader"
   url: "https://theoldreader.com/"
+  platforms: [ "android", "ios", "linux", "web" ]
+  pricing: "Freemium, no public pricing"
 
 - name: "Qi Reader"
   url: "https://www.qireader.com/"
+  platform: [ "web" ]
   pricing: "Free for up to 30 feeds, then $1.50/month"
 
 - name: "Reeder"
   url: "http://reederapp.com/"
+  platforms: [ "macos", "ios" ]
+  pricing: "$5 for ios, $10 for macos (one-time purchase)"
 
 - name: "Unread"
   url: "https://www.goldenhillsoftware.com/unread/"
   platforms: [ "ios" ]
+  pricing: "Free, in-app purchases"
 
 - name: "Vivaldi"
+  url: "https://vivaldi.com/features/feed-reader/"
+  platforms: [ "android", "ios", "macos", "linux", "windows" ]
+  icon: "https://www.vectorlogo.zone/logos/vivaldi/vivaldi-icon.svg"
+  logo: "https://www.vectorlogo.zone/logos/vivaldi/vivaldi-ar21.svg"
+  pricing: "Free"
