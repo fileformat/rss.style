@@ -1,50 +1,55 @@
 #
 # LATER: for a future page of newsreaders to choose from
 #
-# add short description, pricing, platform(s), logo/icon, mini-review, etc.
+# add short description, pricing, platform(s), logo/icon, mini-review, last-updated, other links
 #
 # a really old list: https://sourceforge.net/projects/quicksub/
+# https://feedbin.com/apps
+# https://bazqux.com/apps
 #
 - name: "BazQux"
   url: "https://bazqux.com/"
+  platforms: [ "web" ]
+  pricing: "30 day trial, then $30/year"
+  notes: "Also a backend for various [installable news reader apps](https://bazqux.com/apps)"
 
 - name: "Feedbin"
   url: "https://feedbin.com/"
   pricing: "30 day trial, then $5/month"
 
-- name: Feedly
-  url: https://feedly.com/
+- name: "Feedly"
+  url: "https://feedly.com/"
 
-- name: Feedreader
-  url: https://feedreader.com/
+- name: "Feedreader"
+  url: "https://feedreader.com/"
 
-- name: Inoreader
-  url: https://www.inoreader.com/
+- name: "Inoreader"
+  url: "https://www.inoreader.com/"
   
-- name: Miniflux
-  url: https://miniflux.app/
+- name: "Miniflux"
+  url: "https://miniflux.app/"
 
-- name: NetNewsWire
-  url: https://netnewswire.com/
+- name: "NetNewsWire"
+  url: "https://netnewswire.com/"
 
-- name: Newsboat
-  url: https://newsboat.org/
+- name: "Newsboat"
+  url: "https://newsboat.org/"
 
-- name: Newsblur
-  url: https://newsblur.com/
+- name: "Newsblur"
+  url: "https://newsblur.com/"
 
-- name: The Old Reader
-  url: https://theoldreader.com/
+- name: "The Old Reader"
+  url: "https://theoldreader.com/"
 
 - name: "Qi Reader"
   url: "https://www.qireader.com/"
   pricing: "Free for up to 30 feeds, then $1.50/month"
 
-- name: Reeder
-  url: http://reederapp.com/
+- name: "Reeder"
+  url: "http://reederapp.com/"
 
-- name: Unread
-  url: https://www.goldenhillsoftware.com/unread/
-  platforms: [ "iOS" ]
+- name: "Unread"
+  url: "https://www.goldenhillsoftware.com/unread/"
+  platforms: [ "ios" ]
 
-- name: Vivaldi
+- name: "Vivaldi"

@@ -120,3 +120,9 @@
   hn: "edent"
   url: "https://shkspr.mobi/blog/feed/atom/"
   notes: ""
+
+- name: "Logo of the day"
+  website: "https://logo-of-the-day.vectorlogo.zone/"
+  hn: ""
+  url: "https://logo-of-the-day.vectorlogo.zone/feed.xml"
+  notes: "Perfect, since it is my sample for testing."

@@ -1,0 +1,18 @@
+---
+title: News Readers
+---
+
+<p>
+    A list of software that can be used to read news feeds.
+</p>
+
+
+<table>
+    {% for newsreader in site.data.newsreaders %}
+    <tr>
+        <td>
+            <a href="{{newsreader.url}}">{{newsreader.name}}</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
