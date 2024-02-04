@@ -43,9 +43,8 @@
 			</button>
 		</p>
 
-		<ul>
 		<xsl:for-each select="/rss/channel/item">
-			<li>                
+			<details><summary>                
 				<a>
 					<xsl:attribute name="href">
 						<xsl:value-of select="link"/>
@@ -53,9 +52,10 @@
 					<xsl:value-of select="title"/>
 				</a>&#xa0;-&#xa0;
 				<xsl:value-of select="pubDate" />
-			</li>
+				</summary>
+				<xsl:value-of select="description" disable-output-escaping="yes" />
+				</details>
 		</xsl:for-each>
-		</ul>
 		<p><xsl:value-of select="count(/rss/channel/item)"/> news items.</p>
 		<p><small>Powered by <a href="https://www.feed.style/"><img referrerpolicy="origin" src="https://www.feed.style/favicon.svg" style="height:1em;padding-right:0.25em;vertical-align:middle;" />Feed.Style</a></small></p>
 		<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>    
