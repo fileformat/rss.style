@@ -11,6 +11,36 @@
 - [ ] `parsed.json` - what it would look like when parsed (by ??? library)
 - [ ] `pretty.xml` - pretty-printed XML
 
+## Fonts
+
+### Handwriting
+
+- Monte Carlo
+- Carattere
+- x Gwendolyn
+- Great Vibes (current)
+- Imperial Script
+- x Sansita Swashed
+- x Parisienne
+- x Meow Script
+- x Norican
+- Tangerine
+- Niconne
+- Pinyon Script
+- Charm
+- x Ephesis
+- x Mea Culpe
+
+
+### Other
+- Limelight
+- Barrio
+- Fascinate Inline
+- Molle
+- Mr Bedfort
+- Ruge Boogie
+- Updock
+- Felipa
 
 ## Score
 
