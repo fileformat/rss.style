@@ -82,7 +82,7 @@ h1: Feed Style
 <table>
     {% for example in site.data.examples %}
     <tr>
-        <td>
+        <td style="white-space: nowrap;">
             {%- if example.website -%}
                 <a href="{{example.website}}">{{example.name}}</a>
             {%- else -%}
@@ -91,9 +91,12 @@ h1: Feed Style
         </td>
         <td><a href="{{example.url}}">before</a></td>
         <td><a rel="nofollow" href="example.xml?feedurl={{example.url | cgi_escape}}">after</a></td>
-        <td>{{example.notes | markdownify | replace: "<p>" "" | replace: "</p>" "" }}</td>
+        <td>{{example.notes | markdownify | replace: "<p>", "" | replace: "</p>", "" }}</td>
     <tr>
         {% endfor %}
+    <tr>
+        <td colspan="4"><a role="button" class="outline" href="example.xml">Try it on your own feed!</a></td>
+    </tr>
 </table>
 
 

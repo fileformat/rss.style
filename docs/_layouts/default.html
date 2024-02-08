@@ -3,7 +3,78 @@
 <head>
     <meta charset="utf-8">
     <title>{{ page.title }}{%- unless page.h1 %} - {{ site.title }}{% endunless %}</title>
-{% include meta.html %}
+{%- if page.url == '/index.html' or page.url == '/' %}
+    {%- if site.google_validation != 'LATER' %}
+    <meta name="google-site-verification" content="{{site.google_validation}}" />
+    {%- endif %}
+    {%- if site.bing_validation != 'LATER' %}
+    <meta name="msvalidate.01" content="{{site.bing_validation}}" />
+    {%- endif %}
+    {%- if site.yandex_validation != 'LATER' %}
+    <meta name="yandex-verification" content="{{site.yandex_validation}}" />
+    {%- endif %}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+{%- endif %}
+    <meta name="referrer" content="unsafe-url" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="/css/pico.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --block-spacing-vertical: 0;    /* LATER: why doesn't this work??? */
+        }
+        body > main {
+            padding-top: 1em;
+        }
+        h1 {
+            font-family: 'Limelight', cursive;
+            font-size: 3rem;
+            font-weight: 400;
+        }
+        h2 {
+            font-family: 'Limelight', cursive;
+            font-size: 2.0rem;
+            font-weight: 400;
+            margin-top: 0.75em;
+            margin-bottom: 0.25em;
+        }
+        h3 {
+            margin-top: 0.75em;
+            margin-bottom: 0.25em;
+        }
+        p {
+            margin-bottom: 0.75em;
+        }
+        .clipboard {
+            width: inherit;
+            padding: 0.2em 0.4em 0.2em 0.4em;
+        }
+        .cbinput {
+            margin-bottom: 0.1em !important;
+            padding: 0.2em 0.4em 0.2em 0.4em !important;
+            height: inherit !important;
+        }
+        .github-icon {
+            margin-left: 8px;
+            margin-right: 8px;
+            vertical-align: middle;
+            height: 1rem;
+        }
+        .shareicon {
+            margin-left: 0.25rem;
+            margin-right: 0.25rem;
+            height: 1.5rem;
+        }
+
+        /* too wide on big screens */
+        @media (min-width: 1536px) {
+            .container {
+                max-width: 1200px;
+            }
+        }
+    </style>
 </head>
 <body>
     <main class="container">
