@@ -55,9 +55,9 @@ h1: Feed Style
     You can host the XSLT file yourself and point to it directly:
     <ul>
         <li>Download the <a href="https://github.com/fileformat/feed.style/tree/main/docs/xslt">appropriate XSLT file</a> and host it next to your feed (<code>/localcopy.xslt</code> in the example below).</li>
-        <li>Use a simpler snippet:<br/>
+        <li><label for="localxslt">Use a simpler snippet:</label>
             <input class="cbinput" type="text" id="localxslt" name="localxslt" value="&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/localcopy.xslt&quot; ?&gt;" readonly>
-            <button class="clipboard" data-clipboard-target="#localxslt" role="button">Copy to clipboard</button>
+            <button class="clipboard" data-clipboard-target="#localxslt" role="button">Copy to clipboard (self-hosted)</button>
         </li>
         <li>The code is <a href="https://github.com/fileformat/feed.style/blob/main/LICENSE.txt">MIT licensed</a>: customize to your liking (though XSLT is not for the faint of heart IMHO)</li>
     </ul>
@@ -80,23 +80,32 @@ h1: Feed Style
 <h2 id="examples">Examples</h2>
 
 <table>
-    {% for example in site.data.examples %}
-    <tr>
-        <td style="white-space: nowrap;">
-            {%- if example.website -%}
-                <a href="{{example.website}}">{{example.name}}</a>
-            {%- else -%}
-                {{example.name}}
-            {%- endif -%}
-        </td>
-        <td><a href="{{example.url}}">before</a></td>
-        <td><a rel="nofollow" href="example.xml?feedurl={{example.url | cgi_escape}}">after</a></td>
-        <td>{{example.notes | markdownify | replace: "<p>", "" | replace: "</p>", "" }}</td>
-    <tr>
-        {% endfor %}
-    <tr>
-        <td colspan="4"><a role="button" class="outline" href="example.xml">Try it on your own feed!</a></td>
-    </tr>
+    <thead>
+        <tr>
+            <th>Website</th>
+            <th colspan="2" style="text-align:center;">News Feed</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for example in site.data.examples %}
+        <tr>
+            <td style="white-space: nowrap;">
+                {%- if example.website -%}
+                    <a href="{{example.website}}">{{example.name}}</a>
+                {%- else -%}
+                    {{example.name}}
+                {%- endif -%}
+            </td>
+            <td><a href="{{example.url}}">before</a></td>
+            <td><a rel="nofollow" href="example.xml?feedurl={{example.url | cgi_escape}}">after</a></td>
+            <td>{{example.notes | markdownify | replace: "<p>", "" | replace: "</p>", "" }}</td>
+        </tr>
+{% endfor %}
+        <tr>
+            <td colspan="4"><a role="button" class="outline" href="example.xml" style="padding:0.1em 0.4em 0.1em 0.4em;">Try it on your own feed!</a></td>
+        </tr>
+    </tbody>
 </table>
 
 
