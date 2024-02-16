@@ -1,5 +1,6 @@
 import { PagesFunction, EventContext } from '@cloudflare/workers-types';
 import { render } from '../src/render';
+import he from 'he';
 
 interface Env {
 }
@@ -11,16 +12,37 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     if (!feedurl) {
         return showForm(ctx, '', '')
     }
+    try {
+        const url = new URL(feedurl);
+    } catch (err:unknown) {
+        if (err instanceof Error) {
+            return showForm(ctx, feedurl, `Invalid URL: ${err.message}`);
+        }
+        return showForm(ctx, feedurl, `Error parsing URL: ${err}`);
+    }
     console.log(`INFO: fetching feedurl=${feedurl}`);
     const start = Date.now();
 
-    const feeddata = await fetch(feedurl, {
-        headers: {
-            'User-Agent': `Feed.Style/1.0 (your feed is being stylish on https://www.feed.style/ )`,
-            'Referer': ctx.request.url,
-        },
-    });
+    let feeddata:globalThis.Response;
+
+    try {
+        feeddata = await fetch(feedurl, {
+            headers: {
+                'User-Agent': `Feed.Style/1.0 (your feed is being stylish on https://www.feed.style/ )`,
+                'Referer': ctx.request.url,
+            },
+        });
+    } catch (err:unknown) {
+        if (err instanceof Error) {
+            return showForm(ctx, feedurl, `Error fetching feed: ${err.message}`);
+        }
+        return showForm(ctx, feedurl, `Unable to fetch feed: ${err}`);
+    }
     console.log(`INFO: fetched feedurl=${feedurl} in ${Date.now() - start}ms`);
+
+    if (!feeddata.ok) {
+        return showForm(ctx, feedurl, `Error fetching feed: ${feeddata.status} ${feeddata.statusText}`);
+    }
 
     let feedtext = await feeddata.text();
 
@@ -51,7 +73,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
 
 async function showForm(ctx: EventContext<Env, any, Record<string, unknown>>, feedurl:string, msg:string) {
 
-    const alert = msg ? `<div class="alert alert-danger" role="alert">${msg}</div>` : '';
+    const alert = msg ? `<div class="alert alert-danger" role="alert">${he.encode(msg)}</div>` : '';
 
     const data = {
         page: {
@@ -62,7 +84,7 @@ async function showForm(ctx: EventContext<Env, any, Record<string, unknown>>, fe
 ${alert}
 <form action="example.xml" method="get" style="max-width:500px;margin:auto;padding-top:2em;">
     <label for="feedurl">Feed URL:</label>
-    <input type="text" id="${feedurl}" name="feedurl" placeholder="" required>
+    <input type="text" id="feedurl" value="${he.encode(feedurl)}" name="feedurl" placeholder="" required>
     <button type="submit">Make it pretty!</button>
 </form>
 `,

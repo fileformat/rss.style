@@ -5,6 +5,7 @@
         "typescript": "^5.3.3"
     },
     "dependencies": {
+        "he": "^1.2.0",
         "liquidjs": "^10.10.0",
         "luxon": "^3.4.4",
         "wrangler": "^3.27.0"
