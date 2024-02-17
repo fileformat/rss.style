@@ -42,7 +42,7 @@
 - Updock
 - Felipa
 
-## Score
+## Analyzer
 
 Letter grade for feeds.
 
