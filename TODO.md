@@ -1,8 +1,11 @@
 # To Do
 
-- [ ] test on other browsers
+- [ ] Federo font
+- [ ] FAQ: how to tell if I have atom or rss
+- [ ] test on more browsers
 - [ ] test on Windows
 - [ ] test on mobile
+- [ ] maybe: `<pre>` section in XSLT with original XML
 - [ ] Page explaining news readers w/list of ones to choose
 - [ ] `atom.css` - CSS instead of XSLT for Atom feeds
 - [ ] `rss.css` - CSS instead of XSLT for RSS feeds
