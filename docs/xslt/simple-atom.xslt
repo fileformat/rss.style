@@ -22,7 +22,7 @@
 		</p>
 
 		<p>
-			This is the Atom <a href="https://www.feed.style/what-is-a-feed.html">news feed</a> for the&#xa0; 
+			This is the Atom&#xa0;<a href="https://www.feed.style/what-is-a-feed.html">news feed</a>&#xa0;for the&#xa0; 
 			<a><xsl:attribute name="href">
 				<xsl:value-of select="/atom:feed/atom:link[@rel='alternate']/@href | /atom:feed/atom:link[not(@rel)]/@href"/>
 			</xsl:attribute>
@@ -30,7 +30,7 @@
 			website.
 		</p>
 
-		<p>It is meant for <a href="https://www.feed.style/newsreaders.html">news readers</a>, not humans.  Please copy-and-paste the URL into your news reader!</p>
+		<p>It is meant for&#xa0;<a href="https://www.feed.style/newsreaders.html">news readers</a>, not humans.  Please copy-and-paste the URL into your news reader!</p>
 
 		<p>
 			<pre>
