@@ -45,13 +45,18 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         return showForm(ctx, feedurl, `Error fetching feed: ${feeddata.status} ${feeddata.statusText}`);
     }
 
-    let feedtext = await feeddata.text();
-
     const notes: string[] = [];
-
     notes.push(`Feed fetched in ${Date.now() - start}ms`);
+
+    let contentType = feeddata.headers.get('content-type');
+    if (!contentType) {
+        notes.push('No content type header?!?');
+    } else {
+        notes.push(`Content type is "${contentType}"`)
+    }
+
+    let feedtext = await feeddata.text();
     notes.push(`Feed is ${feedtext.length} characters long`);
-    notes.push(`Content type is "${feeddata.headers.get('content-type') || '(not set?!?)'}"`)
 
     if (feedtext.indexOf('<?xml-stylesheet') != -1) {
         notes.push('Feed already has a stylesheet');
