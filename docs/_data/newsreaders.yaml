@@ -30,7 +30,7 @@
   url: "https://www.inoreader.com/"
   pricing: "Freemium, $90/year for premium"
   platforms: [ "android", "ios", "web" ]
-  
+
 - name: "Miniflux"
   url: "https://miniflux.app/"
   platforms: [ "freebsd", "linux", "macos", "openbsd", "windows" ]
@@ -56,6 +56,11 @@
   url: "https://theoldreader.com/"
   platforms: [ "android", "ios", "linux", "web" ]
   pricing: "Freemium, no public pricing"
+
+- name: "Omnivore"
+  url: "https://omnivore.app/"
+  platforms: [ "android", "ios", "web" ]
+  pricing: "Free, open source"
 
 - name: "Qi Reader"
   url: "https://www.qireader.com/"
