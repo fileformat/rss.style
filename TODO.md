@@ -21,7 +21,8 @@
 - Monte Carlo
 - Carattere
 - x Gwendolyn
-- Great Vibes (current)
+- Great Vibes
+- Limelight
 - Imperial Script
 - x Sansita Swashed
 - x Parisienne
@@ -33,6 +34,7 @@
 - Charm
 - x Ephesis
 - x Mea Culpe
+- [Google search](https://fonts.google.com/?classification=Handwriting)
 
 
 ### Other
@@ -44,6 +46,9 @@
 - Ruge Boogie
 - Updock
 - Felipa
+- Amarante
+- Berkshire Swash
+- Federo
 
 ## Analyzer
 

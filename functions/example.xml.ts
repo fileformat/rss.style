@@ -28,7 +28,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     try {
         feeddata = await fetch(feedurl, {
             headers: {
-                'User-Agent': `Feed.Style/1.0 (your feed is being stylish on https://www.feed.style/ )`,
+                'User-Agent': `RSS.Style/1.0 (your feed is being stylish on https://www.rss.style/ )`,
                 'Referer': ctx.request.url,
             },
         });
@@ -63,7 +63,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     // you know you're naughty when you use regex to parse xml...
     const styledtext = feedtext.replace(/^(<[?]xml .*[?]>)?(.*)$/s, `$1${style}$2`);
 
-    return new Response(styledtext, { headers: { 
+    return new Response(styledtext, { headers: {
         'Content-Type': 'text/xml; charset=utf-8',
         'Cache-Control': 'no-store, max-age=0',
         'X-Robots-Tag': 'noindex',
@@ -77,7 +77,7 @@ async function showForm(ctx: EventContext<Env, any, Record<string, unknown>>, fe
 
     const data = {
         page: {
-            title: `Try Feed.style on your own news feed!`,
+            title: `Try RSS.style on your own news feed!`,
             h1: `Style my feed!`,
         },
         content: `

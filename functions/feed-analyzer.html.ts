@@ -29,7 +29,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     try {
         feeddata = await fetch(feedurl, {
             headers: {
-                'User-Agent': `Feed.Style/1.0 (your feed is being stylish on https://www.feed.style/ )`,
+                'User-Agent': `RSS.Style/1.0 (your feed is being stylish on https://www.rss.style/ )`,
                 'Referer': ctx.request.url,
             },
         });
@@ -80,7 +80,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
 <pre>${he.encode(xmlFormat(feedtext, { collapseContent: true, }))}</pre>`,
     }
 
-    return new Response(await render(data), { headers: { 
+    return new Response(await render(data), { headers: {
         'Content-Type': 'text/html; charset=utf-8',
         'X-Robots-Tag': 'noindex',
     } });
