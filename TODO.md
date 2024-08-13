@@ -59,13 +59,19 @@ Criteria:
 - [ ] valid xml
 - [ ] official schema validation
 - [ ] actual feed parsing libraries can parse (which libraries?)
+- [ ] content-type header
+- [ ] header `x-content-type-options: nosniff`
 - [ ] `self` link matches URL
 - [ ] `link` parent page is valid
 - [ ] `link` parent page has `link/rel=alternate` header
+- [ ] `link` parent page has a regular `<a>` link in the HTML
 - [ ] has icon, icon is square (bonus for SVG)
 - [ ] has logo, logo is 2:1 (bonus for SVG)
 - [ ] has styling
 - [ ] absolute links
 - [ ] secure links
+- [ ] has style
 - [ ] full/partial content (maybe not)
 - [ ] plain/html content (or at least parseable)
+- [ ] overall size in bytes
+- [ ] age of oldest entry (if a lot of entries)

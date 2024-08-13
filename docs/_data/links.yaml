@@ -14,10 +14,14 @@
   url: "https://www.rssboard.org/rss-specification"
   tags: [ "rss" ]
 
+- title: "All about RSS - A directory of RSS resources"
+  url: "https://github.com/AboutRSS/ALL-about-RSS"
+  tags: [ "rss" ]
+
 - title: "RSS Advisory Board: RSS 2.0 Best Practices"
   url: "https://www.rssboard.org/rss-profile"
   tags: [ "rss" ]
-  
+
 - title: "Mozilla Developer Network: XSLT reference"
   url: "https://developer.mozilla.org/en-US/docs/Web/XSLT"
   tags: [ "xslt" ]
