@@ -88,7 +88,9 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
 
 async function showForm(ctx: EventContext<Env, any, Record<string, unknown>>, feedurl:string, msg:string) {
 
-    const alert = msg ? `<div class="alert alert-danger" role="alert">${he.encode(msg)}</div>` : '';
+    const alert = msg
+        ? `<div class="alert alert-danger" role="alert">${he.encode(msg)}</div>`
+        : `<div class="alert alert-info" role="alert">Under Construction: Please don't take it seriously yet!</div>`;
 
     const data = {
         page: {
