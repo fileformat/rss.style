@@ -26,6 +26,11 @@
   platforms: [ "linux", "web", "windows" ]
   pricing: "Free"
 
+- name: "Fluent Reader"
+  url: "https://feedreader.com/"
+  platforms: [ "linux", "mac", "windows", "Android", "ios" ]
+  pricing: "Free"
+
 - name: "Inoreader"
   url: "https://www.inoreader.com/"
   pricing: "Freemium, $90/year for premium"
