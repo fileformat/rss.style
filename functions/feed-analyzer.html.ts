@@ -89,7 +89,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
 async function showForm(ctx: EventContext<Env, any, Record<string, unknown>>, feedurl:string, msg:string) {
 
     const alert = msg
-        ? `<div class="alert alert-danger" role="alert">${he.encode(msg)}</div>`
+        ? `<div class="alert  alert-danger" role="alert">${he.encode(msg)}</div>`
         : `<div class="alert alert-info" role="alert">Under Construction: Please don't take it seriously yet!</div>`;
 
     const data = {
@@ -99,13 +99,23 @@ async function showForm(ctx: EventContext<Env, any, Record<string, unknown>>, fe
         },
         content: `
 ${alert}
-<form action="feed-analyzer.html" method="get" style="max-width:500px;margin:auto;padding-top:2em;">
-    <label for="feedurl">Feed URL:</label>
-    <input type="text" id="feedurl" value="${he.encode(feedurl)}" name="feedurl" placeholder="" required>
-    <button type="submit">Analyze!</button>
+<form action="feed-analyzer.html" class="row justify-content-md-center" method="get">
+    <div class="col-sm-12 col-md-9 col-lg-6">
+        <div class="row">
+            <label class="col-2 col-form-label" for="feedurl">Feed&nbsp;URL:</label>
+            <div class="col-10">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="feedurl" value="${he.encode(
+                        feedurl
+                    )}" name="feedurl" placeholder="" required>
+                    <input class="btn btn-primary" value="Analyze!" type="submit" />
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 `,
-    }
+    };
 
     const html = await render(data);
     return new Response(html, {

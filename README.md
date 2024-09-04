@@ -37,5 +37,4 @@ Contributions are welcome!  Please follow the standard Github [Fork & Pull Reque
 [![SimpleShare](https://www.vectorlogo.zone/logos/simplesharedev/simplesharedev-ar21.svg)](https://simpleshare.dev/ "Privacy-friendly sharing links")
 [![VectorLogoZone](https://www.vectorlogo.zone/logos/vectorlogozone/vectorlogozone-ar21.svg)](https://www.vectorlogo.zone/ "Logos")
 
-* [Tim Holman](https://tholman.com/github-corners/) - Github corner
 * [Taco de Wolff](https://github.com/tdewolff/minify) - minify

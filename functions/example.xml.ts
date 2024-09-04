@@ -82,13 +82,23 @@ async function showForm(ctx: EventContext<Env, any, Record<string, unknown>>, fe
         },
         content: `
 ${alert}
-<form action="example.xml" method="get" style="max-width:500px;margin:auto;padding-top:2em;">
-    <label for="feedurl">Feed URL:</label>
-    <input type="text" id="feedurl" value="${he.encode(feedurl)}" name="feedurl" placeholder="" required>
-    <button type="submit">Make it pretty!</button>
+<form action="example.xml" class="row justify-content-md-center" method="get">
+    <div class="col-sm-12 col-md-9 col-lg-6">
+        <div class="row">
+            <label class="col-2 col-form-label" for="feedurl">Feed&nbsp;URL:</label>
+            <div class="col-10">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="feedurl" value="${he.encode(
+                        feedurl
+                    )}" name="feedurl" placeholder="" required>
+                    <input class="btn btn-primary" value="Make it pretty!" type="submit" />
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 `,
-    }
+    };
 
     const html = await render(data);
     return new Response(html, {

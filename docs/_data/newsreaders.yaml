@@ -27,8 +27,13 @@
   pricing: "Free"
 
 - name: "Fluent Reader"
-  url: "https://feedreader.com/"
-  platforms: [ "linux", "mac", "windows", "Android", "ios" ]
+  url: "https://hyliu.me/fluent-reader/"
+  platforms: [ "linux", "mac", "windows" ]
+  pricing: "Free"
+
+- name: "Fluent Reader Lite"
+  url: "https://hyliu.me/fluent-reader-lite/"
+  platforms: [ "android", "ios" ]
   pricing: "Free"
 
 - name: "Inoreader"
