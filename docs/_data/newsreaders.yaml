@@ -26,6 +26,11 @@
   platforms: [ "linux", "web", "windows" ]
   pricing: "Free"
 
+- name: "Fiery Feeds"
+  url: "https://apps.apple.com/us/app/fiery-feeds/id1158763303"
+  platforms: [ "ios" ]
+  pricing: "$10"
+
 - name: "Fluent Reader"
   url: "https://hyliu.me/fluent-reader/"
   platforms: [ "linux", "mac", "windows" ]
@@ -36,10 +41,20 @@
   platforms: [ "android", "ios" ]
   pricing: "Free"
 
+- name: "FreshRSS"
+  url: "https://freshrss.org/"
+  platforms: [ "docker", "linux", "macos", "windows" ]
+  pricing: "Free (self-hosted)"
+
 - name: "Inoreader"
   url: "https://www.inoreader.com/"
   pricing: "Freemium, $90/year for premium"
   platforms: [ "android", "ios", "web" ]
+
+- name: "Leed"
+  url: "https://github.com/LeedRSS/Leed"
+  platforms: [ "docker", "linux", "macos", "windows" ]
+  pricing: "Free (self-hosted)"
 
 - name: "Miniflux"
   url: "https://miniflux.app/"
@@ -51,6 +66,11 @@
   platforms: [ "macos", "ios" ]
   pricing: "Free"
 
+- name: "Newsbar"
+  url: "https://apps.apple.com/us/app/newsbar-rss-reader/id440472232?mt=12"
+  platforms: [ "macos" ]
+  pricing: "$5"
+  
 - name: "Newsboat"
   url: "https://newsboat.org/"
   platforms: [ "linux", "macos", "freebsd" ]
@@ -61,6 +81,16 @@
   url: "https://newsblur.com/"
   platforms: [ "android", "ios", "web" ]
   pricing: "Freemium, $36/year for premium"
+
+- name: "Newsflash"
+  url: "https://apps.gnome.org/NewsFlash/"
+  platforms: [ "linux" ]
+  pricing: "Free"
+
+- name: "News Explorer"
+  url: "https://betamagic.nl/products/newsexplorer.html"
+  platforms: [ "macos", "ios" ]
+  pricing: "$10 for ios and/or $10 for macos"
 
 - name: "The Old Reader"
   url: "https://theoldreader.com/"
@@ -77,15 +107,30 @@
   platform: [ "web" ]
   pricing: "Free for up to 30 feeds, then $1.50/month"
 
+- name: "ReadKit"
+  url: "https://readkitapp.com/"
+  platforms: [ "ios", "macos" ]
+  pricing: "$10"
+
 - name: "Reeder"
   url: "http://reederapp.com/"
   platforms: [ "macos", "ios" ]
   pricing: "$5 for ios, $10 for macos (one-time purchase)"
 
+- name: "Tiny Tiny RSS"
+  url: "https://tt-rss.org/"
+  platforms: [ "docker", "linux", "macos", "windows" ]
+  pricing: "Free"
+
 - name: "Unread"
   url: "https://www.goldenhillsoftware.com/unread/"
   platforms: [ "ios" ]
   pricing: "Free, in-app purchases"
+
+- name: "Vienna"
+  url: "https://www.vienna-rss.com/"
+  platforms: [ "macos" ]
+  pricing: "Free"
 
 - name: "Vivaldi"
   url: "https://vivaldi.com/features/feed-reader/"

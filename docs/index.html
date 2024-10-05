@@ -112,7 +112,10 @@ h1: RSS Style
                 <a href="{{example.url}}">before</a>
                 <span class="text-muted fw-light">&rarr;</span>
                 <a rel="nofollow" href="example.xml?feedurl={{example.url | cgi_escape}}">after</a></td>
-            <td>{{example.notes | markdownify | replace: "<p>", "" | replace: "</p>", "" }}</td>
+            <td>
+                {{example.notes | markdownify | replace: "<p>", "" | replace: "</p>", "" }}
+                <a rel="nofollow" href="/feed-analyzer.html?url={{example.url | cgi_escape}}">analyze</a>
+            </td>
         </tr>
 {% endfor %}
         <tr>
