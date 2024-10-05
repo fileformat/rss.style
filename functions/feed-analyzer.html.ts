@@ -56,13 +56,13 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     }
 
     const notes: string[] = [];
-    notes.push(`Feed fetched in ${Date.now() - start}ms`);
+    notes.push(`Feed fetched in ${(Date.now() - start).toLocaleString()}ms`);
 
     let contentType = feeddata.headers.get("content-type");
     if (!contentType) {
         notes.push("No content type header?!?");
     } else {
-        notes.push(`Content type is "${contentType}"`);
+        notes.push(`Content type is <code>${contentType}</code>`);
     }
 
     if (contentType && contentType.indexOf("text/html") != -1) {
@@ -101,7 +101,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     }
 
     let feedtext = await feeddata.text();
-    notes.push(`Feed is ${feedtext.length} characters long`);
+    notes.push(`Feed is ${feedtext.length.toLocaleString()} characters long`);
 
     if (feedtext.indexOf("<?xml-stylesheet") != -1) {
         notes.push("Feed already has a stylesheet");
