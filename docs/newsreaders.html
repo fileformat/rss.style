@@ -7,9 +7,9 @@ title: News Readers
 </p>
 
 
-<table class="table table-striped">
-    {% for newsreader in site.data.newsreaders %}
+<table class="table table-striped border-top border-bottom">
     <tbody>
+    {% for newsreader in site.data.newsreaders %}
         <tr>
             <td>
                 <a href="{{newsreader.url}}">{{newsreader.name}}</a>
@@ -18,10 +18,10 @@ title: News Readers
                 {{newsreader.pricing}}
             </td>
         </tr>
-    </tbody>
     {% endfor %}
+    </tbody>
 </table>
 
-<p>Also see the exhaustive list at [ALL-about-RSS](https://github.com/AboutRSS/ALL-about-RSS?tab=readme-ov-file#-rss-readers).</p>
+<p>Also see the exhaustive list at <a href="https://github.com/AboutRSS/ALL-about-RSS?tab=readme-ov-file#-rss-readers">ALL-about-RSS</a>.</p>
 
 <p>Is your favorite one missing? <a href="https://github.com/fileformat/rss.style/issues">Let me know!</a></p>
