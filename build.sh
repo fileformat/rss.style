@@ -17,8 +17,8 @@ then
     go install github.com/tdewolff/minify/cmd/minify@latest
 fi
 
-cat docs/xslt/simple-rss.xslt | "${MINIFY}" --type=xml | base64 > docs/xslt/simple-rss.base64
-cat docs/xslt/simple-atom.xslt | "${MINIFY}" --type=xml | base64 > docs/xslt/simple-atom.base64
+cat docs/xslt/simple-rss.xslt | "${MINIFY}" --type=xml | base64 --wrap=0 > docs/xslt/simple-rss.base64
+cat docs/xslt/simple-atom.xslt | "${MINIFY}" --type=xml | base64 --wrap=0 > docs/xslt/simple-atom.base64
 
 jekyll build --source docs
 
