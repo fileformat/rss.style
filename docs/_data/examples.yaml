@@ -95,7 +95,7 @@
   website: https://www.jgc.org/
   hn: jgrahamc
   url: https://blog.jgc.org/feeds/posts/default
-  notes: "Opens 'Save as' dialog, `self` link mismatch but working"
+  notes: "CSS stylesheet, but insecure so it doesn't work. `self` link mismatch but working"
 
 - name: Dan Luu
   website: https://danluu.com/

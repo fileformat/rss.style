@@ -37,4 +37,5 @@ Contributions are welcome!  Please follow the standard Github [Fork & Pull Reque
 [![SimpleShare](https://www.vectorlogo.zone/logos/simplesharedev/simplesharedev-ar21.svg)](https://simpleshare.dev/ "Privacy-friendly sharing links")
 [![VectorLogoZone](https://www.vectorlogo.zone/logos/vectorlogozone/vectorlogozone-ar21.svg)](https://www.vectorlogo.zone/ "Logos")
 
-* [Taco de Wolff](https://github.com/tdewolff/minify) - minify
+* [Taco de Wolff](https://dewolff.ai/) - [minify](https://github.com/tdewolff/minify)
+* [Rowan Manning](https://rowanmanning.com/) - [feed-parser](https://github.com/rowanmanning/feed-parser)

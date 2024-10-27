@@ -11,6 +11,6 @@ set -o nounset
 (trap 'kill 0' SIGINT; \
     jekyll serve --livereload --verbose --watch --source=docs --destination=dist --port 4001 \
     & \
-    npx wrangler pages dev dist --live-reload --compatibility-date=2023-10-30 --compatibility-flags="nodejs_compat" --port=4000 --env dev \
+    npx wrangler pages dev dist --live-reload --compatibility-date=2023-10-30 --compatibility-flags="nodejs_compat" --port=4000 \
 )
 
