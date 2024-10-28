@@ -37,7 +37,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     try {
         feeddata = await fetch(feedurl, {
             headers: {
-                "User-Agent": `RSS.Style/1.0 (your feed is being stylish on https://www.rss.style/ )`,
+                "User-Agent": `RSS.Style/1.0 (your feed is being analyzed on https://www.rss.style/ )`,
                 Referer: ctx.request.url,
             },
         });
@@ -77,7 +77,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
 
     if (contentType && contentType.indexOf("text/html") != -1) {
         const html = await feeddata.text();
-        const feeds = findFeedsInHtml(feedurl, html);
+        const feeds = findFeedsInHeader(feedurl, html);
         if (feeds.length == 0) {
             return showForm(
                 ctx,
@@ -90,18 +90,21 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
                     title: `Feed Analyzer`,
                     h1: `Feed Analysis`,
                 },
-                content:
-                `<h2>Select a feed</h2><p><code><a href="${he.encode(feedurl)}">${he.encode(feedurl)}</a></code> is an HTML page: try again with one of the feed links:</p>
+                content: `<h2>Select a feed</h2><p><code><a href="${he.encode(
+                    feedurl
+                )}">${he.encode(
+                    feedurl
+                )}</a></code> is an HTML page: try again with one of the feed links:</p>
                  <ul>${feeds
-                    .map(
-                        (f) =>
-                            `<li><a href="feed-analyzer.html?feedurl=${encodeURIComponent(
-                                f
-                            )}">${he.encode(f)}</a></li>`
-                    )
-                    .join("")}</ul>`
-                };
-                const html = await render(data);
+                     .map(
+                         (f) =>
+                             `<li><a href="feed-analyzer.html?feedurl=${encodeURIComponent(
+                                 f
+                             )}">${he.encode(f)}</a></li>`
+                     )
+                     .join("")}</ul>`,
+            };
+            const html = await render(data);
             return new Response(html, {
                 headers: {
                     "Content-Type": "text/html",
@@ -119,9 +122,12 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     } else {
         notes.push(`${warning} Feed is missing an ETag.`);
     }
+
     const lastModified = feeddata.headers.get("last-modified");
     if (lastModified) {
-        notes.push(`Feed has a last modified date of <code>${lastModified}</code>.`);
+        notes.push(
+            `Feed has a last modified date of <code>${lastModified}</code>.`
+        );
     } else {
         notes.push(`${warning} Feed is missing the Last-Modified HTTP header.`);
     }
@@ -133,19 +139,29 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         const styleEnd = feedtext.indexOf("?>", styleStart);
         const xmlStyle = feedtext.slice(styleStart, styleEnd + 2);
         const href_match = /href="([^"]+)"/.exec(xmlStyle);
-        const styleHref = href_match && href_match.length >= 2 ? href_match[1] : null;
+        const styleHref =
+            href_match && href_match.length >= 2 ? href_match[1] : null;
         const type_match = /type="([^"]+)"/.exec(xmlStyle);
         console.log(type_match);
         const styleType =
             type_match && type_match.length >= 2 ? type_match[1] : null;
         if (styleHref && styleType) {
-            notes.push(`Feed has a <code>${he.encode(styleType)}</code> stylesheet: <code>${he.encode(styleHref)}</code>.`);
+
+            notes.push(
+                `Feed has a <code>${he.encode(
+                    styleType
+                )}</code> stylesheet: <code>${he.encode(styleHref.length < 100 ? styleHref : styleHref.slice(0, 100) + '…')}</code>.`
+            );
         } else {
-            notes.push(`Feed has a stylesheet, but it's missing a href or type: <code>${he.encode(xmlStyle)}</code>.`);
+            notes.push(
+                `Feed has a stylesheet, but it's missing a href or type: <code>${he.encode(
+                    xmlStyle
+                )}</code>.`
+            );
         }
         if (styleHref) {
             const styleUrl = new URL(styleHref, feedurl);
-            if (styleUrl.protocol != feedurlObj.protocol) {
+            if (styleUrl.protocol != feedurlObj.protocol && styleUrl.protocol != "data:") {
                 notes.push(
                     `${error} Stylesheet URL is on a different protocol: <code>${he.encode(
                         styleUrl.protocol
@@ -181,7 +197,11 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         if (!feed.self) {
             notes.push(`${warning} Feed is missing a self link.`);
         } else if (feed.self != feedurl) {
-            notes.push(`${warning} Feed self link does not match feed URL: <a href="${he.encode(feed.self)}">${he.encode(feed.self)}</a>.`);
+            notes.push(
+                `${warning} Feed self link does not match feed URL: <a href="${he.encode(
+                    feed.self
+                )}">${he.encode(feed.self)}</a>.`
+            );
         } else {
             notes.push(`Feed self link matches feed URL.`);
         }
@@ -189,7 +209,9 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         if (feed.items.length > 0) {
             const firstItem = feed.items[0];
             if (firstItem.published) {
-                notes.push(`First item published on ${firstItem.published.toISOString()}`);
+                notes.push(
+                    `First item published on ${firstItem.published.toISOString()}`
+                );
             }
         }
         if (feed.items.length > 1) {
@@ -205,7 +227,11 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
             notes.push(`${warning} Feed is missing a home page URL.`);
         } else {
             const homeUrl = new URL(feed.url, feedurl);
-            notes.push(`Home page URL: <a href="${he.encode(homeUrl.href)}">${he.encode(homeUrl.href)}</a>`);
+            notes.push(
+                `Home page URL: <a href="${he.encode(
+                    homeUrl.href
+                )}">${he.encode(homeUrl.href)}</a>`
+            );
             if (homeUrl.protocol != feedurlObj.protocol) {
                 notes.push(
                     `${error} Home page URL is on a different protocol: <code>${he.encode(
@@ -213,9 +239,79 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
                     )}</code>.`
                 );
             }
-            //LATER: check if the home page is accessible
-            //LATER: check if home page has a discoverable feed header
-            //LATER: check if home page has a feed link in the HTML
+            let homeresponse: globalThis.Response | null = null;
+            try {
+                homeresponse = await fetch(homeUrl, {
+                    headers: {
+                        "User-Agent": `RSS.Style/1.0 (your feed is being analyzed on https://www.rss.style/ )`,
+                        Referer: ctx.request.url,
+                    },
+                });
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    notes.push(
+                        `${error} Error fetching home page: ${err.message}`
+                    );
+                } else {
+                    notes.push(`${error} Error fetching home page: ${err}`);
+                }
+            }
+            if (homeresponse) {
+                if (homeresponse.url != homeUrl.href) {
+                    notes.push(
+                        `${warning} Home page URL redirected to <a href="${he.encode(
+                            homeresponse.url
+                        )}">${he.encode(homeresponse.url)}</a>.`
+                    );
+                }
+                if (homeresponse.ok) {
+                    if (
+                        homeresponse.headers
+                            .get("content-type")
+                            ?.indexOf("text/html") != 0
+                    ) {
+                        notes.push(`${error} Home page is not an HTML page.`);
+                    } else {
+                        const homehtml = await homeresponse.text();
+
+                        const homefeeds = findFeedsInHeader(
+                            homeresponse.url,
+                            homehtml
+                        );
+                        if (!homefeeds || homefeeds.length == 0) {
+                            notes.push(
+                                `${error} Home page does not have any feed discovery link in the &lt;head&gt;.`
+                            );
+                        } else if (homefeeds.indexOf(feedurl) == -1) {
+                            notes.push(
+                                `${error} Home page does not have a matching feed discovery link in the &lt;head&gt;.`
+                            );
+                            const homefeedList = homefeeds
+                                .map((f) => `<li><a href="${f}">${f}</a></li>`)
+                                .join("");
+                            notes.push(
+                                `<details><summary>${homefeeds.length} feed links in &lt;head&gt;</summary>${homefeedList}</details>`
+                            );
+                        } else {
+                            notes.push(`Home page has feed discovery link in &lt;head&gt;.`);
+                        }
+
+                        const feedInHtml = findFeedInHtml(
+                            homeresponse.url,
+                            feedurl,
+                            homehtml
+                        );
+                        notes.push(feedInHtml);
+                    }
+                } else {
+                    notes.push(
+                        `${error} Error fetching home page: ${homeresponse.status} ${homeresponse.statusText}`
+                    );
+                }
+            } else {
+                // how could this happen?
+                notes.push(`${error} Unable to fetch home page.`);
+            }
         }
     }
 
@@ -226,7 +322,9 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
             title: `Feed Analyzer`,
             h1: `Feed Analysis`,
         },
-        content: `<h3>Analysis of <a href="${he.encode(feedurl)}">${he.encode(feedurl)}</a></h3>
+        content: `<h3>Analysis of <a href="${he.encode(feedurl)}">${he.encode(
+            feedurl
+        )}</a></h3>
 <p class="lh-lg">${analysis}</p>
 <details><summary>Formatted XML</summary>
 <pre class="border bg-body-secondary rounded p-2">${he.encode(
@@ -242,8 +340,9 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         )}</pre>
 </details>
 <a class="btn btn-outline-primary mt-2 ms-2" href="feed-analyzer.html">Analyze Another</a>
-<a class="btn btn-outline-primary mt-2 ms-2" href="example.xml?feedurl=${encodeURIComponent(feedurl)}">View with RSS.Style</a>`,
-
+<a class="btn btn-outline-primary mt-2 ms-2" href="example.xml?feedurl=${encodeURIComponent(
+            feedurl
+        )}">View with RSS.Style</a>`,
     };
 
     return new Response(await render(data), {
@@ -298,7 +397,7 @@ ${alert}
     });
 }
 
-function findFeedsInHtml(url: string, html: string): string[] {
+function findFeedsInHeader(url: string, html: string): string[] {
     const $ = cheerio.load(html);
     const feeds: string[] = [];
     $('link[type="application/rss+xml"]').each((i, el) => {
@@ -315,4 +414,24 @@ function findFeedsInHtml(url: string, html: string): string[] {
     });
 
     return feeds;
+}
+
+function findFeedInHtml(
+    homeUrl: string,
+    feedUrl: string,
+    html: string
+): string {
+    const $ = cheerio.load(html);
+    const feeds: string[] = [];
+    const links = $("a");
+    for (let i = 0; i < links.length; i++) {
+        const href = $(links[i]).attr("href");
+        if (href) {
+            const linkUrl = new URL(href, homeUrl);
+            if (linkUrl.href == feedUrl) {
+                return `Home page has a link to the feed in the &lt;body&gt;`;
+            }
+        }
+    }
+    return `${error} Home page does not have a link to the feed in the &lt;body&gt;.`;
 }
