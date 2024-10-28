@@ -122,6 +122,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     } else {
         notes.push(`${warning} Feed is missing an ETag.`);
     }
+    //LATER: see if it responds properly when passed the ETag
 
     const lastModified = feeddata.headers.get("last-modified");
     if (lastModified) {
@@ -131,6 +132,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     } else {
         notes.push(`${warning} Feed is missing the Last-Modified HTTP header.`);
     }
+    //LATER: see if it responds properly when passed the Last-Modified date
 
     const styleStart = feedtext.indexOf("<?xml-stylesheet");
     if (styleStart == -1) {
@@ -146,11 +148,14 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         const styleType =
             type_match && type_match.length >= 2 ? type_match[1] : null;
         if (styleHref && styleType) {
-
             notes.push(
                 `Feed has a <code>${he.encode(
                     styleType
-                )}</code> stylesheet: <code>${he.encode(styleHref.length < 100 ? styleHref : styleHref.slice(0, 100) + '…')}</code>.`
+                )}</code> stylesheet: <code>${he.encode(
+                    styleHref.length < 100
+                        ? styleHref
+                        : styleHref.slice(0, 100) + "…"
+                )}</code>.`
             );
         } else {
             notes.push(
@@ -161,7 +166,10 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         }
         if (styleHref) {
             const styleUrl = new URL(styleHref, feedurl);
-            if (styleUrl.protocol != feedurlObj.protocol && styleUrl.protocol != "data:") {
+            if (
+                styleUrl.protocol != feedurlObj.protocol &&
+                styleUrl.protocol != "data:"
+            ) {
                 notes.push(
                     `${error} Stylesheet URL is on a different protocol: <code>${he.encode(
                         styleUrl.protocol
@@ -192,13 +200,13 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         if (feed.title) {
             notes.push(`Feed title: <code>${he.encode(feed.title)}</code>`);
         } else {
-            notes.push(`${warning} Feed is missing a title.`);
+            notes.push(`${error} Feed is missing a title.`);
         }
         if (!feed.self) {
-            notes.push(`${warning} Feed is missing a self link.`);
+            notes.push(`${error} Feed is missing a self link.`);
         } else if (feed.self != feedurl) {
             notes.push(
-                `${warning} Feed self link does not match feed URL: <a href="${he.encode(
+                `${error} Feed self link does not match feed URL: <a href="${he.encode(
                     feed.self
                 )}">${he.encode(feed.self)}</a>.`
             );
@@ -224,7 +232,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         }
 
         if (!feed.url) {
-            notes.push(`${warning} Feed is missing a home page URL.`);
+            notes.push(`${error} Feed is missing a home page URL.`);
         } else {
             const homeUrl = new URL(feed.url, feedurl);
             notes.push(
@@ -293,7 +301,9 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
                                 `<details><summary>${homefeeds.length} feed links in &lt;head&gt;</summary>${homefeedList}</details>`
                             );
                         } else {
-                            notes.push(`Home page has feed discovery link in &lt;head&gt;.`);
+                            notes.push(
+                                `Home page has feed discovery link in &lt;head&gt;.`
+                            );
                         }
 
                         const feedInHtml = findFeedInHtml(
@@ -315,8 +325,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         }
     }
 
-    const analysis = notes.join("<br>"); //LATER: html ul/li/etc.
-
+    const analysis = notes.join("<br>");
     const data = {
         page: {
             title: `Feed Analyzer`,
