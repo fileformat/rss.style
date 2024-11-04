@@ -15,7 +15,7 @@ cd docs
 jekyll serve --watch
 ```
 
-The examples (not really required for the main functionality) are handled with a Cloudflare Pages function.  See the [`run.sh`](run.sh) script to run everything locally.
+The examples and analyzer are handled with a Cloudflare Pages function.  See the [`run.sh`](run.sh) script to run everything locally.
 
 ## Contributing
 
@@ -27,6 +27,7 @@ Contributions are welcome!  Please follow the standard Github [Fork & Pull Reque
 
 ## Credits
 
+[![Atom](docs/images/atom-ar21.svg)](https://www.ietf.org/rfc/rfc4287.txt "Feed file format")
 [![Cloudflare](https://www.vectorlogo.zone/logos/cloudflare/cloudflare-ar21.svg)](https://www.cloudflare.com/ "Hosting")
 [![Git](https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg)](https://git-scm.com/ "Version control")
 [![Github](https://www.vectorlogo.zone/logos/github/github-ar21.svg)](https://github.com/ "Code hosting")
@@ -34,7 +35,9 @@ Contributions are welcome!  Please follow the standard Github [Fork & Pull Reque
 [![Jekyll](https://www.vectorlogo.zone/logos/jekyllrb/jekyllrb-ar21.svg)](https://www.jekyllrb.com/ "Static website builder")
 [![NodePing](https://www.vectorlogo.zone/logos/nodeping/nodeping-ar21.svg)](https://nodeping.com?rid=201109281250J5K3P "Uptime monitoring")
 [![Pico CSS](https://www.vectorlogo.zone/logos/picocss/picocss-ar21.svg)](https://picocss.com/ "CSS")
+[![RSS](https://www.vectorlogo.zone/logos/rss/rss-ar21.svg)](https://www.rssboard.org/rss-specification "Feed file format")
 [![SimpleShare](https://www.vectorlogo.zone/logos/simplesharedev/simplesharedev-ar21.svg)](https://simpleshare.dev/ "Privacy-friendly sharing links")
+[![TypeScript](https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-ar21.svg)](https://www.typescriptlang.org/ "Programming Language")
 [![VectorLogoZone](https://www.vectorlogo.zone/logos/vectorlogozone/vectorlogozone-ar21.svg)](https://www.vectorlogo.zone/ "Logos")
 
 * [Taco de Wolff](https://dewolff.ai/) - [minify](https://github.com/tdewolff/minify)
