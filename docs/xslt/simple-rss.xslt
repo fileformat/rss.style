@@ -57,7 +57,7 @@
 				</details>
 		</xsl:for-each>
 		<p><xsl:value-of select="count(/rss/channel/item)"/> news items.</p>
-		<p><small>Powered by <a href="https://www.rss.style/"><img referrerpolicy="origin" src="https://www.rss.style/favicon.svg" style="height:1em;padding-right:0.25em;vertical-align:middle;" />RSS.Style</a></small></p>
+		<p><small>Powered by <a href="https://www.rss.style/"><img alt="RSS.Style" referrerpolicy="origin" src="https://www.rss.style/favicon.svg" style="height:1em;padding-right:0.25em;vertical-align:middle;" />RSS.Style</a></small></p>
 		<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
 		<script>
 			new ClipboardJS('.clipboard');
