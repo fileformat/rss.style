@@ -66,7 +66,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     return new Response(styledtext, { headers: {
         'Content-Type': 'text/xml; charset=utf-8',
         'Cache-Control': 'no-store, max-age=0',
-        'X-Robots-Tag': 'noindex',
+        'X-Robots-Tag': 'nofollow, noindex',
         'X-Original-Content-Type': feeddata.headers.get('Content-Type') || '(not set?!?)',
     } });
 }
