@@ -1,5 +1,6 @@
 *~
 **/*.base64
+**/*.base64.html
 .cache
 *.class
 crash.log

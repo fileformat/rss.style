@@ -1,6 +1,9 @@
 
 # RSS Style [<img alt="RSS.Style Logo" src="https://www.rss.style/favicon.svg" height="96" align="right" />](https://www.rss.style/)
 
+[![NodePing status](https://img.shields.io/nodeping/status/tstap4yu-l4we-4f3m-81oz-miijwitm8upl?label=Current%20status)](https://nodeping.com/reports/checks/tstap4yu-l4we-4f3m-81oz-miijwitm8upl)
+[![NodePing uptime](https://img.shields.io/nodeping/uptime/tstap4yu-l4we-4f3m-81oz-miijwitm8upl?label=30-day%20uptime)](https://nodeping.com/reports/uptime/tstap4yu-l4we-4f3m-81oz-miijwitm8upl)
+
 [RSS Style](https://www.rss.style/) helps you make your [RSS and Atom feeds](https://en.wikipedia.org/wiki/Web_feed) look nice.
 
 ## Using

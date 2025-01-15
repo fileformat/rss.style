@@ -1,0 +1,9 @@
+bindkey ^c quit
+caption splitonly "%t - Use Ctrl-A+Tab to switch panes, Crtl-A+Esc to view scrollback"
+defscrollback 10000
+screen -t server /usr/bin/env bash -c "./subrun-app.sh"
+screen -t client /usr/bin/env bash -c "./subrun-www.sh"
+split
+select 0
+focus
+select 1

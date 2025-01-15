@@ -92,6 +92,14 @@ h1: RSS Style
     <a href="https://www.petefreitag.com/blog/css-stylesheet-rss/">Pete Freitag's overview</a> for making your own.
 </p>
 
+<h3>Why does the analyzer complain about the content-type?</h3>
+
+<p>
+    While there are official content-types for RSS and Atom feeds, some browsers will try to download the feeds rather than
+    display them.  This is suboptimal (to say the least), so I strongly recommend using the plain XML content type <code>text/xml</code>.
+    You can test how your browser behaves with the <a href="content-type.html">Content-Type Testing</a> page.
+</p>
+
 <h2>Links</h2>
 <ul>
     {%- for link in site.data.links %}

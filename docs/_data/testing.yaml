@@ -1,0 +1,25 @@
+types:
+  - value: "application/atom+xml"
+    key: "application_atom_xml"
+  - value: "application/rss+xml"
+    key: "application_rss_xml"
+  - value: "application/xml"
+    key: "application_xml"
+  - value: "text/xml"
+    key: "text_xml"
+    default: true
+  - value: "text/plain"
+    key: "text_plain"
+
+styles:
+  - value: "No Styling"
+    key: "none"
+  - value: "Style with XSLT (local)"
+    key: "xslt"
+    default: true
+  - value: "Style with XSLT (remote)"
+    key: "xslt_remote"
+  - value: "Style with XSLT (embedded)"
+    key: "xslt_base64"
+  - value: "Style with CSS"
+    key: "css"

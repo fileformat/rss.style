@@ -1,0 +1,68 @@
+---
+title: "Content-Type Testing"
+types:
+  - value: "application/atom+xml"
+    key: "application_atom_xml"
+  - value: "application/rss+xml"
+    key: "application_rss_xml"
+  - value: "application/xml"
+    key: "application_xml"
+  - value: "text/xml"
+    key: "text_xml"
+    default: true
+  - value: "text/plain"
+    key: "text_plain"
+
+styles:
+  - value: "No Styling"
+    key: "none"
+  - value: "Style with XSLT (local)"
+    key: "xslt"
+    default: true
+  - value: "Style with XSLT (remote)"
+    key: "xslt_remote"
+  - value: "Style with XSLT (embedded)"
+    key: "xslt_base64"
+  - value: "Style with CSS"
+    key: "css"
+
+---
+
+<form action="content-type.xml" class="row justify-content-md-center" method="get">
+    <div class="col-sm-12 col-md-7 col-lg-4">
+        <div class="mb-3 row flex align-items-top">
+            <label class="col-4 col-form-label mt-2" for="feedurl">Content Type:</label>
+            <div class="col-sm-8">
+                {% for option in site.data.testing.types %}
+                <div class="form-check mt-3">
+                    <input class="form-check-input" type="radio" name="type" id="{{option.key}}" value="{{option.value}}" {% if option.default %}checked{% endif %}>
+                    <label class="form-check-label" for="{{option.key}}">
+                        <code>{{option.value}}</code>
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="mb-4 row flex align-items-top">
+            <label class="col-4 col-form-label mt-2" for="style">Styling:</label>
+            <div class="col-sm-8">
+                {% for option in site.data.testing.styles %}
+                <div class="form-check mt-3">
+                    <input class="form-check-input" type="radio" name="style" id="{{option.key}}" value="{{option.key}}" {% if option.default %}checked{% endif %}>
+                    <label class="form-check-label" for="{{option.key}}">
+                        {{option.value}}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="mb-3 row flex">
+            <div class="col-4"><!-- spacer for labels --></div>
+            <div class="col-8">
+            <button class="btn btn-primary" type="submit">Test</button>
+            <a href="/content-types.html" class="btn btn-outline-primary">Test All</a>
+            <a href="/" class="btn btn-outline-primary">Cancel</a>
+            </div>
+        </div>
+    </div>
+</form>

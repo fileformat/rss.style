@@ -1,0 +1,19 @@
+---
+title: Testing All Content Type/Stylesheet Embedding Combinations
+noindex: true
+---
+{% for type in site.data.testing.types %}
+<h2>{{type.value}}</h2>
+<div className="row mt-3">
+    <div className="col d-flex flex-wrap justify-content-center align-self-center">
+    {% for style in site.data.testing.styles %}
+        <div class="vstack d-inline-block gap-2 border border-dark m-2 p-0">
+            <iframe src="/content-type.xml?type={{type.value}}&amp;style={{style.key}}" width="300" height="300"></iframe><br/>
+            <div class="w-100 text-center border-top p-3">
+                <a class="fs-6" href="/content-type.xml?type={{type.value}}&amp;style={{style.key}}">{{style.value}}</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endfor %}

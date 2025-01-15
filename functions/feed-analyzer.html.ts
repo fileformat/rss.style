@@ -67,9 +67,9 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     let contentType = feeddata.headers.get("content-type");
     if (!contentType) {
         notes.push(`${error} No content type header found!`);
-    } else if (!contentType.startsWith("text/xml")) {
+    } else if (!contentType.startsWith("text/xml") && !contentType.startsWith("application/xml")) {
         notes.push(
-            `${warning} Content type is <code>${contentType}</code>, not <code>text/xml</code>.`
+            `${warning} Content type is <code>${contentType}</code>, not <code>text/xml</code> or <code>application/xml</code> .`
         );
     } else {
         notes.push(`Content type is <code>${contentType}</code>.`);
@@ -118,7 +118,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
 
     const etag = feeddata.headers.get("etag");
     if (etag) {
-        notes.push(`Feed has an ETag of <code>${etag}</code>.`);
+        notes.push(`Feed has an ETag of <code>${he.encode(etag)}</code>.`);
     } else {
         notes.push(`${warning} Feed is missing an ETag.`);
     }
@@ -127,7 +127,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     const lastModified = feeddata.headers.get("last-modified");
     if (lastModified) {
         notes.push(
-            `Feed has a last modified date of <code>${lastModified}</code>.`
+            `Feed has a last modified date of <code>${he.encode(lastModified)}</code>.`
         );
     } else {
         notes.push(`${warning} Feed is missing the Last-Modified HTTP header.`);
@@ -191,9 +191,9 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         feed = await parseFeed(feedtext);
     } catch (err: unknown) {
         if (err instanceof Error) {
-            notes.push(`${error} Error parsing feed: ${err.message}`);
+            notes.push(`${error} Error parsing feed: ${he.encode(err.message)}`);
         } else {
-            notes.push(`${error} Error parsing feed: ${err}`);
+            notes.push(`${error} Error parsing feed: ${he.encode(String(err))}`);
         }
     }
     if (feed) {
@@ -258,10 +258,10 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     notes.push(
-                        `${error} Error fetching home page: ${err.message}`
+                        `${error} Error fetching home page: he.encode(err.message)}`
                     );
                 } else {
-                    notes.push(`${error} Error fetching home page: ${err}`);
+                    notes.push(`${error} Error fetching home page: ${he.encode(String(err))}`);
                 }
             }
             if (homeresponse) {
@@ -295,7 +295,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
                                 `${error} Home page does not have a matching feed discovery link in the &lt;head&gt;.`
                             );
                             const homefeedList = homefeeds
-                                .map((f) => `<li><a href="${f}">${f}</a></li>`)
+                                .map((f) => `<li><a href="${he.encode(f)}">${he.encode(f)}</a></li>`)
                                 .join("");
                             notes.push(
                                 `<details><summary>${homefeeds.length} feed links in &lt;head&gt;</summary>${homefeedList}</details>`
@@ -315,7 +315,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
                     }
                 } else {
                     notes.push(
-                        `${error} Error fetching home page: ${homeresponse.status} ${homeresponse.statusText}`
+                        `${error} Error fetching home page: ${homeresponse.status} ${he.encode(homeresponse.statusText)}`
                     );
                 }
             } else {
@@ -328,8 +328,8 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     const analysis = notes.join("<br>");
     const data = {
         page: {
-            title: `Feed Analyzer`,
-            h1: `Feed Analysis`,
+            title: `RSS/Atom Feed Analyzer`,
+            h1: `RSS/Atom Feed Analysis`,
         },
         content: `<h3>Analysis of <a href="${he.encode(feedurl)}">${he.encode(
             feedurl
@@ -375,8 +375,8 @@ async function showForm(
 
     const data = {
         page: {
-            title: `Feed Analyzer`,
-            h1: `Analyze my feed!`,
+            title: `RSS/Atom Feed Analyzer`,
+            h1: `Analyze my RSS/Atom feed!`,
         },
         content: `
 ${alert}
