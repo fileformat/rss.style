@@ -22,14 +22,10 @@
   url: "https://www.rssboard.org/rss-profile"
   tags: [ "rss" ]
 
-- title: "Mozilla Developer Network: XSLT reference"
-  url: "https://developer.mozilla.org/en-US/docs/Web/XSLT"
+- title: "XML Style: XSLT links and resources"
+  url: "https://www.xml.style/"
   tags: [ "xslt" ]
-
-- title: "W3C: Official XSLT 3.0 specification"
-  url: "https://www.w3.org/TR/xslt-30/"
-  tags: [ "xslt" ]
-
+  
 - title: "Microsoft Learn: XSLT reference"
   url: "https://learn.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms256069(v=vs.100)"
   tags: [ "xslt" ]
