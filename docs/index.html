@@ -33,67 +33,55 @@ h1: RSS Style
 
 <h2>How do I use it?</h2>
 
-<p>In your feed file (often <code>feed.xml</code> but see below) add a line to the top (after the <code>&lt;?xml...?&gt;</code> but before any real xml) of  with one of the styles here on <b>RSS Style</b>:</p>
+<p>
+    Download one of the <a href="#available_styles">available styles</a> and save it as <code>sitemap.xslt</code> in the
+    same directory as your <code>sitemap.xml</code> file.
+    Note that the extension is <code>.xslt</code> and NOT <code>.xml</code>!<br><br></li>
+</p>
 
-<div class="d-flex pt-3 pb-3">
-    <label class="pt-1 pe-2" for="rssxslt">For&nbsp;RSS&nbsp;feeds:</label>
-    <div class="flex-grow-1 ">
-        <div class="input-group">
-            <input class="cbinput form-control" type="text" id="rssxslt" name="rssxslt" value="&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;data:text/xsl;base64,{% include_relative xslt/simple-rss.base64 %}&quot; ?&gt;" readonly>
-            <button class="clipboard btn btn-primary" data-clipboard-target="#rssxslt" type="button">Copy to clipboard (RSS)</button>
-        </div>
-    </div>
-</div>
+<p>
+    Add it to your <code>sitemap.xml</code>file. At the top of the file, it will look like:
+<pre class="m-4 p-3 bg-light border rounded">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;rss ...&gt;
+...
+</pre>
+</p>
 
-<div class="d-flex pb-3">
-    <label class="pt-1 pe-2" for="atomxslt">For&nbsp;Atom&nbsp;feeds:</label>
-    <div class="flex-grow-1 ">
-        <div class="input-group">
-            <input class="cbinput form-control" type="text" id="atomxslt" name="atomxslt" value="&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;data:text/xsl;base64,{% include_relative xslt/simple-atom.base64 %}&quot; ?&gt;" readonly>
-            <button class="clipboard btn btn-primary" data-clipboard-target="#atomxslt">Copy to clipboard (Atom)</button>
-        </div>
-    </div>
-</div>
+<p>
+    Add a line in the middle so it looks like:
+<pre class="m-4 p-3 bg-light border rounded">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<b title="This is the added line">&lt;?xml-stylesheet type="text/xsl" href="my-downloaded-file.xslt"?&gt;</b>
+&lt;rss ...&gt;
+...
+</pre>
+</p>
+
+<p><a href="https://www.xml.style/index.html#warn">Troubleshooting</a></p>
+
+<h2 id="available_styles">Available styles</h2>
+
+<ul>
+    <li><a href="/xslt/simple-rss.xslt">simple-rss.xslt</a> - for RSS feeds</li>
+    <li><a href="/xslt/simple-atom.xslt">simple-atom.xslt</a> - for Atom feeds</li>
+</ul>
 
 <h2>Questions and Answers</h2>
 
-<h3>How does this work?</h3>
+<h3>Which file do I add it to?</h3>
+<p>
+    Your feed file is often named <code>feed.xml</code> but can be anything.  You can
+    use the <a href="/feed-analyzer.html">Feed Analyzer</a> to find the URL of your feed: put it
+    your website's URL and it will display the feeds that it finds.
+</p>
 
+<h3>How does this work?</h3>
 <p>
     The <code>xml-stylesheet</code> processing instruction tells the browser to use the XSLT stylesheet to transform the raw XML into HTML.  This has been supported by all major browsers for a long time.
 </p>
 
-<h3>Why is the snippet so huge?</h3>
-<p>
-    The entire XSLT stylesheet needs to be included because of a bug in Chrome that prevents cross-domain loading.
-</p>
-
-<h3>What if I don't want a huge base64-encoding blob in my feed?</h3>
-<p>
-    You can host the XSLT file yourself and point to it directly:
-    <ol>
-        <li class="mb-3">Download the <a href="https://github.com/fileformat/rss.style/tree/main/docs/xslt">appropriate XSLT file</a> and host it next to your feed (<code>/localcopy.xslt</code> in the example below).</li>
-        <li class="mb-3"><label for="localxslt">Use a simpler snippet:</label>
-            <div class="d-inline-block w-75">
-            <div class="input-group">
-                <input class="cbinput form-control w-auto" type="text" id="localxslt" name="localxslt" value="&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/localcopy.xslt&quot; ?&gt;" readonly>
-                <button class="clipboard btn btn-primary" data-clipboard-target="#localxslt">Copy to clipboard (self-hosted)</button>
-            </div>
-            </div>
-        </li class="mb-3">
-        <li>The code is <a href="https://github.com/fileformat/rss.style/blob/main/LICENSE.txt">MIT licensed</a>: customize to your liking (though XSLT is not for the faint of heart IMHO)</li>
-    </ol>
-</p>
-
-<h3>Are there other ways to make my feeds look nice?</h3>
-
-<p>
-    Yes! You can also use a CSS stylesheet. I plan on having some examples here, but in the meantime check out
-    <a href="https://www.petefreitag.com/blog/css-stylesheet-rss/">Pete Freitag's overview</a> for making your own.
-</p>
-
 <h3>Why does the analyzer complain about the content-type?</h3>
-
 <p>
     While there are official content-types for RSS and Atom feeds, some browsers will try to download the feeds rather than
     display them.  This is suboptimal (to say the least), so I strongly recommend using the plain XML content type <code>text/xml</code>.

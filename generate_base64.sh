@@ -16,10 +16,19 @@ then
 fi
 
 FILES=(simple-rss simple-atom)
+TYPES=(css xslt)
 
-for FILE in "${FILES[@]}"
+for TYPE in "${TYPES[@]}"
 do
-    echo "INFO: generating base64 for ${FILE}"
-    cat "docs/xslt/${FILE}.xslt" | "${MINIFY}" --type=xml | base64 --wrap=0 > "docs/xslt/${FILE}.base64"
-    cp "docs/xslt/${FILE}.base64" "docs/xslt/_${FILE}.base64.html"
+    for FILE in "${FILES[@]}"
+    do
+        if [ "${TYPE}" == "xslt" ]; then
+            MINIFY_TYPE="xml"
+        else
+            MINIFY_TYPE="${TYPE}"
+        fi
+        echo "INFO: generating base64 for ${FILE} ${TYPE}"
+        cat "docs/${TYPE}/${FILE}.${TYPE}" | "${MINIFY}" --type=${MINIFY_TYPE} | base64 --wrap=0 > "docs/${TYPE}/${FILE}.base64"
+        cp "docs/${TYPE}/${FILE}.base64" "docs/${TYPE}/_${FILE}.base64.html"
+    done
 done

@@ -10,16 +10,23 @@ types:
     default: true
   - value: "text/plain"
     key: "text_plain"
+    skipall: true
+
+locations:
+  - value: "Local URL"
+    key: "local"
+    default: true
+  - value: "Remote URL"
+    key: "remote"
+  - value: "data: URL"
+    key: "base64"
 
 styles:
-  - value: "No Styling"
-    key: "none"
-  - value: "Style with XSLT (local)"
+  - value: "XSLT"
     key: "xslt"
     default: true
-  - value: "Style with XSLT (remote)"
-    key: "xslt_remote"
-  - value: "Style with XSLT (embedded)"
-    key: "xslt_base64"
-  - value: "Style with CSS"
+  - value: "CSS"
     key: "css"
+  - value: "Nothing"
+    key: "none"
+    skipall: true

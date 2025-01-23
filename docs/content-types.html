@@ -3,17 +3,23 @@ title: Testing All Content Type/Stylesheet Embedding Combinations
 noindex: true
 ---
 {% for type in site.data.testing.types %}
-<h2>{{type.value}}</h2>
+{% unless type.skipall == true %}
+{% for style in site.data.testing.styles %}
+{% unless style.skipall == true %}
+<h2>{{type.value}} with {{style.value}}</h2>
 <div className="row mt-3">
     <div className="col d-flex flex-wrap justify-content-center align-self-center">
-    {% for style in site.data.testing.styles %}
+    {% for location in site.data.testing.locations %}
         <div class="vstack d-inline-block gap-2 border border-dark m-2 p-0">
-            <iframe src="/content-type.xml?type={{type.value}}&amp;style={{style.key}}" width="300" height="300"></iframe><br/>
+            <iframe src="/content-type.xml?type={{type.value}}&amp;style={{style.key}}&amp;location={{location.key}}" width="300" height="300"></iframe><br/>
             <div class="w-100 text-center border-top p-3">
-                <a class="fs-6" href="/content-type.xml?type={{type.value}}&amp;style={{style.key}}">{{style.value}}</a>
+                <a class="fs-6" href="/content-type.xml?type={{type.value}}&amp;style={{style.key}}&amp;location={{location.key}}">{{location.value}}</a>
             </div>
         </div>
     {% endfor %}
     </div>
 </div>
+{% endunless %}
+{% endfor %}
+{% endunless %}
 {% endfor %}

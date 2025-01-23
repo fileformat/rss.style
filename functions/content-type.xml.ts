@@ -2,18 +2,28 @@ import { PagesFunction, EventContext } from "@cloudflare/workers-types";
 import he from "he";
 
 // LATER: this is a hack to workaround inlining the files with extensions other than '.html'
-import rss_base64 from "../docs/xslt/_simple-rss.base64.html";
-import atom_base64 from "../docs/xslt/_simple-atom.base64.html";
+import rss_xslt_base64 from "../docs/xslt/_simple-rss.base64.html";
+import atom_xslt_base64 from "../docs/xslt/_simple-atom.base64.html";
+import rss_css_base64 from "../docs/css/_simple-rss.base64.html";
+import atom_css_base64 from "../docs/css/_simple-atom.base64.html";
 
 interface Env {}
 
-const remoteHost = "https://feed-style.pages.dev";
+const remoteHost = process.env.NODE_ENV === "production" ? "https://www.rss.style" : "http://127.0.0.1:5000";
+
+function getReplacement(isAtom: boolean, isCss: boolean): string {
+    if (isCss) {
+        return isAtom ? atom_css_base64 : rss_css_base64;
+    } else {
+        return isAtom ? atom_xslt_base64 : rss_xslt_base64;
+    }
+}
 
 const sampleRss = `<?xml version="1.0" encoding="UTF-8"?>
-{{style}}
+{{style_instruction}}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sample Feed</title>
+    <title>Sample RSS Feed</title>
     <link>https://www.rss.style/</link>
     <description>A sample RSS feed</description>
     <language>en-us</language>
@@ -23,7 +33,7 @@ const sampleRss = `<?xml version="1.0" encoding="UTF-8"?>
     <webMaster>webmaster@rss.style</webMaster>
     <atom:link href="https://www.rss.style/content-type.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Sample Item</title>
+      <title>Location {{location}}</title>
       <link>https://example.com/sample-item</link>
       <description>Sample item description</description>
       <pubDate>Fri, 21 Jul 2023 09:04 EDT</pubDate>
@@ -35,23 +45,37 @@ const sampleRss = `<?xml version="1.0" encoding="UTF-8"?>
       <pubDate>Fri, 21 Jul 2023 09:04 EDT</pubDate>
     </item>
     <item>
-      <title>Style Sheet</title>
+      <title>Style {{style}}</title>
       <link>https://example.com/sample-item</link>
-      <description>{{style_description}}</description>
+      <description>Sample item description</description>
       <pubDate>Fri, 21 Jul 2023 09:04 EDT</pubDate>
     </item>
   </channel>
 </rss>`;
 
 const sampleAtom = `<?xml version="1.0" encoding="UTF-8"?>
-{{style}}
+{{style_instruction}}
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Sample Feed</title>
   <link href="https://example.com/" />
   <id>https://example.com/</id>
   <updated>2022-01-01T00:00:00Z</updated>
   <entry>
-    <title>Sample Item</title>
+    <title>Location {{location}}</title>
+    <link href="https://example.com/sample-item" />
+    <id>https://example.com/sample-item</id>
+    <updated>2022-01-01T00:00:00Z</updated>
+    <content>Sample item description</content>
+  </entry>
+  <entry>
+    <title>Content type {{ct}}</title>
+    <link href="https://example.com/sample-item" />
+    <id>https://example.com/sample-item</id>
+    <updated>2022-01-01T00:00:00Z</updated>
+    <content>Sample item description</content>
+  </entry>
+  <entry>
+    <title>Style {{style}}</title>
     <link href="https://example.com/sample-item" />
     <id>https://example.com/sample-item</id>
     <updated>2022-01-01T00:00:00Z</updated>
@@ -63,14 +87,23 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     const me = new URL(ctx.request.url);
     let ct = me.searchParams.get("type");
     let style = me.searchParams.get("style");
-    if (!ct || !style) {
-        return Response.redirect("/content-type.html", 302);
+    let location = me.searchParams.get("location");
+    if (!ct || !style || !location) {
+        return Response.redirect("/content-type.html?err=Missing+parameters", 302);
+    }
+
+    if (style != "none" && style != "xslt" && style != "css") {
+        return Response.redirect("/content-type.html?err=invalid+style", 302);
+    }
+
+    if (location != "local" && location != "remote" && location != "base64") {
+        return Response.redirect("/content-type.html?err=invalid+location", 302);
     }
 
     if (ct == "custom") {
         ct = me.searchParams.get("custom");
         if (!ct) {
-            return Response.redirect("/content-type.html", 302);
+            return Response.redirect("/content-type.html?err=Missing+custom+content+type", 302);
         }
     }
 
@@ -86,60 +119,39 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         isAtom = false;
     }
     feed = feed.replace("{{ct}}", he.encode(ct));
+    feed = feed.replace("{{location}}", location);
+    feed = feed.replace("{{style}}", style);
 
-    switch (style) {
-        case "xslt":
-            feed = feed.replace(
-                "{{style}}",
-                `<?xml-stylesheet type="text/xsl" href="/xslt/simple-${
-                    isAtom ? "atom" : "rss"
-                }.xslt" ?>`
-            );
-            feed = feed.replace(
-                "{{style_description}}",
-                "This feed uses a local XSLT stylesheet."
-            );
-            break;
-        case "xslt_remote":
-            feed = feed.replace(
-                "{{style}}",
-                `<?xml-stylesheet type="text/xsl" href="${remoteHost}/xslt/simple-${
-                    isAtom ? "atom" : "rss"
-                }.xslt" ?>`
-            );
-            feed = feed.replace(
-                "{{style_description}}",
-                "This feed uses a remote XSLT stylesheet."
-            );
-            break;
-        case "xslt_base64":
-            const replacement = isAtom ? atom_base64 : rss_base64;
-            feed = feed.replace(
-                "{{style}}",
-                `<?xml-stylesheet type="text/xsl" href="data:text/xml;base64,${replacement}" ?>`
-            );
-            feed = feed.replace(
-                "{{style_description}}",
-                "This feed uses a base64-encoded XSLT stylesheet."
-            );
-            break;
-        case "css":
-            feed = feed.replace(
-                "{{style}}",
-                `<?xml-stylesheet type="text/css" href="/css/simple-rss.css" ?>`
-            );
-            feed = feed.replace(
-                "{{style_description}}",
-                "This feed uses a local CSS stylesheet."
-            );
-            break;
-        default:
-            feed = feed.replace("{{style}}", "");
-            feed = feed.replace(
-                "{{style_description}}",
-                "This feed does not use a stylesheet."
-            );
-            break;
+    let styleType = style == "xslt" ? "xsl" : style;
+
+    if (styleType == "none") {
+        feed = feed.replace("{{style_instruction}}", "");
+    } else {
+        switch (location) {
+            case "local":
+                feed = feed.replace(
+                    "{{style_instruction}}",
+                    `<?xml-stylesheet type="text/${styleType}" href="/${style}/simple-${
+                        isAtom ? "atom" : "rss"
+                    }.${style}" ?>`
+                );
+                break;
+            case "remote":
+                feed = feed.replace(
+                    "{{style_instruction}}",
+                    `<?xml-stylesheet type="text/${styleType}" href="${remoteHost}/${style}/simple-${
+                        isAtom ? "atom" : "rss"
+                    }.${style}" ?>`
+                );
+                break;
+            case "base64":
+                const replacement = getReplacement(isAtom, style == "css");
+                feed = feed.replace(
+                    "{{style_instruction}}",
+                    `<?xml-stylesheet type="text/${styleType}" href="data:text/${styleType};base64,${replacement}" ?>`
+                );
+                break;
+        }
     }
 
     return new Response(feed, {

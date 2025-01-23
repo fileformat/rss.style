@@ -25,10 +25,6 @@
 - title: "XML Style: XSLT links and resources"
   url: "https://www.xml.style/"
   tags: [ "xslt" ]
-  
-- title: "Microsoft Learn: XSLT reference"
-  url: "https://learn.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms256069(v=vs.100)"
-  tags: [ "xslt" ]
 
 - title: "How to style RSS feed (Lepture aka Hsiaoming Yang)"
   url: "https://lepture.com/en/2019/rss-style-with-xsl"
