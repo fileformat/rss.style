@@ -67,9 +67,9 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     let contentType = feeddata.headers.get("content-type");
     if (!contentType) {
         notes.push(`${error} No content type header found!`);
-    } else if (!contentType.startsWith("text/xml") && !contentType.startsWith("application/xml")) {
+    } else if (!contentType.startsWith("text/xml")) {
         notes.push(
-            `${warning} Content type is <code>${contentType}</code>, not <code>text/xml</code> or <code>application/xml</code> .`
+            `${warning} Content type is <code>${contentType}</code>, not <code>text/xml</code>.`
         );
     } else {
         notes.push(`Content type is <code>${contentType}</code>.`);
