@@ -335,17 +335,22 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
             feedurl
         )}</a></h3>
 <p class="lh-lg">${analysis}</p>
-<details><summary>Formatted XML</summary>
+<details class="py-1"><summary>Formatted XML</summary>
 <pre class="border bg-body-secondary rounded p-2">${he.encode(
             xmlFormat(feedtext, { collapseContent: true })
         )}</pre>
 </details>
-<details><summary>Raw text</summary>
+<details class="py-1"><summary>Raw text</summary>
 <pre class="border bg-body-secondary rounded p-2">${he.encode(feedtext)}</pre>
 </details>
-<details><summary>Raw headers</summary>
+<details class="py-1"><summary>Raw headers</summary>
 <pre class="border bg-body-secondary rounded p-2">${he.encode(
             JSON.stringify(Object.fromEntries(feeddata.headers), null, 2)
+        )}</pre>
+</details>
+<details class="py-1"><summary>Parsed with <a href="https://github.com/rowanmanning/feed-parser">@rowanmanning/feed-parser</a></summary>
+<pre class="border bg-body-secondary rounded p-2">${he.encode(
+            JSON.stringify(feed, null, 2)
         )}</pre>
 </details>
 <a class="btn btn-outline-primary mt-2 ms-2" href="feed-analyzer.html">Analyze Another</a>
