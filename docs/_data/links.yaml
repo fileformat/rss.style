@@ -22,7 +22,12 @@
   url: "https://www.rssboard.org/rss-profile"
   tags: [ "rss" ]
 
-- title: "XML Style: XSLT links and resources"
+- title: "RSS Feed Best Practises (Kevin Cox)"
+  url: https://kevincox.ca/2022/05/06/rss-feed-best-practices/
+  tags: [ "rss" ]
+  notes: "Everything except the `Content Type`: only `text/xml` works across browsers."
+
+- title: "XML.Style: XSLT links and resources"
   url: "https://www.xml.style/"
   tags: [ "xslt" ]
 

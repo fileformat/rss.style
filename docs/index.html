@@ -91,7 +91,7 @@ h1: RSS Style
 <h2>Links</h2>
 <ul>
     {%- for link in site.data.links %}
-    <li class="mb-2"><a href="{{link.url}}">{{link.title}}</a></li>
+    <li class="mb-2"><a href="{{link.url}}">{{link.title}}</a>{% if link.notes %} - {{link.notes | markdownify | replace: "<p>", "" | replace: "</p>", "" }}{%endif%}</li>
     {% endfor %}
 </ul>
 
