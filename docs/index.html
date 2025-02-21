@@ -6,12 +6,13 @@ h1: RSS Style
 <h2>What is this?</h2>
 
 <p>
-    Every website that updates routinely should have an RSS or Atom <a href="https://en.wikipedia.org/wiki/Web_feed">news feed</a> that
+    Every website that updates routinely should have an RSS or Atom <a
+        href="https://en.wikipedia.org/wiki/Web_feed">news feed</a> that
     people (and search engines) can use to watch for changes.
 </p>
 
 <p>
-    By default, these files look horrible when a human looks at them in a browser.  But there is
+    By default, these files look horrible when a human looks at them in a browser. But there is
     a simple way to make them look better: <b>RSS Style</b>!
 </p>
 
@@ -27,20 +28,29 @@ h1: RSS Style
 </div>
 
 <p>
-    If you are not a webmaster, checkout out <a href="what-is-a-feed.html">What is a new feed?</a> and <a href="newsreaders.html">Picking a news reader</a>
+    If you are not a webmaster, checkout out <a href="what-is-a-feed.html">What is a new feed?</a> and <a
+        href="newsreaders.html">Picking a news reader</a>
     for how to get started!
 </p>
 
 <h2>How do I use it?</h2>
 
 <p>
-    Download one of the <a href="#available_styles">available styles</a> and save it as <code>sitemap.xslt</code> in the
-    same directory as your <code>sitemap.xml</code> file.
+    You need to know the name of your RSS/Atom file. It is usually something like <code>feed.xml</code>,
+    <code>atom.xml</code> or <code>rss.xml</code>.
+    You may be able to use the <a href="/feed-analyzer.html">Feed Analyzer</a> to help you find it. These examples use
+    <code><i>feed.xml</i></code>, but
+    you should replace it with the name of your feed file.
+</p>
+
+<p>
+    Download one of the <a href="#available_styles">available styles</a> and save it as <code>feed.xslt</code> in the
+    same directory as your <code><i>feed.</i>xml</code> file.
     Note that the extension is <code>.xslt</code> and NOT <code>.xml</code>!<br><br></li>
 </p>
 
 <p>
-    Add it to your <code>sitemap.xml</code>file. At the top of the file, it will look like:
+    Add it to your <code><i>feed</i>.xml</code>file. At the top of the file, it will look like:
 <pre class="m-4 p-3 bg-light border rounded">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;rss ...&gt;
@@ -52,7 +62,7 @@ h1: RSS Style
     Add a line in the middle so it looks like:
 <pre class="m-4 p-3 bg-light border rounded">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-<b title="This is the added line">&lt;?xml-stylesheet type="text/xsl" href="my-downloaded-file.xslt"?&gt;</b>
+<b title="This is the added line">&lt;?xml-stylesheet type="text/xsl" href="feed.xslt"?&gt;</b>
 &lt;rss ...&gt;
 ...
 </pre>
@@ -71,27 +81,31 @@ h1: RSS Style
 
 <h3>Which file do I add it to?</h3>
 <p>
-    Your feed file is often named <code>feed.xml</code> but can be anything.  You can
+    Your feed file is often named <code>feed.xml</code> but can be anything. You can
     use the <a href="/feed-analyzer.html">Feed Analyzer</a> to find the URL of your feed: put it
     your website's URL and it will display the feeds that it finds.
 </p>
 
 <h3>How does this work?</h3>
 <p>
-    The <code>xml-stylesheet</code> processing instruction tells the browser to use the XSLT stylesheet to transform the raw XML into HTML.  This has been supported by all major browsers for a long time.
+    The <code>xml-stylesheet</code> processing instruction tells the browser to use the XSLT stylesheet to transform the
+    raw XML into HTML. This has been supported by all major browsers for a long time.
 </p>
 
 <h3>Why does the analyzer complain about the content-type?</h3>
 <p>
-    While there are official content-types for RSS and Atom feeds, some browsers will try to download the feeds rather than
-    display them.  This is suboptimal (to say the least), so I strongly recommend using the plain XML content type <code>text/xml</code>.
+    While there are official content-types for RSS and Atom feeds, some browsers will try to download the feeds rather
+    than
+    display them. This is suboptimal (to say the least), so I strongly recommend using the plain XML content type
+    <code>text/xml</code>.
     You can test how your browser behaves with the <a href="content-type.html">Content-Type Testing</a> page.
 </p>
 
 <h2>Links</h2>
 <ul>
     {%- for link in site.data.links %}
-    <li class="mb-2"><a href="{{link.url}}">{{link.title}}</a>{% if link.notes %} - {{link.notes | markdownify | replace: "<p>", "" | replace: "</p>", "" }}{%endif%}</li>
+    <li class="mb-2"><a href="{{link.url}}">{{link.title}}</a>{% if link.notes %} - {{link.notes | markdownify |
+        replace: "<p>", "" | replace: "</p>", "" }}{%endif%}</li>
     {% endfor %}
 </ul>
 
@@ -106,28 +120,31 @@ h1: RSS Style
         </tr>
     </thead>
     <tbody>
-{% for example in site.data.examples %}
+        {% for example in site.data.examples %}
         <tr>
             <td style="white-space: nowrap;">
                 {%- if example.website -%}
-                    <a href="{{example.website}}">{{example.name}}</a>
+                <a href="{{example.website}}">{{example.name}}</a>
                 {%- else -%}
-                    {{example.name}}
+                {{example.name}}
                 {%- endif -%}
             </td>
             <td>
                 <a href="{{example.url}}">before</a>
                 <span class="text-muted fw-light">&rarr;</span>
-                <a rel="nofollow" href="example.xml?feedurl={{example.url | cgi_escape}}">after</a></td>
+                <a rel="nofollow" href="example.xml?feedurl={{example.url | cgi_escape}}">after</a>
+            </td>
             <td>
                 {{example.notes | markdownify | replace: "<p>", "" | replace: "</p>", "" }}
-                <a class="float-end btn btn-sm btn-outline-primary" rel="nofollow" href="/feed-analyzer.html?feedurl={{example.url | cgi_escape}}">analyze</a>
+                <a class="float-end btn btn-sm btn-outline-primary" rel="nofollow"
+                    href="/feed-analyzer.html?feedurl={{example.url | cgi_escape}}">analyze</a>
             </td>
         </tr>
-{% endfor %}
+        {% endfor %}
         <tr>
             <td colspan="2"><a class="btn btn-outline-primary" href="example.xml">Try it on your own feed!</a></td>
-            <td colspan="2" style="text-align:right">Problems?<a class="btn btn-outline-primary ms-2" href="feed-analyzer.html">Feed Analyzer</a></td>
+            <td colspan="2" style="text-align:right">Problems?<a class="btn btn-outline-primary ms-2"
+                    href="feed-analyzer.html">Feed Analyzer</a></td>
         </tr>
     </tbody>
 </table>
