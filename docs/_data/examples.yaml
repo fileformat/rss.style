@@ -36,6 +36,7 @@
   notes: "Opens 'Save As' in Firefox.  (also no https: support)"
 
 - name: Thomas Schranz
+  website: https://medium.com/@__tosh
   hn: tosh
   url: https://medium.com/feed/@__tosh
   notes: "Different 'self' link is different, though it works.  No link in home page body."
