@@ -376,7 +376,7 @@ async function showForm(
         ? `<div class="alert  alert-danger" role="alert">${he.encode(
               msg
           )}</div>`
-        : `<div class="alert alert-info" role="alert">Under Construction: Please don't take it seriously yet!</div>`;
+        : ''; //`<div class="alert alert-info" role="alert">Under Construction: Please don't take it seriously yet!</div>`;
 
     const data = {
         page: {
