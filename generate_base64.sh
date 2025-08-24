@@ -7,12 +7,31 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+GOBIN="$(go env GOBIN)"
+# if not set use GOPATH/bin
+if [ -z "${GOBIN}" ]; then
+    GOBIN="$(go env GOPATH)/bin"
+fi
+
 # check if minify is installed
-MINIFY="$(go env GOPATH)/bin/minify"
+MINIFY="${GOBIN}/minify"
 if [ ! -f "${MINIFY}" ];
 then
     echo "INFO: minify could not be found, installing"
     go install github.com/tdewolff/minify/cmd/minify@latest
+fi
+
+if [ ! -f "${MINIFY}" ];
+then
+    echo "ERROR: minify could not be found at '${MINIFY}'"
+    echo "INFO: output from 'ls -lR $(go env GOPATH)'"
+    ls -lR "$(go env GOPATH)"
+    echo "INFO: output from 'go env'"
+    go env
+    echo "INFO: output from 'go env GOBIN'"
+    go env GOBIN
+    echo "INFO: exiting"
+    exit 1
 fi
 
 FILES=(simple-rss simple-atom)

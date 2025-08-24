@@ -3,6 +3,7 @@
 #
 
 exclude: [ "CNAME", "**/*.base64" ]
+include: [ "_headers" ]
 production_url: https://www.rss.style
 sharing_targets: [ "reddit", "pinboard" ]
 title: RSS Style
