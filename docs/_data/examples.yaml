@@ -115,8 +115,8 @@
 - name: Stavros Korokithakis
   website: https://www.stavros.io/
   hn: stavros
-  url: https://feeds.feedburner.com/stavrosstuff
-  notes: "Discovery vs 'self' link mismatch but working.  'link' element value is in an attribute instead of the content."
+  url: https://www.stavros.io/feed/short/
+  notes: "Uses RSS.Style for the win!!!"
 
 - name: "Terence Eden"
   website: "https://shkspr.mobi/blog/"
