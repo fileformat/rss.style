@@ -1,11 +1,6 @@
 # To Do
 
 - [ ] Page explaining news readers w/list of ones to choose
-- [ ] `atom.css` - CSS instead of XSLT for Atom feeds
-- [ ] `rss.css` - CSS instead of XSLT for RSS feeds
-- [ ] `debug-atom.xslt` - show details of an Atom feed
-- [ ] `debug-rss.xslt` - show details of an RSS feed
-
 
 ## Analyzer
 

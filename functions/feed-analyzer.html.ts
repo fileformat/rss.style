@@ -4,6 +4,7 @@ import he from "he";
 import xmlFormat from "xml-formatter";
 import * as cheerio from "cheerio";
 import { parseFeed } from "@rowanmanning/feed-parser";
+import { FeedItem } from "@rowanmanning/feed-parser/lib/feed/item/base";
 
 interface Env {}
 
@@ -64,12 +65,20 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     const notes: string[] = [];
     notes.push(`Feed fetched in ${(Date.now() - start).toLocaleString()} ms.`);
 
+    if (feeddata.url != feedurl) {
+        notes.push(
+            `${warning} Feed URL redirected to <a href="${he.encode(
+                feeddata.url
+            )}">${he.encode(feeddata.url)}</a>.`
+        );
+    }
+
     let contentType = feeddata.headers.get("content-type");
     if (!contentType) {
         notes.push(`${error} No content type header found!`);
-    } else if (!contentType.startsWith("text/xml")) {
+    } else if (!contentType.startsWith("text/xml") && !contentType.startsWith("application/xml")) {
         notes.push(
-            `${warning} Content type is <code>${contentType}</code>, not <code>text/xml</code>.`
+            `${warning} Content type is <code>${contentType}</code>, not <code>text/xml</code> or <code>applicaton/xml</code>.`
         );
     } else {
         notes.push(`Content type is <code>${contentType}</code>.`);
@@ -78,6 +87,8 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     if (contentType && contentType.indexOf("text/html") != -1) {
         const html = await feeddata.text();
         const feeds = findFeedsInHeader(feedurl, html);
+        //LATER: also check HTTP headers
+        //LATER: make feeds be a set instead of an array
         if (feeds.length == 0) {
             return showForm(
                 ctx,
@@ -124,15 +135,29 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     }
     //LATER: see if it responds properly when passed the ETag
 
+    let lastModifiedDate: Date | null = null;
     const lastModified = feeddata.headers.get("last-modified");
     if (lastModified) {
         notes.push(
             `Feed has a last modified date of <code>${he.encode(lastModified)}</code>.`
         );
+        const parsedDate = new Date(lastModified);
+        if (!isNaN(parsedDate.getTime())) {
+            lastModifiedDate = parsedDate;
+        }
+        const now = new Date();
+        const ageMillis = now.getTime() - parsedDate.getTime();
+        if (ageMillis < 0) {
+            notes.push(`${error} Last-Modified header date is in the future!`);
+        } else if (ageMillis < 1000 * 60) {
+            notes.push(`${warning} Feed was modified less than a minute ago.  Is that correct?`);
+        }
     } else {
         notes.push(`${warning} Feed is missing the Last-Modified HTTP header.`);
     }
     //LATER: see if it responds properly when passed the Last-Modified date
+
+    //LATER: check for published date
 
     const styleStart = feedtext.indexOf("<?xml-stylesheet");
     if (styleStart == -1) {
@@ -213,21 +238,83 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         } else {
             notes.push(`Feed self link matches feed URL.`);
         }
-        notes.push(`Feed has ${feed.items.length.toLocaleString()} items.`);
-        if (feed.items.length > 0) {
+
+        if (feed.items.length == 0) {
+            notes.push(`${error} Feed has no items.`);
+        } else {
+            notes.push(`Feed has ${feed.items.length.toLocaleString()} items.`);
             const firstItem = feed.items[0];
-            if (firstItem.published) {
+            const firstItemDate = newestItemDate(firstItem);
+            if (firstItemDate) {
                 notes.push(
-                    `First item published on ${firstItem.published.toISOString()}`
+                    `First item published on ${firstItemDate.toISOString()}`
                 );
             }
-        }
-        if (feed.items.length > 1) {
-            const lastItem = feed.items[feed.items.length - 1];
-            if (lastItem.published) {
+            if (feed.items.length > 1) {
+                const lastItem = feed.items[feed.items.length - 1];
+                const lastItemDate = oldestItemDate(lastItem);
+                if (lastItemDate) {
+                    notes.push(
+                        `Last item published on ${lastItemDate.toISOString()}`
+                    );
+                }
+            }
+
+            let missingPublishedDates = 0
+            for (const item of feed.items) {
+                if (!item.published && !item.updated) {
+                    missingPublishedDates++;
+                }
+            }
+            if (missingPublishedDates > 0) {
                 notes.push(
-                    `Last item published on ${lastItem.published.toISOString()}`
+                    `${warning} ${missingPublishedDates.toLocaleString()} item${
+                        missingPublishedDates == 1 ? '' : 's'
+                    } missing published date.`
                 );
+            } else {
+                notes.push(`All items have published dates.`);
+
+                // check for chronological order
+                // LATER: how to account for .updated dates?
+                for (let i = 0; i < feed.items.length - 1; i++) {
+                    const itemA = oldestItemDate(feed.items[i]);
+                    const itemB = newestItemDate(feed.items[i + 1]);
+                    if (itemA && itemB && itemA < itemB) {
+                        notes.push(
+                            `${warning} Item ${i} is published before item ${
+                                i + 1
+                            }: ${itemA.toISOString()} < ${itemB.toISOString()}`
+                        );
+                    }
+                }
+            }
+
+            let newestDate: Date | null = null;
+            for (const item of feed.items) {
+                const itemDate = newestItemDate(item);
+                if (itemDate) {
+                    if (!newestDate || itemDate > newestDate) {
+                        newestDate = itemDate;
+                    }
+                }
+            }
+            if (newestDate) {
+                notes.push(
+                    `Newest item was published on ${newestDate.toISOString()}.`
+                );
+            }
+            if (lastModifiedDate && newestDate) {
+                if (newestDate > lastModifiedDate) {
+                    notes.push(
+                        `${error} Newest item is newer than the feed's Last-Modified date (${newestDate.toISOString()} > ${lastModifiedDate.toISOString()}).`
+                    );
+                } else if (newestDate < lastModifiedDate) {
+                    // occurs too often to make this a warning
+                    notes.push(
+                        `Feed's Last-Modified date is newer than the newest item's published date (${lastModifiedDate.toISOString()} > ${newestDate.toISOString()}).`
+                    );
+                }
             }
         }
 
@@ -430,13 +517,51 @@ function findFeedsInHeader(url: string, html: string): string[] {
     return feeds;
 }
 
+function newestItemDate(item: FeedItem): Date | null {
+    if (item.published) {
+        if (item.updated) {
+            return item.published > item.updated ? item.published : item.updated;
+        }
+        return item.published;
+    }
+    return item.updated || null;
+}
+
+function oldestItemDate(item: FeedItem): Date | null {
+    if (item.published) {
+        if (item.updated) {
+            return item.published < item.updated
+                ? item.published
+                : item.updated;
+        }
+        return item.published;
+    }
+    return item.updated || null;
+}
+
+function findFeedsInHtml(
+    homeUrl: string,
+    html: string
+): string[] {
+    const $ = cheerio.load(html);
+    const feeds: string[] = [];
+    const links = $("a");
+    for (let i = 0; i < links.length; i++) {
+        const href = $(links[i]).attr("href");
+        if (href && (href.indexOf(".rss") != -1 || href.indexOf(".xml") != -1 || href.indexOf("/feed") != -1)) {
+            const linkUrl = new URL(href, homeUrl);
+            feeds.push(linkUrl.href);
+        }
+    }
+    return feeds;
+}
+
 function findFeedInHtml(
     homeUrl: string,
     feedUrl: string,
     html: string
 ): string {
     const $ = cheerio.load(html);
-    const feeds: string[] = [];
     const links = $("a");
     for (let i = 0; i < links.length; i++) {
         const href = $(links[i]).attr("href");

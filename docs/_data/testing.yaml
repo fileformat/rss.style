@@ -18,7 +18,7 @@ locations:
     default: true
   - value: "Remote URL"
     key: "remote"
-  - value: "data: URL"
+  - value: "Inline (base64/CDATA)"
     key: "base64"
 
 styles:
@@ -27,6 +27,8 @@ styles:
     default: true
   - value: "CSS"
     key: "css"
+  - value: "JavaScript"
+    key: "js"
   - value: "Nothing"
     key: "none"
     skipall: true

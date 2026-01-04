@@ -11,6 +11,8 @@ Gemfile.lock
 .idea/
 .jekyll-metadata
 .jekyll-cache
+**/*.min.js
+**/*.min.html
 node_modules/
 *.pyc
 .sass-cache/

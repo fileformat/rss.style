@@ -7,6 +7,8 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+echo "INFO: starting minification at $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
 GOBIN="$(go env GOBIN)"
 # if not set use GOPATH/bin
 if [ -z "${GOBIN}" ]; then
@@ -51,3 +53,14 @@ do
         cp "docs/${TYPE}/${FILE}.base64" "docs/${TYPE}/_${FILE}.base64.html"
     done
 done
+
+JSFILES=(rss-style atom-style)
+
+for JSFILE in "${JSFILES[@]}"
+do
+    echo "INFO: generating minified version of ${JSFILE}.js"
+    "${MINIFY}" --type=js "docs/js/${JSFILE}.js" > "docs/js/${JSFILE}.min.js"
+    cp "docs/js/${JSFILE}.min.js" "docs/js/_${JSFILE}.min.html"
+done
+
+echo "INFO: completed minification at $(date -u +"%Y-%m-%dT%H:%M:%SZ")"

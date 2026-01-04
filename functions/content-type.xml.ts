@@ -6,6 +6,8 @@ import rss_xslt_base64 from "../docs/xslt/_simple-rss.base64.html";
 import atom_xslt_base64 from "../docs/xslt/_simple-atom.base64.html";
 import rss_css_base64 from "../docs/css/_simple-rss.base64.html";
 import atom_css_base64 from "../docs/css/_simple-atom.base64.html";
+import atom_js from "../docs/js/_atom-style.min.html";
+import rss_js from "../docs/js/_rss-style.min.html";
 
 interface Env {}
 
@@ -22,6 +24,7 @@ function getReplacement(isAtom: boolean, isCss: boolean): string {
 const sampleRss = `<?xml version="1.0" encoding="UTF-8"?>
 {{style_instruction}}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  {{script}}
   <channel>
     <title>Sample RSS Feed</title>
     <link>https://www.rss.style/</link>
@@ -56,6 +59,7 @@ const sampleRss = `<?xml version="1.0" encoding="UTF-8"?>
 const sampleAtom = `<?xml version="1.0" encoding="UTF-8"?>
 {{style_instruction}}
 <feed xmlns="http://www.w3.org/2005/Atom">
+  {{script}}
   <title>Sample Feed</title>
   <link href="https://example.com/" />
   <id>https://example.com/</id>
@@ -92,7 +96,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         return Response.redirect("/content-type.html?err=Missing+parameters", 302);
     }
 
-    if (style != "none" && style != "xslt" && style != "css") {
+    if (style != "none" && style != "xslt" && style != "css" && style != "js") {
         return Response.redirect("/content-type.html?err=invalid+style", 302);
     }
 
@@ -124,7 +128,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
 
     let styleType = style == "xslt" ? "xsl" : style;
 
-    if (styleType == "none") {
+    if (styleType == "none" || styleType == "js") {
         feed = feed.replace("{{style_instruction}}", "");
     } else {
         switch (location) {
@@ -153,6 +157,20 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
                 break;
         }
     }
+
+    var scriptContent = '';
+    if (styleType == "js") {
+        if (location === "base64") {
+            const replacement = isAtom ? atom_js : rss_js;
+            scriptContent = `<script type="text/javascript" xmlns="http://www.w3.org/1999/xhtml"><![CDATA[${replacement}]]></script>`;
+        } else {
+            scriptContent = `<script src="${remoteHost}/js/${isAtom ? "atom" : "rss"}-style.js" xmlns="http://www.w3.org/1999/xhtml"></script>`
+        }
+    }
+    feed = feed.replace(
+        "{{script}}",
+        scriptContent
+    );
 
     return new Response(feed, {
         headers: { "Content-Type": ct },

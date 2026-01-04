@@ -8,6 +8,7 @@
     "dependencies": {
         "@rowanmanning/feed-parser": "^2.1.1",
         "cheerio": "^1.0.0",
+        "fast-xml-parser": "^5.3.3",
         "he": "^1.2.0",
         "liquidjs": "^10.18.0",
         "luxon": "^3.5.0",

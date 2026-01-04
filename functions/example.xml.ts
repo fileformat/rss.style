@@ -1,6 +1,7 @@
 import { PagesFunction, EventContext } from '@cloudflare/workers-types';
 import { render } from '../src/render';
 import he from 'he';
+import { XMLBuilder, XMLParser } from "fast-xml-parser";
 
 interface Env {
 }
@@ -45,23 +46,55 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     }
 
     let feedtext = await feeddata.text();
+    console.log(`INFO: feed size=${feedtext.length} for feedurl=${feedurl}`);
+    console.log('DEBUG: feed content:', feedtext.slice(0, 500));
 
-    if (feedtext.indexOf('<?xml-stylesheet') != -1) {
-        console.log(`INFO: removing default xslt stylesheet`)
-        feedtext = feedtext.replace(/<[?]xml-stylesheet .*[?]>/, '');
+    const xmlOptions = {
+        // Use a prefix to distinguish attributes from elements in the JSON object
+        attributeNamePrefix: "@_",
+        // Do not ignore attributes during parsing
+        ignoreAttributes: false,
+        // Optionally, parse attribute values to native types (int, float, boolean)
+        parseAttributeValue: false,
+        suppressBooleanAttributes: false,
+        format: true,
+        indentBy: "  ",
+    };
+
+    const parser = new XMLParser(xmlOptions);
+
+    const xmlDocument = parser.parse(feedtext);
+
+    console.log(JSON.stringify(xmlDocument));
+
+    if (xmlDocument["?xml-stylesheet"]) {
+        console.log(`INFO: removing existing stylesheet processing instruction`);
+        delete xmlDocument["?xml-stylesheet"];
     }
 
-    let style = `<?xml-stylesheet type="text/xsl" href="/xslt/simple-rss.xslt" ?>`;
-    if (feedtext.indexOf('<rss') == -1) {
-        console.log(`INFO: using atom stylesheet`);
-        style = `<?xml-stylesheet type="text/xsl" href="/xslt/simple-atom.xslt" ?>`;
+    // prevent flash of unstyled content by adding a blank stylesheet first (not totally effective, but helps)
+    xmlDocument["?xml-stylesheet"] = {
+        "@_type": "text/css",
+        "@_href": "/css/blank.css",
+    };
+
+    if (xmlDocument.rss) {
+        xmlDocument.rss["script"] = {
+            "@_src": "/js/rss-style.js",
+            "@_xmlns": "http://www.w3.org/1999/xhtml",
+            "#text": "",
+        };
+    } else if (xmlDocument.feed) {
+        xmlDocument.feed["script"] = {
+            "@_src": "/js/atom-style.js",
+            "@_xmlns": "http://www.w3.org/1999/xhtml",
+            "#text": "",
+        };
     } else {
-        console.log(`INFO: using rss stylesheet`);
+        console.log(`WARN: unrecognized top-level node keys: ${Object.keys(xmlDocument).join(', ')}`);
     }
-    feedtext = feedtext.replace(/<[?]xml-stylesheet type="text\/xsl" href=".*" [?]>/, '');
 
-    // you know you're naughty when you use regex to parse xml...
-    const styledtext = feedtext.replace(/^(<[?]xml .*[?]>)?(.*)$/s, `$1${style}$2`);
+    var styledtext = new XMLBuilder(xmlOptions).build(xmlDocument);
 
     return new Response(styledtext, { headers: {
         'Content-Type': 'text/xml; charset=utf-8',

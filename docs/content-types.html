@@ -11,9 +11,9 @@ noindex: true
     <div className="col d-flex flex-wrap justify-content-center align-self-center">
     {% for location in site.data.testing.locations %}
         <div class="vstack d-inline-block gap-2 border border-dark m-2 p-0">
-            <iframe src="/content-type.xml?type={{type.value}}&amp;style={{style.key}}&amp;location={{location.key}}" width="300" height="300"></iframe><br/>
+            <iframe src="/content-type.xml?type={{type.value | url_encode }}&amp;style={{style.key}}&amp;location={{location.key}}" width="300" height="300"></iframe><br/>
             <div class="w-100 text-center border-top p-3">
-                <a class="fs-6" href="/content-type.xml?type={{type.value}}&amp;style={{style.key}}&amp;location={{location.key}}">{{location.value}}</a>
+                <a class="fs-6" href="/content-type.xml?type={{type.value | url_encode }}&amp;style={{style.key}}&amp;location={{location.key}}">{{location.value}}</a>
             </div>
         </div>
     {% endfor %}
