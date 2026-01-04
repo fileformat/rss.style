@@ -44,17 +44,7 @@ h1: RSS Style
 </p>
 
 <p>
-    Download one of the <a href="#available_styles">available styles</a> and save it as <code>feed.xslt</code> in the
-    same directory as your <code><i>feed.</i>xml</code> file.
-    Note that the extension is <code>.xslt</code> and NOT <code>.xml</code>!
-</p>
-
-<p>
-    You do need to download the file: browsers won't use remote stylesheets, so it has to be saved on server with your feed.
-</p>
-
-<p>
-    Add it to your <code><i>feed</i>.xml</code>file. At the top of the file, it will look like:
+    Add a line to your <code><i>feed</i>.xml</code>file. At the top of the file, it will look like:
 <pre class="m-4 p-3 bg-light border rounded">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;rss ...&gt;
@@ -66,19 +56,19 @@ h1: RSS Style
     Add a line in the middle so it looks like:
 <pre class="m-4 p-3 bg-light border rounded">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-<b title="This is the added line">&lt;?xml-stylesheet type="text/xsl" href="feed.xslt"?&gt;</b>
 &lt;rss ...&gt;
+<b title="This is the added line">&lt;script src="https://www.rss.style/js/rss-style.js" xmlns="http://www.w3.org/1999/xhtml"&gt;&lt;/script&gt;</b>
 ...
 </pre>
 </p>
 
-<p><a href="https://www.xml.style/index.html#warn">Troubleshooting</a></p>
+<p>If your feed is an Atom feed, it will be slightly different: <code>&lt;feed...&gt;</code> instead of <code>&lt;rss...&gt;</code> and the script will be <code>atom-style.js</code></p>
 
-<h2 id="available_styles">Available styles</h2>
+<h2 id="available_scripts">Available scripts</h2>
 
 <ul>
-    <li><a href="/xslt/simple-rss.xslt">simple-rss.xslt</a> - for RSS feeds</li>
-    <li><a href="/xslt/simple-atom.xslt">simple-atom.xslt</a> - for Atom feeds</li>
+    <li><a href="/js/rss-style.js">rss-style.js</a> - for RSS feeds (<a href="/js/rss-style.min.js">minified</a>)</li>
+    <li><a href="/js/atom-style.js">atom-style.js</a> - for Atom feeds (<a href="/js/atom-style.min.js">minified</a>)</li>
 </ul>
 
 <h2>Questions and Answers</h2>
@@ -92,17 +82,27 @@ h1: RSS Style
 
 <h3>How does this work?</h3>
 <p>
-    The <code>xml-stylesheet</code> processing instruction tells the browser to use the XSLT stylesheet to transform the
+    The <code>&lt;script&gt;</code> replaces the content with an XHTML version.  The process
     raw XML into HTML. This has been supported by all major browsers for a long time.
 </p>
 
-<h3>Why does the analyzer complain about the content-type?</h3>
+<h3>Why am I still getting a wall of text?  Or a download prompt?</h3>
 <p>
-    While there are official content-types for RSS and Atom feeds, some browsers will try to download the feeds rather
-    than
-    display them. This is suboptimal (to say the least), so I strongly recommend using the plain XML content type
-    <code>text/xml</code>.
-    You can test how your browser behaves with the <a href="content-type.html">Content-Type Testing</a> page.
+    Your web server needs to send the correct <code>Content-Type</code> header for your feed.
+    You need to use either <code>text/xml</code> or <code>application/xml</code>.  It does not work with
+    <code>application/rss+xml</code> or <code>application/atom+xml</code>.  You can test it with the
+    <a href="content-type.html">Content-Type Testing</a> page.
+</p>
+
+<h3>I don't want to use a script from a remote site.  May I copy it to my server?</h3>
+<p>
+    Yes!  The scripts (and everything else on this site) are <a href="https://github.com/fileformat/rss.style/blob/main/LICENSE.txt">MIT licensed</a>.
+</p>
+
+<h3>How can I prevent the flash of unstyled content?</h3>
+<p>
+    I haven't been able to figure a really good way to do this.  You can add a CSS stylesheet to the feed, but this only
+    makes the flash a little shorter.  Let me know if you have any ideas!
 </p>
 
 <h2>Links</h2>
