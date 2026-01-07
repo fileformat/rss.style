@@ -5,11 +5,13 @@ import xmlFormat from "xml-formatter";
 import * as cheerio from "cheerio";
 import { parseFeed } from "@rowanmanning/feed-parser";
 import { FeedItem } from "@rowanmanning/feed-parser/lib/feed/item/base";
+import { XMLParser } from "fast-xml-parser";
 
 interface Env {}
 
 const error = `<span class="badge text-bg-danger">Error</span>`;
 const warning = `<span class="badge text-bg-warning">Warning</span>`;
+const info = `<span class="badge text-bg-secondary">Info</span>`;
 
 export const onRequest: PagesFunction<Env> = async (ctx) => {
     const me = new URL(ctx.request.url);
@@ -158,51 +160,75 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     //LATER: see if it responds properly when passed the Last-Modified date
 
     //LATER: check for published date
+    const xmlOptions = {
+        // Use a prefix to distinguish attributes from elements in the JSON object
+        attributeNamePrefix: "@_",
+        // Do not ignore attributes during parsing
+        ignoreAttributes: false,
+        // Optionally, parse attribute values to native types (int, float, boolean)
+        parseAttributeValue: false,
+        suppressBooleanAttributes: false,
+        format: true,
+        indentBy: "  ",
+    };
 
-    const styleStart = feedtext.indexOf("<?xml-stylesheet");
-    if (styleStart == -1) {
-        notes.push(`${warning} This feed does not have a stylesheet.`);
+    const parser = new XMLParser(xmlOptions);
+
+    const xmlDocument = parser.parse(feedtext);
+
+    if (!xmlDocument) {
+        notes.push(`${error} Unable to parse feed as XML.`);
     } else {
-        const styleEnd = feedtext.indexOf("?>", styleStart);
-        const xmlStyle = feedtext.slice(styleStart, styleEnd + 2);
-        const href_match = /href="([^"]+)"/.exec(xmlStyle);
-        const styleHref =
-            href_match && href_match.length >= 2 ? href_match[1] : null;
-        const type_match = /type="([^"]+)"/.exec(xmlStyle);
-        console.log(type_match);
-        const styleType =
-            type_match && type_match.length >= 2 ? type_match[1] : null;
-        if (styleHref && styleType) {
-            notes.push(
-                `Feed has a <code>${he.encode(
-                    styleType
-                )}</code> stylesheet: <code>${he.encode(
-                    styleHref.length < 100
-                        ? styleHref
-                        : styleHref.slice(0, 100) + "…"
-                )}</code>.`
-            );
-        } else {
-            notes.push(
-                `Feed has a stylesheet, but it's missing a href or type: <code>${he.encode(
-                    xmlStyle
-                )}</code>.`
-            );
-        }
-        if (styleHref) {
-            const styleUrl = new URL(styleHref, feedurl);
-            if (
-                styleUrl.protocol != feedurlObj.protocol &&
-                styleUrl.protocol != "data:"
-            ) {
+        notes.push(`Feed is well-formed XML.`);
+        var xmlStyle = xmlDocument["?xml-stylesheet"];
+        if (xmlStyle) {
+            notes.push(`DEBUG: ${JSON.stringify(xmlStyle)}`);
+            if (xmlStyle["@_type"] == "text/css") {
                 notes.push(
-                    `${error} Stylesheet URL is on a different protocol: <code>${he.encode(
-                        styleUrl.protocol
+                    `Feed has an associated CSS stylesheet at <a href="${he.encode(
+                        xmlStyle["@_href"]
+                    )}">${he.encode(xmlStyle["@_href"])}</a>.`
+                );
+            } else if (xmlStyle["@_type"] == "text/xsl") {
+                notes.push(
+                    `${warning} Feed has an associated XSLT stylesheet at <a href="${he.encode(
+                        xmlStyle["@_href"]
+                    )}">${he.encode(
+                        xmlStyle["@_href"]
+                    )}</a>, but XSLT is deprecated.`
+                );
+            } else {
+                notes.push(
+                    `${error} Feed has an associated stylesheet at <a href="${he.encode(
+                        xmlStyle["@_href"]
+                    )}">${he.encode(
+                        xmlStyle["@_href"]
+                    )}</a> but with an unrecognized type <code>${he.encode(
+                        xmlStyle["@_type"]
                     )}</code>.`
                 );
             }
-            //LATER: check if the stylesheet is accessible and type matches
         }
+        var xmlScript = xmlDocument.rss?.script || xmlDocument.feed?.script;
+        if (xmlScript) {
+            if (xmlScript["@_xmlns"] != "http://www.w3.org/1999/xhtml") {
+                notes.push(
+                    `${warning} Feed has a script but it is missing the correct xmlns attribute.`
+                );
+            } else {
+                notes.push(
+                    `Feed has an associated script, presumably for styling <code>${he.encode(
+                        xmlScript["@_src"]
+                    )}</code>.`
+                );
+            }
+        }
+        if (!xmlStyle && !xmlScript) {
+            notes.push(`${warning} Feed has no styling.`);
+        }
+        //LATER: check if the stylesheet url is the same protocol
+        //LATER: check if the stylesheet url returns 200
+        //LATER: check if the stylesheet url has the correct Content-Type
     }
 
     if (feedtext.indexOf("<rss") == -1) {
@@ -282,7 +308,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
                     const itemB = newestItemDate(feed.items[i + 1]);
                     if (itemA && itemB && itemA < itemB) {
                         notes.push(
-                            `${warning} Item ${i} is published before item ${
+                            `${info} Item ${i} is published before item ${
                                 i + 1
                             }: ${itemA.toISOString()} < ${itemB.toISOString()}`
                         );
@@ -312,7 +338,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
                 } else if (newestDate < lastModifiedDate) {
                     // occurs too often to make this a warning
                     notes.push(
-                        `Feed's Last-Modified date is newer than the newest item's published date (${lastModifiedDate.toISOString()} > ${newestDate.toISOString()}).`
+                        `${info} Feed's Last-Modified date is newer than the newest item's published date (${lastModifiedDate.toISOString()} > ${newestDate.toISOString()}).`
                     );
                 }
             }
