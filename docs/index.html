@@ -99,10 +99,18 @@ h1: RSS Style
     Yes!  The scripts (and everything else on this site) are <a href="https://github.com/fileformat/rss.style/blob/main/LICENSE.txt">MIT licensed</a>.
 </p>
 
-<h3>How can I prevent the flash of unstyled content?</h3>
+<h2>Known Issues</h2>
+
+<h3>There is a flash of unstyled content</h3>
 <p>
-    I haven't been able to figure a really good way to do this.  You can add a CSS stylesheet to the feed, but this only
-    makes the flash a little shorter.  Let me know if you have any ideas!
+    I haven't been able to figure a really good way to get rid of it. You can add a CSS stylesheet to the feed, but this only
+    makes the flash a little shorter. Let me know if you have any ideas!
+</p>
+
+<h3>Post bodies are shown as raw HTML</h3>
+<p>
+    This is because the posts need to be XHTML.  I'm not using a full HTML parser,
+    so if there are any errors decoding or embedding the post body as HTML, it will just be shown as raw text.
 </p>
 
 <h2>Links</h2>

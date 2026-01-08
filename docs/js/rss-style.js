@@ -17,6 +17,10 @@ document.onreadystatechange = async function () {
 
         var description = document.querySelector("channel > description");
 
+        var iconUrl =
+            document.querySelector("channel > image > url")?.textContent ||
+            "https://www.vectorlogo.zone/logos/rss/rss-tile.svg";
+
         var items = document.querySelectorAll("channel > item");
 
         const NS = "http://www.w3.org/1999/xhtml"; // Soooooo important!
@@ -34,10 +38,7 @@ document.onreadystatechange = async function () {
         const h1 = document.createElementNS(NS, "h1");
         const rssIcon = document.createElementNS(NS, "img");
         rssIcon.setAttribute("alt", "feed icon");
-        rssIcon.setAttribute(
-            "src",
-            "https://www.vectorlogo.zone/logos/rss/rss-tile.svg"
-        );
+        rssIcon.setAttribute("src", iconUrl);
         rssIcon.setAttribute(
             "style",
             "height:1em;vertical-align:middle;padding-right:0.25em;"
@@ -127,7 +128,30 @@ document.onreadystatechange = async function () {
             summary.style.width = "100%";
             summary.appendChild(document.createTextNode(` - ${itemPubDate}`));
             details.appendChild(summary);
-            details.appendChild(document.createTextNode(itemDesc));
+            if (itemDesc) {
+                try {
+                    if (itemDesc.indexOf("<") !== -1 && itemDesc.indexOf(">") !== -1) {
+                        // Contains unescaped HTML, so slam it in there
+                        const descContainer = document.createElementNS(NS, "div");
+                        descContainer.innerHTML = itemDesc;
+                        details.appendChild(descContainer);
+                    } else if (itemDesc.indexOf("&lt;") !== -1 && itemDesc.indexOf("&gt;") !== -1) {
+                        // Contains escaped HTML, so unescape first, then slam it in there
+                        const decodeArea = document.createElementNS(NS, "textarea");
+                        decodeArea.innerHTML = itemDesc;
+                        const descContainer = document.createElementNS(NS, "div");
+                        descContainer.innerHTML = decodeArea.value;
+                        details.appendChild(descContainer);
+                    } else {
+                        // Plain text???
+                        details.appendChild(document.createTextNode(itemDesc));
+                    }
+                } catch (e) {
+                    // unfortunately, the content needs to be XHTML, so this gets triggered a lot
+                    console.log("ERROR: Could not parse item description HTML: ", e);
+                    details.appendChild(document.createTextNode(itemDesc));
+                }
+            }
 
             body.appendChild(details);
         }
