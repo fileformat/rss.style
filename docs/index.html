@@ -110,7 +110,12 @@ h1: RSS Style
 <h3>Post bodies are shown as raw HTML</h3>
 <p>
     This is because the posts need to be XHTML.  I'm not using a full HTML parser,
-    so if there are any errors decoding or embedding the post body as HTML, it will just be shown as raw text.
+    so if there are any errors decoding or embedding the post body as XHTML, it will just be shown as raw text.
+</p>
+
+<p>
+    The most common reason for content to not be valid XHTML is unclosed <code>&lt;img&gt;</code> tags.  Just put a slash
+    before the closing angle bracket: <code>&lt;img src="..." /&gt;</code>.
 </p>
 
 <h2>Links</h2>

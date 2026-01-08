@@ -182,7 +182,6 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         notes.push(`Feed is well-formed XML.`);
         var xmlStyle = xmlDocument["?xml-stylesheet"];
         if (xmlStyle) {
-            notes.push(`DEBUG: ${JSON.stringify(xmlStyle)}`);
             if (xmlStyle["@_type"] == "text/css") {
                 notes.push(
                     `Feed has an associated CSS stylesheet at <a href="${he.encode(
@@ -231,12 +230,6 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         //LATER: check if the stylesheet url has the correct Content-Type
     }
 
-    if (feedtext.indexOf("<rss") == -1) {
-        notes.push(`This appears to be an Atom feed.`);
-    } else {
-        notes.push(`This appears to be an RSS feed.`);
-    }
-
     let feed;
     try {
         feed = await parseFeed(feedtext);
@@ -248,21 +241,43 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         }
     }
     if (feed) {
+
+        if (feed.meta?.type == "atom") {
+            notes.push(`This is an Atom feed.`);
+        } else if (feed.meta?.type == "rss") {
+            notes.push(`This is an RSS feed.`);
+        } else {
+            notes.push(`${warning} Unable to determine if feed is RSS or Atom: <code>${he.encode(JSON.stringify(feed.meta))}</code>`);
+        }
         if (feed.title) {
             notes.push(`Feed title: <code>${he.encode(feed.title)}</code>`);
         } else {
             notes.push(`${error} Feed is missing a title.`);
         }
         if (!feed.self) {
-            notes.push(`${error} Feed is missing a self link.`);
+            notes.push(`${warning} Feed is missing a self link.`);
         } else if (feed.self != feedurl) {
             notes.push(
-                `${error} Feed self link does not match feed URL: <a href="${he.encode(
+                `${error} Feed self link: <a href="${he.encode(
                     feed.self
-                )}">${he.encode(feed.self)}</a>.`
+                )}">${he.encode(
+                    feed.self
+                )}</a> does not match feed URL: <a href="${he.encode(
+                    feedurl
+                )}">${he.encode(feedurl)}</a>.`
             );
         } else {
             notes.push(`Feed self link matches feed URL.`);
+        }
+
+        if (feed.image && feed.image.url) {
+            notes.push(
+                `Feed has an image at <a href="${he.encode(
+                    feed.image.url
+                )}">${he.encode(feed.image.url)}</a>.`
+            );
+        } else {
+            notes.push(`${warning} Feed is missing an image.`);
         }
 
         if (feed.items.length == 0) {
@@ -303,6 +318,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
 
                 // check for chronological order
                 // LATER: how to account for .updated dates?
+                /* NO: this happens too often in real feeds
                 for (let i = 0; i < feed.items.length - 1; i++) {
                     const itemA = oldestItemDate(feed.items[i]);
                     const itemB = newestItemDate(feed.items[i + 1]);
@@ -314,6 +330,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
                         );
                     }
                 }
+                */
             }
 
             let newestDate: Date | null = null;
