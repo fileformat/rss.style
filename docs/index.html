@@ -64,12 +64,33 @@ h1: RSS Style
 
 <p>If your feed is an Atom feed, it will be slightly different: <code>&lt;feed...&gt;</code> instead of <code>&lt;rss...&gt;</code> and the script will be <code>atom-style.js</code></p>
 
+<p>
+    <button class="btn btn-primary"
+        onclick="navigator.clipboard.writeText('&lt;script src=&quot;https://www.rss.style/js/rss-style.js&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;/script&gt;');">
+        Copy RSS script tag to clipboard
+    </button>
+
+    <button class="btn btn-primary"
+        onclick="navigator.clipboard.writeText('&lt;script src=&quot;https://www.rss.style/js/atom-style.js&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;/script&gt;')">
+        Copy Atom script tag to clipboard
+    </button>
+</p>
+
 <h2 id="available_scripts">Available scripts</h2>
+
+<p>
+    If you don't trust me (probably a wise move on your part), you can download the scripts and host them yourself.
+    They are <a href="https://github.com/fileformat/rss.style/blob/main/LICENSE.txt">MIT Licensed</a>.
+</p>
 
 <ul>
     <li><a href="/js/rss-style.js">rss-style.js</a> - for RSS feeds (<a href="/js/rss-style.min.js">minified</a>)</li>
     <li><a href="/js/atom-style.js">atom-style.js</a> - for Atom feeds (<a href="/js/atom-style.min.js">minified</a>)</li>
 </ul>
+
+<p>NOTE: The scripts are fresh out of the oven, so you still might want to hot-link them until they cool down.</p>
+
+<p>At some point soon, I'll start a change log, with an RSS feed that you can follow, naturally!</p>
 
 <h2>Questions and Answers</h2>
 
@@ -82,8 +103,9 @@ h1: RSS Style
 
 <h3>How does this work?</h3>
 <p>
-    The <code>&lt;script&gt;</code> replaces the content with an XHTML version.  The process
-    raw XML into HTML. This has been supported by all major browsers for a long time.
+    The <code>&lt;script&gt;</code> replaces the content with an XHTML version.
+    This is actually pretty neat: view-source shows the XML, but inspect-element shows the HTML.
+    Apparently, this has been supported by all major browsers for a long time.
 </p>
 
 <h3>Why am I still getting a wall of text?  Or a download prompt?</h3>
@@ -92,11 +114,6 @@ h1: RSS Style
     You need to use either <code>text/xml</code> or <code>application/xml</code>.  It does not work with
     <code>application/rss+xml</code> or <code>application/atom+xml</code>.  You can test it with the
     <a href="content-type.html">Content-Type Testing</a> page.
-</p>
-
-<h3>I don't want to use a script from a remote site.  May I copy it to my server?</h3>
-<p>
-    Yes!  The scripts (and everything else on this site) are <a href="https://github.com/fileformat/rss.style/blob/main/LICENSE.txt">MIT licensed</a>.
 </p>
 
 <h2>Known Issues</h2>
