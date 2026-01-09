@@ -45,6 +45,10 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         return showForm(ctx, feedurl, `Error fetching feed: ${feeddata.status} ${feeddata.statusText}`);
     }
 
+    if (!feeddata.headers.get('Content-Type')?.match(/(application\/(rss\+xml|atom\+xml|xml)|text\/xml)/i)) {
+        return showForm(ctx, feedurl, `This URL does not appear to be an RSS or Atom feed (Content-Type: ${feeddata.headers.get('Content-Type')})`);
+    }
+
     let feedtext = await feeddata.text();
     console.log(`INFO: feed size=${feedtext.length} for feedurl=${feedurl}`);
     console.log('DEBUG: feed content:', feedtext.slice(0, 500));

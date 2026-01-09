@@ -17,6 +17,8 @@ document.onreadystatechange = async function () {
 
         var description = document.querySelector("channel > description");
 
+        var homeLink = document.querySelector("channel > link")?.textContent;
+
         var iconUrl =
             document.querySelector("channel > image > url")?.textContent ||
             "https://www.vectorlogo.zone/logos/rss/rss-tile.svg";
@@ -60,9 +62,16 @@ document.onreadystatechange = async function () {
         );
         rssLink.textContent = "news feed";
         pRss.appendChild(rssLink);
-        pRss.appendChild(
-            document.createTextNode(` for the ${title.textContent} website.`)
-        );
+        pRss.appendChild(document.createTextNode(` for the `));
+        if (homeLink) {
+            var aHomeLink = document.createElementNS(NS, "a");
+            aHomeLink.setAttribute("href", selfLink.replace(/\/feed(\/)?(\.xml)?$/i, '/'));
+            aHomeLink.textContent = title.textContent;
+            pRss.appendChild(aHomeLink);
+        } else {
+            pRss.appendChild(document.createTextNode(title.textContent));
+        }
+        pRss.appendChild(document.createTextNode(` website.`));
         body.appendChild(pRss);
 
         const pReader = document.createElementNS(NS, "p");
