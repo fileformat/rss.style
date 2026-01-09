@@ -11,24 +11,31 @@
   pricing: "30 day trial, then $30/year"
   notes: "Also a backend for various [installable news reader apps](https://bazqux.com/apps)"
   apps: "https://bazqux.com/apps"
+  tags: [ "api", "opml" ]
 
 - name: "Feedbin"
   url: "https://feedbin.com/"
+  platforms: [ "web" ]
   pricing: "30 day trial, then $5/month"
   apps: "https://feedbin.com/apps"
+  tags: [ "api", "newsletters", "opml" ]
 
 - name: "Feedly"
   url: "https://feedly.com/"
+  platforms: [ "android", "ios", "web" ]
   pricing: "Free, $72/year for pro"
+  pricing_url: "https://feedly.com/i/pro"
+  tags: [ "newsletters", "opml" ]
 
 - name: "Feedreader"
   url: "https://feedreader.com/"
-  platforms: [ "linux", "web", "windows" ]
+  platforms: [ "web", "windows" ]
   pricing: "Free"
 
 - name: "Fiery Feeds"
-  url: "https://apps.apple.com/us/app/fiery-feeds/id1158763303"
-  platforms: [ "ios" ]
+  url: "https://voidstern.net/fiery-feeds"
+  pricing_url: "https://apps.apple.com/us/app/fiery-feeds/id1158763303"
+  platforms: [ "ios", "macos" ]
   pricing: "$10"
 
 - name: "Fluent Reader"
@@ -45,21 +52,27 @@
   url: "https://freshrss.org/"
   platforms: [ "docker", "linux", "macos", "windows" ]
   pricing: "Free (self-hosted)"
+  apps: "https://github.com/FreshRSS/FreshRSS/blob/edge/README.md#apis--native-apps"
+  tags: [ "api", "opml", "selfhost" ]
 
 - name: "Inoreader"
   url: "https://www.inoreader.com/"
   pricing: "Freemium, $90/year for premium"
+  pricing_url: "https://www.inoreader.com/pricing"
   platforms: [ "android", "ios", "web" ]
 
 - name: "Leed"
   url: "https://github.com/LeedRSS/Leed"
   platforms: [ "docker", "linux", "macos", "windows" ]
   pricing: "Free (self-hosted)"
+  tags: [ "opml", "selfhost" ]
 
 - name: "Miniflux"
   url: "https://miniflux.app/"
-  platforms: [ "freebsd", "linux", "macos", "openbsd", "windows" ]
-  pricing: "Free"
+  platforms: [ "freebsd", "linux", "macos", "openbsd", "docker" ]
+  pricing: "Free (option for paid hosting)"
+  pricing_url: "https://miniflux.app/hosting.html"
+  tags: [ "selfhost" ]
 
 - name: "NetNewsWire"
   url: "https://netnewswire.com/"
@@ -70,17 +83,20 @@
   url: "https://apps.apple.com/us/app/newsbar-rss-reader/id440472232?mt=12"
   platforms: [ "macos" ]
   pricing: "$5"
-  
+
 - name: "Newsboat"
   url: "https://newsboat.org/"
   platforms: [ "linux", "macos", "freebsd" ]
   notes: "Terminal-based, need to build from source"
   pricing: "Free"
+  tags: [ "opml", "selfhost", "terminal" ]
 
 - name: "Newsblur"
   url: "https://newsblur.com/"
   platforms: [ "android", "ios", "web" ]
-  pricing: "Freemium, $36/year for premium"
+  pricing: "Free, $36/year for premium"
+  pricing_url: "https://newsblur.com/#:~:text=Pricing"
+  tags: [ "opml", "selfhost" ]
 
 - name: "Newsflash"
   url: "https://apps.gnome.org/NewsFlash/"
@@ -91,31 +107,37 @@
   url: "https://betamagic.nl/products/newsexplorer.html"
   platforms: [ "macos", "ios" ]
   pricing: "$10 for ios and/or $10 for macos"
+  tags: [ "opml"]
 
 - name: "The Old Reader"
   url: "https://theoldreader.com/"
   platforms: [ "android", "ios", "linux", "web" ]
-  pricing: "Freemium, no public pricing"
+  pricing: "Free, Premium has no public pricing"
+  tags: [ "api", "opml" ]
 
 - name: "Omnivore"
   url: "https://omnivore.app/"
   platforms: [ "android", "ios", "web" ]
-  pricing: "Free, open source"
+  pricing: "Free, donations accepted"
+  tags: [ "selfhost" ]
 
 - name: "Qi Reader"
   url: "https://www.qireader.com/"
-  platform: [ "web" ]
+  platforms: [ "web" ]
   pricing: "Free for up to 30 feeds, then $1.50/month"
+  tags: [ "opml" ]
 
 - name: "ReadKit"
   url: "https://readkitapp.com/"
   platforms: [ "ios", "macos" ]
   pricing: "$10"
+  tags: [ "api" ]
 
 - name: "Reeder"
   url: "http://reederapp.com/"
   platforms: [ "macos", "ios" ]
-  pricing: "$5 for ios, $10 for macos (one-time purchase)"
+  pricing: "Free with in-app purchases"
+  tags: [ "opml" ]
 
 - name: "Tiny Tiny RSS"
   url: "https://tt-rss.org/"
@@ -138,3 +160,4 @@
   icon: "https://www.vectorlogo.zone/logos/vivaldi/vivaldi-icon.svg"
   logo: "https://www.vectorlogo.zone/logos/vivaldi/vivaldi-ar21.svg"
   pricing: "Free"
+  tags: [ "opml" ]

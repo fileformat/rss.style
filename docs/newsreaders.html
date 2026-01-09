@@ -7,7 +7,15 @@ title: News Readers
 </p>
 
 
-<table class="table table-striped border-top border-bottom">
+<table class="table table-striped border-bottom">
+    <thead>
+        <tr>
+            <th>News Reader</th>
+            <th>Platforms</th>
+            <th>Pricing</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
     <tbody>
     {% for newsreader in site.data.newsreaders %}
         <tr>
@@ -15,7 +23,18 @@ title: News Readers
                 <a href="{{newsreader.url}}">{{newsreader.name}}</a>
             </td>
             <td>
-                {{newsreader.pricing}}
+                {{newsreader.platforms | join: ", "}}
+            </td>
+            <td>
+                {%- if newsreader.pricing_url -%}
+                    <a href="{{newsreader.pricing_url}}">{{newsreader.pricing}}</a>
+                {%- else -%}
+                    {{newsreader.pricing}}
+                {% endif -%}
+            </td>
+            <td>{% for tag in newsreader.tags %}
+                <span class="badge bg-secondary">{{tag}}</span>
+                {% endfor %}
             </td>
         </tr>
     {% endfor %}
