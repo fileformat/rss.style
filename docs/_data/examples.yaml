@@ -149,9 +149,13 @@
 
 - name: "Marco Arment"
   website: "https://marco.org/"
-  hn: marcoarment
   url: "https://marco.org/rss"
   notes: "Missing 'self' link"
+
+- name: "Addy Osmani"
+  website: "https://addyosmani.com/"
+  url: "https://addyosmani.com/rss.xml"
+  notes: "Mismatched 'self' link, two identical link headers"
 
 - name: "Logo of the day"
   website: "https://logo-of-the-day.vectorlogo.zone/"
