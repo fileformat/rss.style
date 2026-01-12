@@ -130,6 +130,29 @@
   url: "https://chriscoyier.net/feed/"
   notes: "Opens 'Save as' dialog in Firefox."
 
+- name: "Anil Dash"
+  website: "https://www.anildash.com/"
+  hn: anildash
+  url: "https://www.anildash.com/feed.xml"
+  notes: "Links use naked domain, but website is at www"
+
+- name: "Daring Fireball"
+  website: "https://daringfireball.net/"
+  url: "https://daringfireball.net/feeds/main"
+  notes: "Not linked from home page, Last-Modified header is 'now'"
+
+- name: "Gwern"
+  website: "https://gwern.net/"
+  hn: gwern
+  url: "https://gwern.substack.com/feed"
+  notes: "Not linked from home page"
+
+- name: "Marco Arment"
+  website: "https://marco.org/"
+  hn: marcoarment
+  url: "https://marco.org/rss"
+  notes: "Missing 'self' link"
+
 - name: "Logo of the day"
   website: "https://logo-of-the-day.vectorlogo.zone/"
   hn: fileformat
