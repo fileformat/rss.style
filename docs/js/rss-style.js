@@ -33,6 +33,10 @@ document.onreadystatechange = async function () {
         link.setAttribute("rel", "stylesheet");
         link.setAttribute("href", "https://www.rss.style/css/water.min.css");
         head.appendChild(link);
+        const viewport = document.createElementNS(NS, "meta");
+        viewport.setAttribute("name", "viewport");
+        viewport.setAttribute("content", "width=device-width, initial-scale=1");
+        head.appendChild(viewport);
         htmlRoot.appendChild(head);
 
         const body = document.createElementNS(NS, "body");
