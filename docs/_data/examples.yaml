@@ -157,6 +157,34 @@
   url: "https://addyosmani.com/rss.xml"
   notes: "Mismatched 'self' link, two identical link headers"
 
+- name: "Jason Kottke"
+  website: "https://kottke.org/"
+  url: "https://feeds.kottke.org/main"
+  notes: "Home page rel-link uses http:"
+
+- name: "Chris Dixon"
+  website: "https://cdixon.org/"
+  hn: cdixon
+  url: "https://cdixon.org/rss.xml"
+  notes: "Missing 'self' link"
+
+- name: "Simon Willison"
+  website: "https://simonwillison.net/"
+  hn: simonw
+  url: "https://simonwillison.net/atom/everything/"
+  notes: "Self and home links use http:"
+
+- name: "Scott Helme"
+  website: "https://scotthelme.co.uk/"
+  hn: Scott_Helme_
+  url: "https://scotthelme.co.uk/rss/"
+  notes: "Domain mixup with ghost.io"
+
+- name: "Avery Pennarun"
+  website: "https://apenwarr.ca/"
+  hn: apenwarr
+  url: "https://apenwarr.ca/log/rss.php"
+
 - name: "Logo of the day"
   website: "https://logo-of-the-day.vectorlogo.zone/"
   hn: fileformat
