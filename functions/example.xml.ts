@@ -58,6 +58,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         attributeNamePrefix: "@_",
         // Do not ignore attributes during parsing
         ignoreAttributes: false,
+        ignoreNamespaces: false,
         // Optionally, parse attribute values to native types (int, float, boolean)
         parseAttributeValue: false,
         suppressBooleanAttributes: false,
@@ -82,12 +83,23 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
         "@_href": "/css/blank.css",
     };
 
+    // add our script
     if (xmlDocument.rss) {
         xmlDocument.rss["script"] = {
             "@_src": "/js/rss-style.js",
             "@_xmlns": "http://www.w3.org/1999/xhtml",
             "#text": "",
         };
+
+        if (!xmlDocument.rss.channel["atom:link"]) {
+            console.log(`INFO: adding atom:self link to RSS feed`, xmlDocument);
+            xmlDocument['@_xmlns:atom'] = 'http://www.w3.org/2005/Atom'
+            xmlDocument.rss.channel["atom:link"] = {
+                "@_href": feedurl,
+                "@_rel": "self",
+                "@_type": "application/rss+xml",
+            };
+        }
     } else if (xmlDocument.feed) {
         xmlDocument.feed["script"] = {
             "@_src": "/js/atom-style.js",
