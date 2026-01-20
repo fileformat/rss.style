@@ -5,7 +5,7 @@ document.onreadystatechange = async function () {
 
         //<atom:link href="https://logo-of-the-day.vectorlogo.zone/feed.xml" rel="self" type="application/rss+xml"></atom:link>
         var selfLink = null;
-        var selfLinkEl = document.querySelector("[href][rel='self']");
+        var selfLinkEl = document.querySelector("[href][rel='self']");  // avoid all the namespace stuff and just find based on attributes
         if (selfLinkEl) {
             selfLink = selfLinkEl.getAttribute("href")
         } else {
@@ -69,7 +69,7 @@ document.onreadystatechange = async function () {
         pRss.appendChild(document.createTextNode(` for the `));
         if (homeLink) {
             var aHomeLink = document.createElementNS(NS, "a");
-            aHomeLink.setAttribute("href", selfLink.replace(/\/feed(\/)?(\.xml)?$/i, '/'));
+            aHomeLink.setAttribute("href", homeLink);
             aHomeLink.textContent = title.textContent;
             pRss.appendChild(aHomeLink);
         } else {
