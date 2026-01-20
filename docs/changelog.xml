@@ -1,0 +1,67 @@
+---
+# Remember to set production_url in your _config.yml file!
+title: RSS.Style Changelog
+noindex: true
+layout: none
+posts:
+  - date: 2026-01-19
+    title: "Fixed home link in RSS"
+    content: "Fixed the hyperlink in RSS version for the \"for the Xxx Website\" link to use the `<link>` from the feed instead of modifying the feed url. [source](https://github.com/fileformat/rss.style/commit/9faa99b0605e8ecbb4db16b04dbb0a4c3f358aff)"
+  - date: 2026-01-12
+    title: "Added viewport"
+    content: "Added `viewport` meta element to the HTML header so it displays nicely on mobile. [source](https://github.com/fileformat/rss.style/commit/b0fb6043f8c72d1df685f207241d8c6ae9f07e20)"
+  - date: 2026-01-08
+    title: "Added home link"
+    content: "Added a hyperlink to the site name in the \"for the Xxx Website\" text. [source](https://github.com/fileformat/rss.style/commit/2ec59ccf1fd18bb28b64d9227d942c2f57ff17b8)"
+  - date: 2026-01-04
+    title: "Javascript version released"
+    content: "After trying to use Google's proposed XSLT polyfill (and failing), I realized that if a Javascript-based polyfill could turn XML into HTML, then I could do it directly in Javascript and skip the XSLT.  And it worked!"
+  - date: 2025-08-01
+    title: "Discussion started about deprecating XSLT in the browser"
+    content: "Google starts discussing deprecating XSLT support in the [WHATWG Github Issues](https://github.com/whatwg/html/issues/11523).  Despite a lot of negative feedback, I think the decision has already been made."
+  - date: 2024-04-07
+    title: "Feed Analyzer"
+    content: "When building the list of example feeds, I made the \"Notes\" column by hand. That got tedious really quicky, so I automated it. Thus, the [Feed Analyzer](https://www.rss.style/feed-analyzer.html)."
+  - date: 2023-12-26
+    title: "Initial XSLT-based release"
+    content: "First public release of RSS.Style, with the styling done via XSLT."
+  - date: 2023-12-12
+    title: "Registered feed.style domain"
+    content: "I was wavering back and forth on the name, and went with `feed.style` for awhile, but later decided that it was too generic, and that everyone would recognize what RSS is."
+  - date: "2023-11-15"
+    title: "Registered rss.style domain"
+    content: "Registered the `rss.style` domain."
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xml:base="{{site.production_url}}/">
+    <script src="{{site.production_url}}/js/rss-style.js" xmlns="http://www.w3.org/1999/xhtml"></script>
+    <channel>
+        <copyright>Copyright © 2026 by Andrew Marcuse<!-- COPYRIGHTYEAR --></copyright>
+        <description>Log of changes to the embeddable/hotlinkable scripts</description>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>Jekyll {{site.github.versions.jekyll | default: site.data.jekyll_version | default: '(unknown)'}}</generator>
+        <image>
+            <link>{{site.production_url}}/</link>
+            <title>{{page.title}}</title>
+            <url>{{site.production_url}}/favicon.svg</url>
+        </image>
+        <language>en</language>
+        <lastBuildDate>{{site.time|date: "%a, %d %b %Y %T +0000"}}</lastBuildDate>
+        <link>{{site.production_url}}/</link>
+        <atom:link href="{{site.production_url}}/changelog.xml" rel="self" type="application/rss+xml" />
+        <managingEditor>fileformat@gmail.com (Andrew Marcuse)</managingEditor>
+        <pubDate>{{site.time|date: "%a, %d %b %Y %T +0000"}}</pubDate>
+        <title>{{page.title}}</title>
+        <ttl>{% comment %} 1440 = 1 day {% endcomment %}1440</ttl>
+        <webMaster>fileformat@gmail.com (Andrew Marcuse)</webMaster>
+{%- for post in page.posts %}
+        <item>
+            <guid>{{site.production_url}}{{post.date}}</guid>
+            <link>{{site.production_url}}{{post.url}}</link>
+            <pubDate>{{ post.date | date: "%a, %d %b %Y %T -0600" }}</pubDate>
+            <title>{{post.title}}</title>
+            <description><![CDATA[{{post.content | markdownify}}]]></description>
+        </item>
+{%- endfor %}
+    </channel>
+</rss>
