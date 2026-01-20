@@ -30,9 +30,10 @@
         body > main {
             padding-top: 1em;
         }
-        h1 {
+        .h1 {
             font-family: 'Federo', sans-serif;
             font-weight: 400;
+            text-decoration: none;
         }
         h2 {
             font-weight: 600;
@@ -66,13 +67,41 @@
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand navbar-light pb-0 border-bottom">
+        <div class="container">
+            <a class="fw-bold h1" href="/">
+                <img alt="logo" class="d-none d-sm-inline pe-2" src="/favicon.svg" style="height:32pt;">RSS.Style
+            </a>
+            <div class="justify-content-end align-items-center d-flex">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="/example.xml">
+                            <img alt="Preview" class="fa d-sm-none ps-2" src="/images/navbar/preview.svg"
+                                style="height: 1.25em;">
+                            <span class="d-none d-sm-inline">Preview</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/feed-analyzer.html">
+                            <img alt="Feed Analyzer" class="fa d-sm-none ps-2" src="/images/navbar/feed-analyzer.svg"
+                                style="height: 1.25em;">
+                            <span class="d-none d-sm-inline">Feed&nbsp;Analyzer</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="/changelog.xml">
+                            <img alt="Changelog" class="fa d-sm-none ps-2" src="/images/fa/digging-solid.svg"
+                                style="height: 1.25em;">
+                            <span class="d-none d-sm-inline">Changelog</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container">
-        <h1 class="pt-3">
-            <a href="/"><img alt="RSS.Style logo" src="/favicon.svg" style="height:1em;vertical-align:top;" /></a>&nbsp;
-            {%- if page.h1 %}{{ page.h1 }}{% else %}{{ page.title }}{% endif %}
-            {%- if page.subtitle %} <small> - {{ page.subtitle }}</small>{% endif %}
-        </h1>
-        <hr/>
         {{ content }}
         <hr/>
         <footer class="d-flex justify-content-center pb-2">

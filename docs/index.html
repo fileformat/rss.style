@@ -28,7 +28,7 @@ h1: RSS Style
 </div>
 
 <p>
-    If you are not a webmaster, checkout out <a href="what-is-a-feed.html">What is a feed?</a> and <a
+    If you are not a webmaster, check out <a href="what-is-a-feed.html">What is a feed?</a> and <a
         href="newsreaders.html">Picking a news reader</a>
     for how to get started!
 </p>
@@ -76,28 +76,12 @@ h1: RSS Style
     </button>
 </p>
 
-<h2 id="available_scripts">Available scripts</h2>
-
-<p>
-    If you don't trust me (probably a wise move on your part), you can download the scripts and host them yourself.
-    They are <a href="https://github.com/fileformat/rss.style/blob/main/LICENSE.txt">MIT Licensed</a>.
-</p>
-
-<ul>
-    <li><a href="/js/rss-style.js">rss-style.js</a> - for RSS feeds (<a href="/js/rss-style.min.js">minified</a>)</li>
-    <li><a href="/js/atom-style.js">atom-style.js</a> - for Atom feeds (<a href="/js/atom-style.min.js">minified</a>)</li>
-</ul>
-
-<p>NOTE: The scripts are fresh out of the oven, so you still might want to hot-link them until they cool down.</p>
-
-<p>At some point soon, I'll start a change log, with an RSS feed that you can follow, naturally!</p>
-
 <h2>Questions and Answers</h2>
 
 <h3>Which file do I add it to?</h3>
 <p>
-    Your feed file is often named <code>feed.xml</code> but can be anything. You can
-    use the <a href="/feed-analyzer.html">Feed Analyzer</a> to find the URL of your feed: put it
+    Your feed file is often named <code>feed.xml</code>, but can be anything. You can
+    use the <a href="/feed-analyzer.html">Feed Analyzer</a> to find the URL of your feed: put in
     your website's URL and it will display the feeds that it finds.
 </p>
 
@@ -116,11 +100,102 @@ h1: RSS Style
     <a href="content-type.html">Content-Type Testing</a> page.
 </p>
 
+<h3>Can I host the scripts myself instead of hotlinking them?</h3>
+
+<p>
+    If you don't trust me (probably a wise move on your part), you can download the scripts and host them yourself.
+    They are <a href="https://github.com/fileformat/rss.style/blob/main/LICENSE.txt">MIT Licensed</a>.
+</p>
+
+<ul>
+    <li><a href="/js/rss-style.js">rss-style.js</a> - for RSS feeds (<a href="/js/rss-style.min.js">minified</a>)</li>
+    <li><a href="/js/atom-style.js">atom-style.js</a> - for Atom feeds (<a href="/js/atom-style.min.js">minified</a>)
+    </li>
+</ul>
+
+<p>NOTE: The scripts are fresh out of the oven, so you still might want to hot-link them until they cool off.</p>
+
+<h3>If I host the scripts myself, how to I know when you make fixes and improvements?</h3>
+
+<p>
+    Please follow the <a href="/changelog.xml">RSS.Style Changelog</a> feed in your newsreader to get updates!  It is also a good
+    example of a feed styled with RSS.Style!
+</p>
+
+<h3>How do I customize the HTML content?</h3>
+
+<p>
+    All of the content comes from settings in the feed itself.
+</p>
+
+<div class="table-responsive">
+<table class="table table-striped border-top border-bottom table-scrollable">
+    <thead>
+        <tr>
+            <th class="text-nowrap">HTML Element</th>
+            <th class="text-nowrap">RSS Source</th>
+            <th class="text-nowrap">Atom Source</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="text-nowrap">Icon</td>
+            <td class="text-nowrap">channel &gt; image &gt; url</td>
+            <td class="text-nowrap">feed &gt; icon<br />
+            fallback to feed &gt; logo</td>
+            <td class="text-nowrap">Defaults to an RSS icon</td>
+        </tr>
+        <tr>
+            <td class="text-nowrap">Title (H1)</td>
+            <td class="text-nowrap">channel &gt; title</td>
+            <td class="text-nowrap">feed &gt; title</td>
+            <td class="text-nowrap">Also used in "for the Xxx Website"</td>
+        </tr>
+        <tr>
+            <td class="text-nowrap">Description</td>
+            <td class="text-nowrap">channel &gt; description</td>
+            <td class="text-nowrap">feed &gt; subtitle</td>
+            <td class="text-nowrap"></td>
+        </tr>
+        <tr>
+            <td class="text-nowrap">Hyperlink of Xxx in the<br>for the Xxx Website</td>
+            <td class="text-nowrap">channel &gt; link</td>
+            <td class="text-nowrap">feed &gt; link &gt; href<br/>
+                that is not rel="self"</td>
+            <td class="text-nowrap">Not hyperlinked if not found</td>
+        </tr>
+        <tr>
+            <td class="text-nowrap">Feed URL (for copying)</td>
+            <td class="text-nowrap">channel &gt; atom:link's href attribute</td>
+            <td class="text-nowrap">feed &gt; link &gt; href<br />
+                that is rel="self"</td>
+            <td class="text-nowrap">Defaults to window.location.href if not found</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<h3>How do I customize the HTML style?</h3>
+
+<p>This is only for advanced users, since you will need to self-host the script and edit the code.</p>
+
+<p>Once you have your own copy of the appropriate script, modify the link to <code>https://www.rss.style/css/water.css</code> to your new stylesheet.</p>
+
+<p><a href="https://watercss.kognise.dev/">Water.css</a> is a "classless" stylesheet that does not require any <code>class</code> attributes on the
+    HTML elements, which is handy.  You can drop-in any other <a href="https://github.com/dbohdan/classless-css?tab=readme-ov-file#classless-css">classless</a>
+    stylesheet, or you can add classes and use any other CSS framework you like.
+</p>
+
+<p>
+    NOTE: I would not fuss too much about the styling: it is meant to guide new users how to handle RSS/Atom feeds, not be a full page of your website.
+</p>
+
 <h2>Known Issues</h2>
 
 <h3>There is a flash of unstyled content</h3>
 <p>
-    I haven't been able to figure a really good way to get rid of it. You can add a CSS stylesheet to the feed, but this only
+    I haven't been able to figure out a really good way to get rid of it. You can add a CSS stylesheet to the feed, but this only
     makes the flash a little shorter. Let me know if you have any ideas!
 </p>
 
