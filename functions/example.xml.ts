@@ -93,7 +93,7 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
 
         if (!xmlDocument.rss.channel["atom:link"]) {
             console.log(`INFO: adding atom:self link to RSS feed`, xmlDocument);
-            xmlDocument['@_xmlns:atom'] = 'http://www.w3.org/2005/Atom'
+            xmlDocument.rss['@_xmlns:atom'] = 'http://www.w3.org/2005/Atom'
             xmlDocument.rss.channel["atom:link"] = {
                 "@_href": feedurl,
                 "@_rel": "self",
