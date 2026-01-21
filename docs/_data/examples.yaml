@@ -184,9 +184,15 @@
   website: "https://apenwarr.ca/"
   hn: apenwarr
   url: "https://apenwarr.ca/log/rss.php"
+  notes: "Missing logo and 'self' link"
 
 - name: "Logo of the day"
   website: "https://logo-of-the-day.vectorlogo.zone/"
   hn: fileformat
   url: "https://logo-of-the-day.vectorlogo.zone/feed.xml"
   notes: "Perfect, since it is my sample for testing."
+
+- name: "RSS.Style Changelog"
+  website: "https://www.rss.style/"
+  url: "https://www.rss.style/changelog.xml"
+  notes: ""
