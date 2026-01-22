@@ -126,23 +126,19 @@ async function showForm(ctx: EventContext<Env, any, Record<string, unknown>>, fe
 
     const data = {
         page: {
-            title: `Try RSS.style on your own news feed!`,
-            h1: `Style my feed!`,
+            title: `Preview - RSS.Style`,
         },
-        content: `
+        content: `<h1>Preview</h1>
 ${alert}
 <form action="example.xml" class="row justify-content-md-center" method="get">
     <div class="col-sm-12 col-md-9 col-lg-6">
-        <div class="row">
+        <div class="mb-3">
             <label class="col-2 col-form-label" for="feedurl">Feed&nbsp;URL:</label>
-            <div class="col-10">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="feedurl" value="${he.encode(
-                        feedurl
-                    )}" name="feedurl" placeholder="" required>
-                    <input class="btn btn-primary" value="Make it pretty!" type="submit" />
-                </div>
-            </div>
+            <input type="text" class="form-control" id="feedurl" value="${he.encode(feedurl)}" name="feedurl" placeholder="" required>
+        </div>
+        <div class="mb-3">
+            <input class="btn btn-primary" value="Make it pretty!" type="submit" />
+            <a href="/" class="btn btn-outline-primary ms-2">Cancel</a>
         </div>
     </div>
 </form>

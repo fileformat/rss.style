@@ -151,7 +151,7 @@ h1: RSS Style
             <td class="text-nowrap"></td>
         </tr>
         <tr>
-            <td class="text-nowrap">Hyperlink of Xxx in the<br>for the Xxx Website</td>
+            <td class="text-nowrap">Hyperlink to the website</td>
             <td class="text-nowrap">channel &gt; link</td>
             <td class="text-nowrap">feed &gt; link &gt; href<br/>
                 that is not rel="self"</td>
@@ -159,7 +159,7 @@ h1: RSS Style
         </tr>
         <tr>
             <td class="text-nowrap">Feed URL (for copying)</td>
-            <td class="text-nowrap">channel &gt; atom:link's href attribute</td>
+            <td class="text-nowrap">channel &gt; atom:link's<br/>href attribute</td>
             <td class="text-nowrap">feed &gt; link &gt; href<br />
                 that is rel="self"</td>
             <td class="text-nowrap">Defaults to window.location.href if not found</td>
@@ -187,8 +187,8 @@ h1: RSS Style
 <p>
     Your web server needs to send the correct <code>Content-Type</code> header for your feed.
     You need to use either <code>text/xml</code> or <code>application/xml</code>. It does not work with
-    <code>application/rss+xml</code> or <code>application/atom+xml</code>. You can test it with the
-    <a href="content-type.html">Content-Type Testing</a> page.
+    <code>application/rss+xml</code> or <code>application/atom+xml</code>. The <a href="feed-analyzer.html">Feed Analyzer</a>
+    will show what you are currently sending.
 </p>
 
 <h3>Why is there a flash of unstyled content (FOUC)?</h3>
@@ -216,8 +216,10 @@ h1: RSS Style
 
 <p>
     I did try to use the "Agent" mode when converting from XSLT to Javascript.  The solution it came up with did not work.  After I was done, I went
-    back and looked at what it had suggested, and it was very close, but got a key detail wrong (the correct XML namespace).  I'm
+    back and looked at what it had suggested, and it was very close, but got a key detail wrong (the correct XML namespace).
 </p>
+
+<p>And if you look at the <a href="https://github.com/fileformat/rss.style/blob/main/functions/feed-analyzer.html.ts">source for the Feed Analyzer</a>, you'll think: No AI could possibly make code this bad...</p>
 
 <h2>Links</h2>
 <ul>
