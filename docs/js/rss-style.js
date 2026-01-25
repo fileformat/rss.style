@@ -17,7 +17,7 @@ document.onreadystatechange = async function () {
 
         var description = document.querySelector("channel > description");
 
-        var homeLink = document.querySelector("channel > link")?.textContent;
+        var homeLink = document.querySelector("channel > link:not([rel])")?.textContent;
 
         var iconUrl =
             document.querySelector("channel > image > url")?.textContent ||
@@ -67,15 +67,17 @@ document.onreadystatechange = async function () {
         rssLink.textContent = "news feed";
         pRss.appendChild(rssLink);
         pRss.appendChild(document.createTextNode(` for the `));
+        pRss.appendChild(document.createTextNode(title.textContent));
         if (homeLink) {
-            var aHomeLink = document.createElementNS(NS, "a");
-            aHomeLink.setAttribute("href", homeLink);
-            aHomeLink.textContent = title.textContent;
-            pRss.appendChild(aHomeLink);
-        } else {
-            pRss.appendChild(document.createTextNode(title.textContent));
+            var btnHomeLink = document.createElementNS(NS, "button");
+            btnHomeLink.setAttribute(
+                "onclick",
+                `window.location.href = \"${homeLink}\";`,
+            );
+            btnHomeLink.setAttribute("style", "margin-left:1em;");
+            btnHomeLink.textContent = "Visit Website \u2192";
+            pRss.appendChild(btnHomeLink);
         }
-        pRss.appendChild(document.createTextNode(` website.`));
         body.appendChild(pRss);
 
         const pReader = document.createElementNS(NS, "p");

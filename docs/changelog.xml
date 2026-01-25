@@ -4,6 +4,9 @@ title: RSS.Style Changelog
 noindex: true
 layout: none
 posts:
+  - date: 2026-01-25
+    title: "Fixed home link source, made into a button"
+    content: "The home link wasn't been specific about which &lt;link&gt; element it was using as the source.  Also made it be a button so it stands out a bit more."
   - date: 2026-01-19
     title: "Fixed home link in RSS"
     content: "Fixed the hyperlink in RSS version for the \"for the Xxx Website\" link to use the `<link>` from the feed instead of modifying the feed url. [source](https://github.com/fileformat/rss.style/commit/9faa99b0605e8ecbb4db16b04dbb0a4c3f358aff)"
@@ -34,7 +37,7 @@ posts:
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xml:base="{{site.production_url}}/">
-    <script src="{{site.production_url}}/js/rss-style.js" xmlns="http://www.w3.org/1999/xhtml"></script>
+    <script src="/js/rss-style.js" xmlns="http://www.w3.org/1999/xhtml"></script>
     <channel>
         <copyright>Copyright © 2026 by Andrew Marcuse<!-- COPYRIGHTYEAR --></copyright>
         <description>Log of changes to the embeddable/hotlinkable scripts</description>

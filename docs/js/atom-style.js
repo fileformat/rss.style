@@ -17,7 +17,7 @@ document.onreadystatechange = async function () {
 
         var description = document.querySelector("feed > subtitle");
 
-        var homeLink = document.querySelector("feed > link:not([rel='self'])")?.getAttribute("href");
+        var homeLink = document.querySelector("feed > link:not([rel])")?.getAttribute("href");
 
         var iconUrl = document.querySelector("feed > icon")?.textContent
             || document.querySelector("feed > logo")?.textContent
@@ -69,15 +69,17 @@ document.onreadystatechange = async function () {
         rssLink.textContent = "news feed";
         pRss.appendChild(rssLink);
         pRss.appendChild(document.createTextNode(` for the `));
+        pRss.appendChild(document.createTextNode(title.textContent));
         if (homeLink) {
-            var aHomeLink = document.createElementNS(NS, "a");
-            aHomeLink.setAttribute("href", selfLink.replace(/\/feed(\/)?(\.xml)?$/i, '/'));
-            aHomeLink.textContent = title.textContent;
-            pRss.appendChild(aHomeLink);
-        } else {
-            pRss.appendChild(document.createTextNode(title.textContent));
+            var btnHomeLink = document.createElementNS(NS, "button");
+            btnHomeLink.setAttribute(
+                "onclick",
+                `window.location.href = \"${homeLink}\";`,
+            );
+            btnHomeLink.setAttribute("style", "margin-left:1em;");
+            btnHomeLink.textContent = "Visit Website \u2192";
+            pRss.appendChild(btnHomeLink);
         }
-        pRss.appendChild(document.createTextNode(` website.`));
         body.appendChild(pRss);
 
         const pReader = document.createElementNS(NS, "p");
