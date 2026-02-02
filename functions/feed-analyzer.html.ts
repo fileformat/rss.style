@@ -243,9 +243,9 @@ export const onRequest: PagesFunction<Env> = async (ctx) => {
     if (feed) {
 
         if (feed.meta?.type == "atom") {
-            notes.push(`This is an Atom feed.`);
+            notes.push(`This is an <b>Atom</b> feed.`);
         } else if (feed.meta?.type == "rss") {
-            notes.push(`This is an RSS feed.`);
+            notes.push(`This is an <b>RSS</b> feed.`);
         } else {
             notes.push(`${warning} Unable to determine if feed is RSS or Atom: <code>${he.encode(JSON.stringify(feed.meta))}</code>`);
         }

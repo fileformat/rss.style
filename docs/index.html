@@ -78,19 +78,25 @@ h1: RSS Style
 
 <h2>Questions and Answers</h2>
 
+<h3>Which file do I add it to?</h3>
+<p>
+    Your feed file is often named <code>feed.xml</code>, but can be anything. You can
+    use the <a href="/feed-analyzer.html">Feed Analyzer</a> to find the URL of your feed: put in
+    your website's URL and it will display the feeds that it finds.
+</p>
+
+<h3>How can I tell if I have an RSS or an Atom feed?</h3>
+<p>
+    The <a href="/feed-analyzer.html">Feed Analyzer</a> will tell you.  Or look at the top of your feed file:
+    if it starts with <code>&lt;rss</code>, it is RSS; if it starts with <code>&lt;feed</code>, it is Atom.
+</p>
+
 <h3>How does this work?</h3>
 <p>
     The <code>&lt;script&gt;</code> replaces the content with an XHTML version.
     This is actually pretty neat: view-source shows the XML, but inspect-element shows the HTML. This has been supported
     by
     all major browsers for a quite awhile (20 years?).
-</p>
-
-<h3>Which file do I add it to?</h3>
-<p>
-    Your feed file is often named <code>feed.xml</code>, but can be anything. You can
-    use the <a href="/feed-analyzer.html">Feed Analyzer</a> to find the URL of your feed: put in
-    your website's URL and it will display the feeds that it finds.
 </p>
 
 <h3>Can I host the scripts myself instead of hotlinking them?</h3>
@@ -219,7 +225,10 @@ h1: RSS Style
     back and looked at what it had suggested, and it was very close, but got a key detail wrong (the correct XML namespace).
 </p>
 
-<p>And if you look at the <a href="https://github.com/fileformat/rss.style/blob/main/functions/feed-analyzer.html.ts">source for the Feed Analyzer</a>, you'll think: No AI could possibly make code this bad...</p>
+<p>
+    And if you look at the <a href="https://github.com/fileformat/rss.style/blob/main/functions/feed-analyzer.html.ts">source for the Feed Analyzer</a>,
+    you'll think: No AI could possibly make code this bad...
+</p>
 
 <h2>Links</h2>
 <ul>
