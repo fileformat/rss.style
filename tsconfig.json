@@ -2,16 +2,27 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
+    "moduleResolution": "Bundler",
     "strict": true,
-    "lib": [
-      "esnext"
-    ],
+    "jsx": "preserve",
+    "jsxImportSource": "astro",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
     "types": [
       "@cloudflare/workers-types"
-    ],
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    ]
   },
+  "include": [
+    ".astro/types.d.ts",
+    "src",
+    "astro.config.mjs"
+  ],
+  "exclude": [
+    "functions",
+    "docs",
+    "tmp",
+    "dist",
+    "_site",
+    "node_modules"
+  ]
 }

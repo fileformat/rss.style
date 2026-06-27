@@ -2,6 +2,7 @@
 **/*.base64
 **/*.base64.html
 .cache
+.astro/
 *.class
 crash.log
 dist/

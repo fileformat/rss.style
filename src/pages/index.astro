@@ -1,0 +1,15 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { renderJekyllTemplate } from '../lib/jekyll-liquid';
+
+import indexTemplate from '../site-content/templates/index.html?raw';
+
+const content = await renderJekyllTemplate(indexTemplate, {
+  title: 'RSS.Style: Better UX for your RSS and Atom feeds!',
+  h1: 'RSS Style',
+  url: '/'
+});
+---
+<MainLayout title="RSS.Style: Better UX for your RSS and Atom feeds!" h1="RSS Style">
+  <div set:html={content}></div>
+</MainLayout>

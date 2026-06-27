@@ -1,0 +1,7 @@
+name = "rss-style"
+main = "./dist/_worker.js/index.js"
+compatibility_date = "2026-06-21"
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"

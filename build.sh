@@ -6,12 +6,11 @@ set -o nounset
 
 echo "INFO: build starting at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
-echo "INFO: Jekyll location = $(which jekyll)"
-echo "INFO: Jekyll version = $(jekyll --version)"
-
+echo "INFO: Node version = $(node --version)"
+echo "INFO: npm version = $(npm --version)"
 
 ./generate_base64.sh
 
-jekyll build --source docs
+npm run build
 
 echo "INFO: build complete at $(date -u +%Y-%m-%dT%H:%M:%SZ)"

@@ -1,0 +1,14 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { renderJekyllTemplate } from '../lib/jekyll-liquid';
+
+import template from '../site-content/templates/newsreaders.html?raw';
+
+const content = await renderJekyllTemplate(template, {
+  title: 'News Readers',
+  url: '/newsreaders.html'
+});
+---
+<MainLayout title="News Readers">
+  <div set:html={content}></div>
+</MainLayout>

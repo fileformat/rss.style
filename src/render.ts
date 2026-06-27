@@ -1,7 +1,7 @@
 import { Liquid } from 'liquidjs';
 import { DateTime } from 'luxon';
 
-import html from '../docs/_layouts/default.html';
+import html from './site-content/templates/default.html';
 
 const engine = new Liquid();
 

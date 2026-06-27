@@ -1,0 +1,46 @@
+---
+title: News Readers
+---
+
+<p>
+    Software that can be used to read news feeds.
+</p>
+
+
+<table class="table table-striped border-bottom">
+    <thead>
+        <tr>
+            <th>News Reader</th>
+            <th>Platforms</th>
+            <th>Pricing</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for newsreader in site.data.newsreaders %}
+        <tr>
+            <td>
+                <a href="{{newsreader.url}}">{{newsreader.name}}</a>
+            </td>
+            <td>
+                {{newsreader.platforms | join: ", "}}
+            </td>
+            <td>
+                {%- if newsreader.pricing_url -%}
+                    <a href="{{newsreader.pricing_url}}">{{newsreader.pricing}}</a>
+                {%- else -%}
+                    {{newsreader.pricing}}
+                {% endif -%}
+            </td>
+            <td>{% for tag in newsreader.tags %}
+                <span class="badge bg-secondary">{{tag}}</span>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<p>Also see the exhaustive list at <a href="https://github.com/AboutRSS/ALL-about-RSS?tab=readme-ov-file#-rss-readers">ALL-about-RSS</a>.</p>
+
+<p>Is your favorite one missing? <a href="https://github.com/fileformat/rss.style/issues">Let me know!</a></p>

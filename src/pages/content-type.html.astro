@@ -1,0 +1,14 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { renderJekyllTemplate } from '../lib/jekyll-liquid';
+
+import template from '../site-content/templates/content-type.html?raw';
+
+const content = await renderJekyllTemplate(template, {
+  title: 'Content-Type Testing',
+  url: '/content-type.html'
+});
+---
+<MainLayout title="Content-Type Testing">
+  <div set:html={content}></div>
+</MainLayout>

@@ -12,13 +12,31 @@ Instructions and links for all the different resources are on the [RSS Style web
 
 ## Running
 
-The website is a simple Jekyll app:
+The website now runs on Astro with the Cloudflare Workers adapter.
+
+Install dependencies:
+
 ```bash
-cd docs
-jekyll serve --watch
+npm install
 ```
 
-The examples and analyzer are handled with a Cloudflare Pages function.  See the [`run.sh`](run.sh) script to run everything locally.
+Run locally with Astro dev server:
+
+```bash
+npm run dev
+```
+
+Build for Workers deployment:
+
+```bash
+npm run build
+```
+
+Preview the built Worker locally:
+
+```bash
+npm run preview
+```
 
 ## Contributing
 
