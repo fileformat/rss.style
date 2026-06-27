@@ -1,14 +1,13 @@
 ---
-import { siteConfig } from '../lib/site-config';
+const sharingTargets = ['reddit', 'pinboard'];
 
-const { pagePath } = Astro.props;
-const shareBase = encodeURIComponent(siteConfig.productionUrl + pagePath);
+const shareBase = encodeURIComponent(Astro.url.href);
 ---
 <div class="d-flex justify-content-center">
   <small>
     Share:
     {
-      siteConfig.sharingTargets.map((target) => (
+      sharingTargets.map((target) => (
         <a href={`https://simpleshare.dev/go?site=${target}&url=${shareBase}`} rel="nofollow">
           <img alt={`share on ${target}`} class="shareicon" src={`https://www.vectorlogo.zone/logos/${target}/${target}-tile.svg`} />
         </a>

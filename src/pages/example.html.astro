@@ -1,0 +1,46 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+const feedurl = Astro.url.searchParams.get("feedurl") ?? "";
+const msg = Astro.url.searchParams.get("msg") ?? "";
+---
+
+<MainLayout title="Preview styling your RSS/Atom Feeds - RSS.Style" h1="Preview">
+    {
+        msg && (
+            <div class="alert alert-danger" role="alert">
+                {msg}
+            </div>
+        )
+    }
+    <form
+        action="example.xml"
+        class="row justify-content-md-center"
+        method="get"
+    >
+        <div class="col-sm-12 col-md-9 col-lg-6">
+            <div class="mb-3">
+                <label class="col-2 col-form-label" for="feedurl"
+                    >Feed&nbsp;URL:</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="feedurl"
+                    value={feedurl}
+                    name="feedurl"
+                    placeholder=""
+                    required
+                />
+            </div>
+            <div class="mb-3">
+                <input
+                    class="btn btn-primary"
+                    value="Make it pretty!"
+                    type="submit"
+                />
+                <a href="/" class="btn btn-outline-primary ms-2">Cancel</a>
+            </div>
+        </div>
+    </form>
+</MainLayout>

@@ -1,14 +1,11 @@
 import type { APIRoute } from 'astro';
-import he from 'he';
 import { XMLBuilder, XMLParser } from 'fast-xml-parser';
-
-import { render } from '../render';
 
 export const GET: APIRoute = async ({ request }) => {
   const me = new URL(request.url);
   const feedurl = me.searchParams.get('feedurl');
   if (!feedurl) {
-    return showForm('', '');
+    return showForm('', 'Please enter a feed URL to preview.');
   }
 
   try {
@@ -106,33 +103,17 @@ export const GET: APIRoute = async ({ request }) => {
 };
 
 async function showForm(feedurl: string, msg: string) {
-  const alert = msg ? `<div class="alert alert-danger" role="alert">${he.encode(msg)}</div>` : '';
+  const params = new URLSearchParams();
+  params.set('feedurl', feedurl);
+  if (msg) {
+    params.set('msg', msg);
+  }
 
-  const data = {
-    page: {
-      title: 'Preview - RSS.Style'
-    },
-    content: `<h1>Preview</h1>
-${alert}
-<form action="example.xml" class="row justify-content-md-center" method="get">
-    <div class="col-sm-12 col-md-9 col-lg-6">
-        <div class="mb-3">
-            <label class="col-2 col-form-label" for="feedurl">Feed&nbsp;URL:</label>
-            <input type="text" class="form-control" id="feedurl" value="${he.encode(feedurl)}" name="feedurl" placeholder="" required>
-        </div>
-        <div class="mb-3">
-            <input class="btn btn-primary" value="Make it pretty!" type="submit" />
-            <a href="/" class="btn btn-outline-primary ms-2">Cancel</a>
-        </div>
-    </div>
-</form>
-`
-  };
-
-  const html = await render(data);
-  return new Response(html, {
+  //return Response.redirect(`/example.html?${params.toString()}`, 302);
+  return new Response(null, {
+    status: 302,
     headers: {
-      'Content-Type': 'text/html'
+      Location: `/example.html?${params.toString()}`
     }
   });
 }

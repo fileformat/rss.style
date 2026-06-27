@@ -1,14 +1,75 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import { renderJekyllTemplate } from '../lib/jekyll-liquid';
+import MainLayout from "../layouts/MainLayout.astro";
+import { load } from "js-yaml";
+import newsreadersYaml from "../data/newsreaders.yaml?raw";
 
-import template from '../site-content/templates/newsreaders.html?raw';
+interface Newsreader {
+    name: string;
+    url: string;
+    platforms: string[];
+    pricing: string;
+    pricing_url?: string;
+    notes?: string;
+    apps?: string;
+    tags?: string[];
+}
 
-const content = await renderJekyllTemplate(template, {
-  title: 'News Readers',
-  url: '/newsreaders.html'
-});
+const newsreaders = load(newsreadersYaml) as Newsreader[];
+if (!Array.isArray(newsreaders)) {
+    throw new Error("newsreaders.yaml is not an array");
+}
 ---
-<MainLayout title="News Readers">
-  <div set:html={content}></div>
+
+<MainLayout title="News Readers - RSS.Style" h1="News Readers">
+    <p>Software that can be used to read RSS and Atom news feeds.</p>
+
+    <table class="table table-striped border-bottom">
+        <thead>
+            <tr>
+                <th>News Reader</th>
+                <th>Platforms</th>
+                <th>Pricing</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {
+                newsreaders.map((newsreader) => (
+                    <tr>
+                        <td>
+                            <a href={newsreader.url}>{newsreader.name}</a>
+                        </td>
+                        <td>{newsreader.platforms.join(", ")}</td>
+                        <td>
+                            {newsreader.pricing_url ? (
+                                <a href={newsreader.pricing_url}>
+                                    {newsreader.pricing}
+                                </a>
+                            ) : (
+                                newsreader.pricing
+                            )}
+                        </td>
+                        <td>
+                            {(newsreader.tags ?? []).map((tag) => (
+                                <span class="badge bg-secondary me-2">{tag}</span>
+                            ))}
+                        </td>
+                    </tr>
+                ))
+            }
+        </tbody>
+    </table>
+
+    <p>
+        Also see the exhaustive list at <a
+            href="https://github.com/AboutRSS/ALL-about-RSS?tab=readme-ov-file#-rss-readers"
+            >ALL-about-RSS</a
+        >.
+    </p>
+
+    <p>
+        Is your favorite one missing? <a
+            href="https://github.com/fileformat/rss.style/issues"
+            >Let me know!</a>
+    </p>
 </MainLayout>

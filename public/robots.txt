@@ -1,0 +1,11 @@
+#
+# robots.txt for RSS.Style
+#
+#
+
+Sitemap: https://www.rss.style/sitemap.xml
+
+User-agent: *
+Disallow: /honeypot.txt
+Disallow: /example
+Clean-param: feedurl
