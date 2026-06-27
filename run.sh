@@ -7,4 +7,4 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-screen -c .screenrc
+npm run dev

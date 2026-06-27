@@ -1,7 +1,11 @@
 name = "rss-style"
-main = "./dist/_worker.js/index.js"
 compatibility_date = "2026-06-21"
+compatibility_flags = [ "nodejs_compat" ]
 
 [assets]
 directory = "./dist"
 binding = "ASSETS"
+not_found_handling = "404-page"
+
+[observability]
+enabled = true

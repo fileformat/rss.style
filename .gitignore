@@ -22,3 +22,4 @@ tmp/
 _tmp/
 venv/
 .vscode
+.wrangler
