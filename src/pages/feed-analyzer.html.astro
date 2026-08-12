@@ -6,6 +6,7 @@ import * as cheerio from "cheerio";
 import { XMLParser } from "fast-xml-parser";
 import he from "he";
 import xmlFormat from "xml-formatter";
+import { examples } from "../lib/examples";
 
 import { findFeedsInHeader } from "../lib/findFeedsInHeader";
 import MainLayout from "../layouts/MainLayout.astro";
@@ -457,6 +458,11 @@ async function analyze(
     return { body, feedurl };
 }
 
+if (Astro.url.searchParams.get("demo")) {
+    const example = examples[Math.floor(Math.random() * examples.length)];
+    return Astro.redirect(`/feed-analyzer.html?feedurl=${encodeURIComponent(example.url)}`);
+}
+
 const { body, feedurl, msg } = await analyze(
     Astro.url.searchParams.get("feedurl") ?? "",
     Astro.url.href,
@@ -507,6 +513,7 @@ const { body, feedurl, msg } = await analyze(
                         <a href="/" class="btn btn-outline-primary ms-2">
                             Cancel
                         </a>
+                        <a class="btn btn-outline-secondary float-end" href="?demo=Y">Demo</a>
                     </div>
                 </div>
             </form>

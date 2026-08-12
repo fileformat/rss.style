@@ -1,8 +1,15 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import { examples } from "../lib/examples";
 
 const feedurl = Astro.url.searchParams.get("feedurl") ?? "";
 const msg = Astro.url.searchParams.get("msg") ?? "";
+
+if (Astro.url.searchParams.get("demo")) {
+    const example = examples[Math.floor(Math.random() * examples.length)];
+    return Astro.redirect(`/example.xml?feedurl=${encodeURIComponent(example.url)}`);
+}
+
 ---
 
 <MainLayout title="Preview styling your RSS/Atom Feeds - RSS.Style" h1="Preview">
@@ -40,6 +47,7 @@ const msg = Astro.url.searchParams.get("msg") ?? "";
                     type="submit"
                 />
                 <a href="/" class="btn btn-outline-primary ms-2">Cancel</a>
+                <a class="btn btn-outline-secondary float-end" href="?demo=Y">Demo</a>
             </div>
         </div>
     </form>

@@ -2,16 +2,8 @@
 import fs from "fs";
 import { load } from "js-yaml";
 import MainLayout from "../layouts/MainLayout.astro";
-import examplesYaml from "../data/examples.yaml?raw";
 import linksYaml from "../data/links.yaml?raw";
-
-interface Example {
-    name: string;
-    website?: string;
-    hn?: string;
-    url: string;
-    notes?: string;
-}
+import { examples } from "../lib/examples";
 
 interface Link {
     url: string;
@@ -19,7 +11,6 @@ interface Link {
     notes?: string;
 }
 
-const examples = load(examplesYaml) as Example[];
 const links = load(linksYaml) as Link[];
 ---
 
